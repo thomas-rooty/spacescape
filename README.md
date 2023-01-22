@@ -1,38 +1,17 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![spacescape_banner.png](https://github.com/thomas-rooty/spacescape/raw/master/public/img/spacescape_banner.png)
 
-## Getting Started
+Welcome to Space Scape, a survival game set in the year 2300 where the Earth has become uninhabitable and the remaining survivors have fled to space in search of a new habitable planet.
 
-First, run the development server:
+As the protagonist, Jacob, an engineer in survival systems, you find yourself alone on a damaged spaceship, struggling to keep vital systems running. You soon realize that energy, water, and food resources are critical and that you must find a solution quickly before the ship is destroyed.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+With your technical knowledge and determination, you begin to repair the damaged systems and maximize the use of remaining resources. You explore the ship in search of salvageable items such as spare parts and materials, and use your ingenuity to create water and energy recycling systems.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The tutorial phase of the game will teach you how to move around the ship, pick up and craft items.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+However, the ship takes a hit and crashes onto an unknown planet after wandering in space.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+As you begin your new journey on this planet, you embark on a mission to collect soil, air, and water samples to analyze and determine if the planet is viable for humanity. The tutorial phase of the game will teach you how to analyze the soil.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+The soil appears poor and dangerous, Jacob will have to fight to get the ship back in working order until he can take off from this planet and find another habitable planet. Jacob's survival depends on your ability to use limited resources efficiently and your determination to find a solution to leave this planet.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Get ready for an epic adventure as you fight for survival in the vast reaches of space. Visit Space Scape now and experience the thrill of survival in a hostile environment.
