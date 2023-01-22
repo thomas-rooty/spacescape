@@ -6,4 +6,6 @@ const nextConfig = {
 const withTM = require('next-transpile-modules')(['three'])
 
 // Module export the nextConfig and the withTM
-module.exports = withTM(nextConfig)
+module.exports = withTM()
+module.exports = nextConfig
+
