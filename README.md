@@ -1,5 +1,8 @@
 ![spacescape_banner.png](https://github.com/thomas-rooty/spacescape/raw/master/public/img/spacescape_banner.png)
 
+
+# Space Scape
+
 Welcome to Space Scape, a survival game set in the year 2300 where the Earth has become uninhabitable and the remaining survivors have fled to space in search of a new habitable planet.
 
 As the protagonist, Jacob, an engineer in survival systems, you find yourself alone on a damaged spaceship, struggling to keep vital systems running. You soon realize that energy, water, and food resources are critical and that you must find a solution quickly before the ship is destroyed.
