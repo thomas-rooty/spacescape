@@ -20,17 +20,34 @@ const StartingEarth = ({position, rotation, scale}: StartingEarthProps) => {
   })
 
   return (
-      <group ref={earthRef} name="earth" position={position} rotation={rotation} scale={scale}>
-        <mesh name="lands" geometry={nodes.lands.geometry} material={nodes.lands.material} castShadow={true}
-              receiveShadow={true}/>
-        <mesh
-          name="oceans"
-          geometry={nodes.oceans.geometry}
-          material={nodes.oceans.material}
-          castShadow={true}
-          receiveShadow={true}
+    <group ref={earthRef} name="earth" position={position} rotation={rotation} scale={scale}>
+      <mesh
+        name="lands"
+        geometry={nodes.lands.geometry}
+        material={nodes.lands.material}
+        castShadow={true}
+        receiveShadow={true}
+      >
+        <meshLambertMaterial
+          attach="material"
+          color="#9DD688"
+          fog={false}
         />
-      </group>
+      </mesh>
+      <mesh
+        name="oceans"
+        geometry={nodes.oceans.geometry}
+        material={nodes.oceans.material}
+        castShadow={true}
+        receiveShadow={true}
+      >
+        <meshLambertMaterial
+          attach="material"
+          color="#98c3d1"
+          fog={false}
+        />
+      </mesh>
+    </group>
   )
 }
 
