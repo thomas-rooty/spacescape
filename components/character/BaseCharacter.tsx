@@ -25,7 +25,7 @@ const BaseCharacter = (props: SphereProps) => {
   const velocity = useRef<any>([0, 0, 0]);
   useEffect(() => api.velocity.subscribe((v) => (velocity.current = v)), [api.velocity]);
 
-  useFrame(() => {
+  useFrame(({clock}) => {
     ref.current.getWorldPosition(camera.position);
     frontVector.set(0, 0, Number(backward) - Number(forward));
     sideVector.set(Number(left) - Number(right), 0, 0);
@@ -34,6 +34,13 @@ const BaseCharacter = (props: SphereProps) => {
 
     api.velocity.set(direction.x, velocity.current[1], direction.z);
     if (jump && Math.abs(velocity.current[1].toFixed(3)) < 0.001) api.velocity.set(velocity.current[0], 1.07, velocity.current[2]);
+
+    // Head bobbing effect
+    if (direction.x !== 0 || direction.z !== 0) {
+      camera.position.y += (Math.sin(clock.getElapsedTime()*20) / 250);
+    } else {
+      camera.position.y += (Math.sin(clock.getElapsedTime()*2) / 1000);
+    }
   });
 
   return (
