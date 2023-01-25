@@ -1,4 +1,4 @@
-import { SphereProps, useSphere} from '@react-three/cannon';
+import {SphereProps, useSphere} from '@react-three/cannon';
 import {useFrame, useThree} from '@react-three/fiber';
 import {useEffect, useRef} from 'react';
 import {useControls} from "@/utils/useControls";
@@ -11,7 +11,7 @@ const BaseCharacter = (props: SphereProps) => {
   const speed = new THREE.Vector3();
   const SPEED = 0.5;
 
-  const { camera } = useThree();
+  const {camera} = useThree();
 
   const [ref, api] = useSphere<any>(() => ({
     mass: 1,
@@ -21,7 +21,7 @@ const BaseCharacter = (props: SphereProps) => {
     ...props,
   }));
 
-  const { forward, backward, left, right, jump } = useControls();
+  const {forward, backward, left, right, jump} = useControls();
   const velocity = useRef<any>([0, 0, 0]);
   useEffect(() => api.velocity.subscribe((v) => (velocity.current = v)), [api.velocity]);
 
@@ -39,8 +39,8 @@ const BaseCharacter = (props: SphereProps) => {
   return (
     <group>
       <mesh castShadow={true} position={props.position} ref={ref}>
-        <sphereGeometry args={props.args} />
-        <meshStandardMaterial color="#FFFF00" />
+        <sphereGeometry args={props.args}/>
+        <meshStandardMaterial color="#FFFF00"/>
       </mesh>
     </group>
   );
