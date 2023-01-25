@@ -33,7 +33,7 @@ const BaseCharacter = (props: SphereProps) => {
     speed.fromArray(velocity.current);
 
     api.velocity.set(direction.x, velocity.current[1], direction.z);
-    if (jump && Math.abs(velocity.current[1].toFixed(3)) < 0.001) api.velocity.set(velocity.current[0], 1, velocity.current[2]);
+    if (jump && Math.abs(velocity.current[1].toFixed(3)) < 0.001) api.velocity.set(velocity.current[0], 1.07, velocity.current[2]);
   });
 
   return (
