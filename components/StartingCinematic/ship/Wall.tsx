@@ -7,7 +7,7 @@ interface WallsProps {
   args: [number, number, number];
 }
 
-const Walls = (props: WallsProps) => {
+const Wall = (props: WallsProps) => {
   const [ref] = useBox<any>(() => ({
     type: 'Static',
     position: props.position,
@@ -16,10 +16,8 @@ const Walls = (props: WallsProps) => {
   }));
 
   return (
-    <mesh ref={ref}>
-      <boxGeometry args={props.args}/>
-    </mesh>
+    <mesh ref={ref}/>
   );
 };
 
-export default Walls;
+export default Wall;
