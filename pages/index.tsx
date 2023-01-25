@@ -19,9 +19,9 @@ export default function Home() {
         <meta name='twitter:image' content='/img/spacescape_banner.png'/>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
+      <div className={styles.scene}>
         <Scene />
-      </main>
+      </div>
     </>
   )
 }
