@@ -35,7 +35,7 @@ const Scene = () => {
             </Debug>
           </Physics>
           <PointerLockControls
-            selector={'#startBtn'}
+            selector={'#startBtnContainer'}
           />
           <Stars radius={1} depth={25} count={1250} factor={0.5} saturation={1} fade/>
           <StartingEarth position={[0, -0.33, -3.33]} rotation={[0, 0, 0]} scale={0.10}/>

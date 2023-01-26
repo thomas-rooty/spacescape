@@ -1,6 +1,9 @@
 import s from '@/styles/Buttons.module.css'
+import {useEffect, useState} from 'react'
 
 const StartBtn = () => {
+  const [showPointerLocker, setShowPointerLocker] = useState(true)
+
   function _hideStartBtn() {
     const startBtn = document.getElementById('startBtn')
     if (startBtn) {
@@ -11,11 +14,23 @@ const StartBtn = () => {
     }
   }
 
+  function _pointerLockChange() {
+    setShowPointerLocker(!showPointerLocker)
+  }
+
+  useEffect(() => {
+    document.addEventListener('pointerlockchange', _pointerLockChange, false)
+    return () => {
+      document.removeEventListener('pointerlockchange', _pointerLockChange, false)
+    }
+  })
+
   return (
-    <div id='startBtn' className={s.startBtn} onClick={_hideStartBtn}>
-      <a className={s.cta} href="#">
-        <span className={s.startSpan}>START</span>
-        <span className={s.startSpan}>
+    <div id='startBtnContainer' className={showPointerLocker ? s.show : s.hide}>
+      <div id='startBtn' className={s.startBtn} onClick={_hideStartBtn}>
+        <a className={s.cta} href="#">
+          <span className={s.startSpan}>START</span>
+          <span className={s.startSpan}>
       <svg width="66px" height="43px" viewBox="0 0 66 43" version="1.1" xmlns="http://www.w3.org/2000/svg"
            xmlnsXlink="http://www.w3.org/1999/xlink">
         <g id="arrow" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
@@ -31,7 +46,8 @@ const StartBtn = () => {
         </g>
       </svg>
     </span>
-      </a>
+        </a>
+      </div>
     </div>
   )
 }

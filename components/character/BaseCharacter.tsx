@@ -13,6 +13,7 @@ const BaseCharacter = (props: SphereProps) => {
 
   const {camera} = useThree();
 
+  // Character collision sphere
   const [ref, api] = useSphere<any>(() => ({
     mass: 1,
     type: 'Dynamic',
@@ -21,6 +22,7 @@ const BaseCharacter = (props: SphereProps) => {
     ...props,
   }));
 
+  // Character movement
   const {forward, backward, left, right, jump} = useControls();
   const velocity = useRef<any>([0, 0, 0]);
   useEffect(() => api.velocity.subscribe((v) => (velocity.current = v)), [api.velocity]);
@@ -35,7 +37,7 @@ const BaseCharacter = (props: SphereProps) => {
     api.velocity.set(direction.x, velocity.current[1], direction.z);
     if (jump && Math.abs(velocity.current[1].toFixed(3)) < 0.001) api.velocity.set(velocity.current[0], 1.07, velocity.current[2]);
 
-    // Head bobbing effect
+    // Head bobbing effect according to the player movement behavior
     if (direction.x !== 0 || direction.z !== 0) {
       camera.position.y += (Math.sin(clock.getElapsedTime()*20) / 250);
     } else {
