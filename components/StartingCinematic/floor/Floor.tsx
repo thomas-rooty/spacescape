@@ -11,8 +11,6 @@ const Floor = (props: FloorProps) => {
 
   return (
     <mesh receiveShadow={true} rotation={props.rotation} position={props.position} ref={ref}>
-      <boxGeometry args={[2.5, 0.5, 0.02]} />
-      <meshStandardMaterial color={props.color} />
     </mesh>
   );
 };
