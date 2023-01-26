@@ -45,7 +45,6 @@ const Spaceship = ({position, rotation, scale}: SpaceshipProps) => {
     } else if (!animationDone && startedGame && glassRef.current.material.opacity >= 0.05) {
       glassRef.current.material.opacity = 0.05;
       animationDone = true;
-      console.log('spaceship glass opacity set to 0.05')
     }
   })
 

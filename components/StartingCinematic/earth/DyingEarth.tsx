@@ -37,7 +37,6 @@ const DyingEarth = ({position, rotation, scale}: DyingEarthProps) => {
       earthBaseRef.current.visible = false;
       cloudsRef.current.visible = false;
       animationDone = true;
-      console.log('removed earth')
     }
   })
 
