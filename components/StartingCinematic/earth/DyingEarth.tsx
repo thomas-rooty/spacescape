@@ -1,6 +1,7 @@
 import {useFrame} from "@react-three/fiber";
 import {useRef} from "react";
 import {useTexture} from "@react-three/drei"
+import {useStore} from "@/utils/zustore";
 
 interface DyingEarthProps {
   position: [number, number, number]
@@ -9,21 +10,34 @@ interface DyingEarthProps {
 }
 
 const DyingEarth = ({position, rotation, scale}: DyingEarthProps) => {
+  // Get startedGame from store
+  const startedGame = useStore((state) => state.startedGame)
+
   // Earth reference
   const planetRef = useRef<any>()
   const earthBaseRef = useRef<any>()
   const earthDyingRef = useRef<any>()
   const cloudsRef = useRef<any>()
 
+  // Useful variables
+  let animationDone = false
+
   // Earth and clouds rotations
   useFrame(({clock}) => {
     planetRef.current.rotation.y = clock.getElapsedTime() / 50
     cloudsRef.current.rotation.y = clock.getElapsedTime() / 50
 
-    // Slowly turn earthBaseRef and cloudsRef opacity to 0
-    if (earthBaseRef.current.material.opacity > 0) {
+    // Begin dying animation on game start
+    if (startedGame && earthBaseRef.current.material.opacity > 0) {
       earthBaseRef.current.material.opacity -= 0.001;
       cloudsRef.current.material.opacity -= 0.001;
+    } else if (!animationDone && startedGame && earthBaseRef.current.material.opacity <= 0) {
+      earthBaseRef.current.material.opacity = 0;
+      cloudsRef.current.material.opacity = 0;
+      earthBaseRef.current.visible = false;
+      cloudsRef.current.visible = false;
+      animationDone = true;
+      console.log('removed earth')
     }
   })
 

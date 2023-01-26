@@ -1,10 +1,13 @@
 import s from '@/styles/Buttons.module.css'
 import {useEffect, useState} from 'react'
+import {useStore} from "@/utils/zustore";
 
 const StartBtn = () => {
   const [showPointerLocker, setShowPointerLocker] = useState(true)
+  const {setStartedGame} = useStore()
 
   function _hideStartBtn() {
+    // Hide start button, show pointer locker, and set startedGame to true
     const startBtn = document.getElementById('startBtn')
     if (startBtn) {
       startBtn.classList.add(s.hide)
@@ -12,8 +15,10 @@ const StartBtn = () => {
         startBtn.remove()
       }, 1000)
     }
+    setStartedGame(true)
   }
 
+  // Used to handle user that exit pointer lock mode by pressing ESC and not lock them out
   function _pointerLockChange() {
     setShowPointerLocker(!showPointerLocker)
   }

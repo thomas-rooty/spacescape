@@ -1,9 +1,14 @@
 import create from 'zustand';
-import { devtools } from 'zustand/middleware';
 
-export const useStore = create(
-  devtools((set, get) => ({
+interface IStore {
+  startedGame: boolean;
+  setStartedGame: (startedGame: boolean) => void;
+}
+
+export const useStore = create<IStore>(
+  (set) => ({
     startedGame: false,
-    setStartedGame: (startedGame: boolean) => set({ startedGame }),
-  }))
-);
+    setStartedGame: (startedGame: boolean) => set({startedGame}),
+  }));
+
+// Path: utils\zustore.tsx
