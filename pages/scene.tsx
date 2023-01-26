@@ -2,6 +2,7 @@ import {Canvas} from '@react-three/fiber'
 import {Stars, PointerLockControls} from "@react-three/drei";
 import {Physics, Debug} from '@react-three/cannon';
 import {Suspense} from "react";
+import {useStore} from "@/utils/zustore";
 import DyingEarth from "@/components/StartingCinematic/earth/DyingEarth";
 import ShipInteriors from "@/components/StartingCinematic/ship/Ship";
 import Lights from "@/components/StartingCinematic/lights/Lights";
@@ -15,6 +16,9 @@ import Loader from "@/components/loader/Loader";
 const Scene = () => {
   // Base values
   const distanceFromCenter = 25
+
+  // Store values
+  const startedGame = useStore((state) => state.startedGame)
 
   return (
     <>
@@ -36,9 +40,7 @@ const Scene = () => {
               <Wall position={[0, 0, distanceFromCenter - 0.1]} rotation={[0, Math.PI / -2, 0]} args={[0.1, 0.4, 0.6]}/>
             </Debug>
           </Physics>
-          <PointerLockControls
-            selector={'#startBtnContainer'}
-          />
+          {startedGame && <PointerLockControls/>}
           <Stars radius={1} depth={25} count={1250} factor={0.5} saturation={1} fade/>
           <DyingEarth position={[0, 0, 0]} rotation={[0, 0, 0]} scale={9.33}/>
           <ShipInteriors position={[-0.495, -0.153, distanceFromCenter]} rotation={[0, 0, 0]} scale={0.001}/>
