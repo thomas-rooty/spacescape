@@ -13,7 +13,7 @@ export default function Home() {
           property='og:description'
           content='🚀 Jacob stranded on an anonymous planet, gather resources to survive and connect with other survivors!'
         />
-        <meta property='og:title' content='🚀 SpaceScape'/>
+        <meta property='og:title' content='SpaceScape'/>
         <meta property='og:image' content='/img/spacescape_banner.png'/>
         <meta itemProp='image' content='/img/spacescape_banner.png'/>
         <meta name='twitter:image' content='/img/spacescape_banner.png'/>
