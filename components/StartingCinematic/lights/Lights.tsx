@@ -17,7 +17,7 @@ const Lights = () => {
   // Light ref
   const lightRef = useRef<any>()
 
-  // Make the light move to [30, 20, -5] slowly when the game starts
+  // Make the light move to [15, 20, -25] slowly when the game starts
   useFrame(() => {
     if (startedGame) {
       lightRef.current.position.lerp(new THREE.Vector3(15, 20, -25), 0.001)
