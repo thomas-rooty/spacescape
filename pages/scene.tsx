@@ -38,9 +38,9 @@ const Scene = () => {
             </Debug>
           </Physics>
           {animationDone && <PointerLockControls/>}
-          <Stars radius={1} depth={25} count={1250} factor={0.5} saturation={1} fade/>
+          <Stars radius={1} depth={25} count={2500} factor={0.5} saturation={1} fade/>
           <DyingEarth position={[0, 0, 0]} rotation={[0, 0, 0]} scale={9.33}/>
-          <Spaceship position={[0.12, -1.28, 25.09]} rotation={[0, Math.PI/2, 0]} scale={0.4}/>
+          <Spaceship position={[0.105, -1.3, 25.09]} rotation={[0, Math.PI/2, 0]} scale={0.4}/>
         </Canvas>
         <StartBtn/>
       </Suspense>
