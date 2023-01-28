@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200i');
+
+.dateTimelapse {
+  position: absolute;
+  top: 33px;
+  left: 33px;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-size: 40px;
+  font-weight: 200;
+}
+
+.dateText {
+  display: flex;
+  flex-direction: row;
+}
+
+.yearAnimation {
+  animation: moveFromTop .015s ease-in-out infinite;
+}
+
+@keyframes moveFromTop {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

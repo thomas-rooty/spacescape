@@ -4,7 +4,7 @@ import {useStore} from "@/utils/zustore";
 
 const StartBtn = () => {
   const [showPointerLocker, setShowPointerLocker] = useState(true)
-  const {setStartedGame} = useStore()
+  const setStartedGame = useStore((state) => state.setStartedGame)
 
   function _hideStartBtn() {
     // Hide start button, show pointer locker, and set startedGame to true

@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
 import Scene from "@/pages/scene";
+import DateTimelapse from "@/components/StartingCinematic/datetimelapse/DateTimelapse";
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
       </Head>
       <div className={styles.scene}>
         <Scene />
+        <DateTimelapse />
       </div>
     </>
   )

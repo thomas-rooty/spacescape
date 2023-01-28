@@ -18,7 +18,7 @@ const Scene = () => {
   const distanceFromCenter = 25
 
   // Store values
-  const startedGame = useStore((state) => state.startedGame)
+  const animationDone = useStore((state) => state.animationDone)
 
   return (
     <>
@@ -37,7 +37,7 @@ const Scene = () => {
               <CockpitCollision/>
             </Debug>
           </Physics>
-          {startedGame && <PointerLockControls/>}
+          {animationDone && <PointerLockControls/>}
           <Stars radius={1} depth={25} count={1250} factor={0.5} saturation={1} fade/>
           <DyingEarth position={[0, 0, 0]} rotation={[0, 0, 0]} scale={9.33}/>
           <Spaceship position={[0.12, -1.28, 25.09]} rotation={[0, Math.PI/2, 0]} scale={0.4}/>

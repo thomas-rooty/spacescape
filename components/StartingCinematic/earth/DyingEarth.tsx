@@ -10,17 +10,16 @@ interface DyingEarthProps {
 }
 
 const DyingEarth = ({position, rotation, scale}: DyingEarthProps) => {
-  // Get startedGame from store
+  // Get startedGame, animationDone and getAnimationDone from store
   const startedGame = useStore((state) => state.startedGame)
+  const animationDone = useStore((state) => state.animationDone)
+  const setAnimationDone = useStore((state) => state.setAnimationDone)
 
   // Earth reference
   const planetRef = useRef<any>()
   const earthBaseRef = useRef<any>()
   const earthDyingRef = useRef<any>()
   const cloudsRef = useRef<any>()
-
-  // Useful variables
-  let animationDone = false
 
   // Earth and clouds rotations
   useFrame(({clock}) => {
@@ -36,7 +35,7 @@ const DyingEarth = ({position, rotation, scale}: DyingEarthProps) => {
       cloudsRef.current.material.opacity = 0;
       earthBaseRef.current.visible = false;
       cloudsRef.current.visible = false;
-      animationDone = true;
+      setAnimationDone(true)
     }
   })
 
@@ -69,7 +68,7 @@ const DyingEarth = ({position, rotation, scale}: DyingEarthProps) => {
         castShadow={true}
         receiveShadow={true}
       >
-        <sphereBufferGeometry attach="geometry" args={[0.99, 32, 32]}/>
+        <sphereBufferGeometry attach="geometry" args={[0.999, 32, 32]}/>
         <meshLambertMaterial
           attach="material"
           map={dyingTexture}
