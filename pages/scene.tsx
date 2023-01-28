@@ -6,7 +6,7 @@ import {useStore} from "@/utils/zustore";
 import DyingEarth from "@/components/StartingCinematic/earth/DyingEarth";
 import Spaceship from "@/components/StartingCinematic/ship/Spaceship";
 import Lights from "@/components/StartingCinematic/lights/Lights";
-import Effects from "@/components/effects/effects";
+import Effects from "@/components/effects/Effects";
 import Floor from "@/components/StartingCinematic/floor/Floor";
 import BaseCharacter from "@/components/character/BaseCharacter";
 import CockpitCollision from "@/components/StartingCinematic/ship/CockpitCollision";
