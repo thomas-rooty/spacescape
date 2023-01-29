@@ -16,13 +16,15 @@ const DateTimelapse = () => {
         setYear(year + 1)
       } else {
         setYear(2300)
+        document.getElementById('textLast')?.classList.add(styles.showOrWhatItsLeft)
       }
     }, 22)
   }
 
   return (
     <div className={styles.dateTimelapse}>
-      <div className={styles.dateText}>A.D.&nbsp;<div id='year'>{year}</div>&nbsp;| EARTH</div>
+      {/* eslint-disable-next-line react/no-unescaped-entities */}
+      <div className={styles.dateText}>A.D.&nbsp;<div id='year'>{year}</div>&nbsp;| EARTH&nbsp;<div id="textLast" className={styles.orWhatItsLeft}>or what it's left...</div></div>
     </div>
   )
 }

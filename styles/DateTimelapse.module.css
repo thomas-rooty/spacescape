@@ -9,6 +9,7 @@
   font-family: "Microsoft JhengHei Light", sans-serif;
   height: 45px;
   font-weight: 600;
+  padding-left: 40px;
 }
 
 .dateText {
@@ -21,6 +22,17 @@
 
 .yearAnimation {
   animation: moveFromTop .015s linear infinite;
+}
+
+.orWhatItsLeft {
+  opacity: 0;
+  transition: opacity 3s;
+  font-style: italic;
+  font-size: 14px;
+}
+
+.showOrWhatItsLeft {
+  opacity: 1;
 }
 
 @keyframes moveFromTop {
