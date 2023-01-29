@@ -17,7 +17,7 @@ const DateTimelapse = () => {
       } else {
         setYear(2300)
       }
-    }, 15)
+    }, 22)
   }
 
   return (
