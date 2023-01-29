@@ -29,12 +29,9 @@ const DyingEarth = ({position, rotation, scale}: DyingEarthProps) => {
     // Begin dying animation on game start
     if (startedGame && earthBaseRef.current.material.opacity > 0) {
       earthBaseRef.current.material.opacity -= 0.001;
-      cloudsRef.current.material.opacity -= 0.001;
     } else if (!animationDone && startedGame && earthBaseRef.current.material.opacity <= 0) {
       earthBaseRef.current.material.opacity = 0;
-      cloudsRef.current.material.opacity = 0;
       earthBaseRef.current.visible = false;
-      cloudsRef.current.visible = false;
       setAnimationDone(true)
     }
   })
@@ -42,7 +39,7 @@ const DyingEarth = ({position, rotation, scale}: DyingEarthProps) => {
   // Load textures
   const [baseTexture, dyingTexture, cloudsTexture] = useTexture([
     '/models/tex/earth_base.jpg',
-    '/models/tex/earth_dying.jpg',
+    '/models/tex/earth_dying.jpeg',
     '/models/tex/earth_clouds.png'
   ])
 
