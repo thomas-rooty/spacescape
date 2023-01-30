@@ -1,10 +1,10 @@
 // This is used to create the walls that surround the player to prevent them from leaving the desired area.
-import {useBox} from '@react-three/cannon';
+import { useBox } from '@react-three/cannon'
 
 interface WallsProps {
-  position: [number, number, number];
-  rotation: [number, number, number];
-  args: [number, number, number];
+  position: [number, number, number]
+  rotation: [number, number, number]
+  args: [number, number, number]
 }
 
 const Wall = (props: WallsProps) => {
@@ -13,11 +13,9 @@ const Wall = (props: WallsProps) => {
     position: props.position,
     rotation: props.rotation,
     args: props.args,
-  }));
+  }))
 
-  return (
-    <mesh ref={ref}/>
-  );
-};
+  return <mesh ref={ref} />
+}
 
-export default Wall;
+export default Wall

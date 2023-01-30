@@ -1,6 +1,6 @@
-import styles from '@/styles/DateTimelapse.module.css';
-import {useStore} from "@/utils/zustore";
-import {useState} from "react";
+import styles from '@/styles/DateTimelapse.module.css'
+import { useStore } from '@/utils/zustore'
+import { useState } from 'react'
 
 const DateTimelapse = () => {
   // Get animationDone
@@ -24,7 +24,14 @@ const DateTimelapse = () => {
   return (
     <div className={styles.dateTimelapse}>
       {/* eslint-disable-next-line react/no-unescaped-entities */}
-      <div className={styles.dateText}>A.D.&nbsp;<div id='year'>{year}</div>&nbsp;| EARTH&nbsp;<div id="textLast" className={styles.orWhatItsLeft}>or what it's left...</div></div>
+      <div className={styles.dateText}>
+        A.D.&nbsp;
+        <div id="year">{year}</div>
+        &nbsp;| EARTH&nbsp;
+        <div id="textLast" className={styles.orWhatItsLeft}>
+          or what it&apos;s left...
+        </div>
+      </div>
     </div>
   )
 }

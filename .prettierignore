@@ -1,0 +1,4 @@
+# Ignore next build files
+.next/
+node_modules/
+.idea/
