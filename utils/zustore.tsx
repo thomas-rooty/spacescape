@@ -13,5 +13,3 @@ export const useStore = create<IStore>((set) => ({
   animationDone: false,
   setAnimationDone: (animationDone: boolean) => set({ animationDone }),
 }))
-
-// Path: utils\zustore.tsx
