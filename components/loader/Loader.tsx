@@ -1,8 +1,8 @@
-import s from '@/styles/Loader.module.css'
+import styles from '@/styles/Loader.module.css'
 
 const Loader = () => {
   return (
-    <div className={s.loader}>
+    <div className={styles.loader}>
       <svg viewBox="0 0 160 160" width="160" height="160">
         <circle cx="80" cy="80" r="50" fill="#757575" />
         <g transform=" matrix(0.866, -0.5, 0.25, 0.433, 80, 80)">
