@@ -35,7 +35,7 @@ const Spaceship = ({position, rotation, scale}: SpaceshipProps) => {
 
   // Make the ship go forward when animation is done smoothly to z = 24.8
   useFrame(() => {
-    shipRef.current.position.z = THREE.MathUtils.lerp(shipRef.current.position.z, animationDone ? 24.8 : 27, 0.005)
+    shipRef.current.position.z = THREE.MathUtils.lerp(shipRef.current.position.z, animationDone ? 24.8 : 26.1, 0.001)
   })
 
   return (
