@@ -18,3 +18,13 @@
   left: 20%;
   width: 60%;
 }
+
+.loaderText {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  color: #fff;
+  font-size: 1.5rem;
+  font-family: "Microsoft JhengHei", sans-serif;
+  font-style: italic;
+}
