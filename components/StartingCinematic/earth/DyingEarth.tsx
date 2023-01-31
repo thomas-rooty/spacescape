@@ -26,7 +26,7 @@ const DyingEarth = ({ position, rotation, scale }: DyingEarthProps) => {
     planetRef.current.rotation.y = clock.getElapsedTime() / 50
     cloudsRef.current.rotation.y = clock.getElapsedTime() / 50
 
-    // Begin dying animation on game start
+    // Begin dying animation on game start using clock
     if (startedGame && earthBaseRef.current.material.opacity > 0) {
       earthBaseRef.current.material.opacity -= 0.001
     } else if (!animationDone && startedGame && earthBaseRef.current.material.opacity <= 0) {
