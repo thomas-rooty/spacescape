@@ -5,7 +5,7 @@ import { KernelSize } from 'postprocessing'
 const Effects = () => {
   return (
     <EffectComposer>
-      <Bloom intensity={1} luminanceThreshold={0} luminanceSmoothing={0.7} height={900} kernelSize={KernelSize.LARGE} />
+      <Bloom intensity={1} luminanceThreshold={0} luminanceSmoothing={1} height={400} kernelSize={KernelSize.SMALL} />
     </EffectComposer>
   )
 }
