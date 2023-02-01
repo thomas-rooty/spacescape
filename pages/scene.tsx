@@ -32,7 +32,7 @@ const Scene = () => {
         {animationDone && <PointerLockControls/>}
         <Stars radius={1} depth={25} count={2500} factor={0.5} saturation={1} fade/>
         <DyingEarth position={[0, 0, -6]} rotation={[0, 0, 0]} scale={9.33}/>
-        <Spaceship position={[0, -3.75, 27]} rotation={[0, 0, 0]} scale={0.006}/>
+        <Spaceship position={[0, -3.83, 27]} rotation={[0, 0, 0]} scale={0.006}/>
       </Canvas>
     </>
   )

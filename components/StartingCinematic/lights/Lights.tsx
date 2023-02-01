@@ -31,7 +31,7 @@ function Spot({ target, ...props }: SpotProps) {
 const Lights = () => {
   const LightsPosition: LightsPosition = {
     light1: [-20, -20, 25],
-    light2: [0, 1.3, 24.8],
+    light2: [0, 0.7, 24.8],
   }
 
   return (
@@ -40,7 +40,7 @@ const Lights = () => {
       <Spot position={LightsPosition.light1} target={[0, 0, -6]} color="white" penumbra={0} distance={100} angle={90} attenuation={1} anglePower={5} intensity={2} />
       <Spot position={LightsPosition.light2} target={[0, 0, 25 + 0.09]} color="#f0f2ff" penumbra={1} distance={5} angle={3} attenuation={1} anglePower={0} intensity={2} />
       <ambientLight intensity={0.1} />
-      {/* These are boxes that are used to visualize the light sources */}
+      {/* These are the boxes that are used to visualize the light sources */}
       <mesh position={LightsPosition.light1}>
         <boxBufferGeometry args={[0.5, 0.5, 0.5]} />
         <meshStandardMaterial color="hotpink" />
