@@ -5,6 +5,7 @@ import DateTimelapse from '@/components/StartingCinematic/datetimelapse/DateTime
 import {Suspense} from 'react'
 import Loader from "@/components/loader/Loader";
 import StartBtn from "@/components/StartingCinematic/buttons/StartBtn";
+import Hud from "@/components/hud/Hud";
 
 export default function Home() {
   return (
@@ -25,6 +26,7 @@ export default function Home() {
       <Suspense fallback={<Loader/>}>
         <div className={styles.scene}>
           <Scene/>
+          <Hud/>
           <DateTimelapse/>
           <StartBtn/>
         </div>
