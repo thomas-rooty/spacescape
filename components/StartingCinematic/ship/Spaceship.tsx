@@ -4,6 +4,7 @@ import {useGLTF} from "@react-three/drei";
 import {GLTF} from "three-stdlib";
 import {useFrame} from "@react-three/fiber";
 import {useStore} from "@/utils/zustore";
+import { a, useSpring } from '@react-spring/three'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -35,7 +36,7 @@ const Spaceship = ({position, rotation, scale}: SpaceshipProps) => {
 
   // Make the ship go forward when animation is done smoothly to z = 24.8
   useFrame(() => {
-    shipRef.current.position.z = THREE.MathUtils.lerp(shipRef.current.position.z, animationDone ? 24.8 : 26.1, 0.001)
+    shipRef.current.position.z = THREE.MathUtils.lerp(shipRef.current.position.z, animationDone ? 24.8 : 26.1, 0.003)
   })
 
   return (

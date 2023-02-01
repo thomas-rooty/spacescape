@@ -1,7 +1,8 @@
-import { useFrame } from '@react-three/fiber'
-import { useRef } from 'react'
-import { useTexture } from '@react-three/drei'
-import { useStore } from '@/utils/zustore'
+import {useFrame} from '@react-three/fiber'
+import {useRef} from 'react'
+import {useTexture} from '@react-three/drei'
+import {useStore} from '@/utils/zustore'
+import * as THREE from "three";
 
 interface DyingEarthProps {
   position: [number, number, number]
@@ -9,7 +10,7 @@ interface DyingEarthProps {
   scale: number
 }
 
-const DyingEarth = ({ position, rotation, scale }: DyingEarthProps) => {
+const DyingEarth = ({position, rotation, scale}: DyingEarthProps) => {
   // Get startedGame, animationDone and getAnimationDone from store
   const startedGame = useStore((state) => state.startedGame)
   const animationDone = useStore((state) => state.animationDone)
@@ -26,10 +27,9 @@ const DyingEarth = ({ position, rotation, scale }: DyingEarthProps) => {
     planetRef.current.rotation.y = clock.getElapsedTime() / 50
     cloudsRef.current.rotation.y = clock.getElapsedTime() / 50
 
-    // Begin dying animation on game start using clock
-    if (startedGame && earthBaseRef.current.material.opacity > 0) {
-      earthBaseRef.current.material.opacity -= 0.001
-    } else if (!animationDone && startedGame && earthBaseRef.current.material.opacity <= 0) {
+    // Begin dying animation on game start true using lerp
+    earthBaseRef.current.material.opacity = THREE.MathUtils.lerp(earthBaseRef.current.material.opacity, startedGame ? 0 : 1, 0.003)
+    if (!animationDone && startedGame && earthBaseRef.current.material.opacity <= 0.1) {
       earthBaseRef.current.material.opacity = 0
       earthBaseRef.current.visible = false
       setAnimationDone(true)
