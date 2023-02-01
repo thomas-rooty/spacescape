@@ -41,14 +41,6 @@ const Lights = () => {
       <Spot position={LightsPosition.light2} target={[0, 0, 25 + 0.09]} color="#f0f2ff" penumbra={1} distance={5} angle={3} attenuation={1} anglePower={0} intensity={2} />
       <ambientLight intensity={0.1} />
       {/* These are the boxes that are used to visualize the light sources */}
-      <mesh position={LightsPosition.light1}>
-        <boxBufferGeometry args={[0.5, 0.5, 0.5]} />
-        <meshStandardMaterial color="hotpink" />
-      </mesh>
-      <mesh position={LightsPosition.light2}>
-        <boxBufferGeometry args={[0.5, 0.5, 0.5]} />
-        <meshStandardMaterial color="hotpink" />
-      </mesh>
     </>
   )
 }
