@@ -1,7 +1,26 @@
+/* Crosshair component */
 #crosshair {
   position: absolute;
   z-index: 1000000000;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+/* InteractPrompt component */
+.interactPrompt {
+  position: absolute;
+  z-index: 1000000000;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-family: "Microsoft JhengHei Light", sans-serif;
+  font-style: italic;
+  transition: all .3s;
+}
+
+/* Global styles */
+.hide {
+  opacity: 0;
 }

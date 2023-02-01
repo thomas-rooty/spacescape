@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 
 export const useControls = () => {
-  const keys = { KeyW: 'forward', KeyS: 'backward', KeyA: 'left', KeyD: 'right', Space: 'jump' }
+  const keys = { KeyW: 'forward', KeyS: 'backward', KeyA: 'left', KeyD: 'right', Space: 'jump', KeyE: 'interact' }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const moveFieldByKey = (key: string | number) => keys[key as keyof typeof keys]
 
-  const [movement, setMovement] = useState({ forward: false, backward: false, left: false, right: false, jump: false })
+  const [movement, setMovement] = useState({ forward: false, backward: false, left: false, right: false, jump: false, interact: false })
 
   useEffect(() => {
     const handleKeyDown = (e: { code: string | number }) =>

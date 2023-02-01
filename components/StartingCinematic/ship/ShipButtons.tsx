@@ -1,6 +1,7 @@
 import {useFrame} from '@react-three/fiber'
 import {useRef} from 'react'
 import {useStore} from "@/utils/zustore";
+import {useControls} from "@/utils/useControls";
 
 const ShipButtons = () => {
   // Get store variables and functions
@@ -9,6 +10,7 @@ const ShipButtons = () => {
 
   // Create refs for the buttons
   const SHIP_SELECT_BTN = useRef<any>()
+  const {interact} = useControls()
 
   useFrame(() => {
     // Add SHIP_SELECT_BTN as a hoverable object if not already in the list
@@ -17,7 +19,7 @@ const ShipButtons = () => {
     }
 
     // Change the color of the SHIP_SELECT_BTN object if it is hovered
-    if (hoveredObject === 'SHIP_SELECT_BTN') {
+    if (hoveredObject === 'SHIP_SELECT_BTN' && interact) {
       SHIP_SELECT_BTN.current.material.color.set('red')
     } else {
       SHIP_SELECT_BTN.current.material.color.set('hotpink')
