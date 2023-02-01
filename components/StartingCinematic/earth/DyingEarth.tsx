@@ -2,7 +2,7 @@ import {useFrame} from '@react-three/fiber'
 import {useRef} from 'react'
 import {useTexture} from '@react-three/drei'
 import {useStore} from '@/utils/zustore'
-import * as THREE from "three";
+import * as THREE from 'three'
 
 interface DyingEarthProps {
   position: [number, number, number]
@@ -29,7 +29,7 @@ const DyingEarth = ({position, rotation, scale}: DyingEarthProps) => {
 
     // Begin dying animation on game start true using lerp
     earthBaseRef.current.material.opacity = THREE.MathUtils.lerp(earthBaseRef.current.material.opacity, startedGame ? 0 : 1, 0.003)
-    if (!animationDone && startedGame && earthBaseRef.current.material.opacity <= 0.1) {
+    if (!animationDone && startedGame && earthBaseRef.current.material.opacity <= 0.05) {
       earthBaseRef.current.material.opacity = 0
       earthBaseRef.current.visible = false
       setAnimationDone(true)

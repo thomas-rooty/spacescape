@@ -2,7 +2,6 @@ import * as THREE from "three";
 import React, {useRef} from "react";
 import {useGLTF} from "@react-three/drei";
 import {GLTF} from "three-stdlib";
-import {useFrame} from "@react-three/fiber";
 import {useStore} from "@/utils/zustore";
 import { a, useSpring } from '@react-spring/three'
 
@@ -34,13 +33,13 @@ const Spaceship = ({position, rotation, scale}: SpaceshipProps) => {
   // Get animationDone from store
   const animationDone = useStore((state) => state.animationDone)
 
-  // Make the ship go forward when animation is done smoothly to z = 24.8
-  useFrame(() => {
-    shipRef.current.position.z = THREE.MathUtils.lerp(shipRef.current.position.z, animationDone ? 24.8 : 26.1, 0.003)
+  const { z } = useSpring({
+    z: animationDone ? 24.8 : 26.1,
+    config: { mass: 1, tension: 100, friction: 100, precision: 0.003 }
   })
 
   return (
-    <group ref={shipRef} name="shipinteriors" position={position} rotation={rotation} scale={scale}>
+    <a.group ref={shipRef} name="shipinteriors" position-z={z} position={position} rotation={rotation} scale={[scale, scale, scale]}>
       <group
         name="Space_ship_interior_lp"
         rotation={[Math.PI / 2, 0, 0]}
@@ -70,7 +69,7 @@ const Spaceship = ({position, rotation, scale}: SpaceshipProps) => {
           material={materials.Space_ship}
         />
       </group>
-    </group>
+    </a.group>
   )
     ;
 }
