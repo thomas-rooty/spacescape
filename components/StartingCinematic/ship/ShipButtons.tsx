@@ -1,7 +1,7 @@
-import {useFrame} from '@react-three/fiber'
-import {useRef} from 'react'
-import {useStore} from "@/utils/zustore";
-import {useControls} from "@/utils/useControls";
+import { useFrame } from '@react-three/fiber'
+import { useRef } from 'react'
+import { useStore } from '@/utils/zustore'
+import { useControls } from '@/utils/useControls'
 
 const ShipButtons = () => {
   // Get store variables and functions
@@ -11,7 +11,7 @@ const ShipButtons = () => {
   // Create refs for the buttons
   const SHIP_BTN_SELECT = useRef<any>()
   const SHIP_BTN_START = useRef<any>()
-  const {interact} = useControls()
+  const { interact } = useControls()
 
   useFrame(() => {
     // Add SHIP_BTN_SELECT as a hoverable object
@@ -41,13 +41,13 @@ const ShipButtons = () => {
 
   return (
     <>
-      <mesh ref={SHIP_BTN_SELECT} userData={{id: 'SHIP_SELECT_BTN'}} position={[-0.68, 0.08, 24.3]}>
-        <boxBufferGeometry args={[0.07, 0.07, 0.07]}/>
-        <meshLambertMaterial opacity={0.5} transparent={true}/>
+      <mesh ref={SHIP_BTN_SELECT} userData={{ id: 'SHIP_SELECT_BTN' }} position={[-0.68, 0.08, 24.3]}>
+        <boxBufferGeometry args={[0.07, 0.07, 0.07]} />
+        <meshLambertMaterial opacity={0.5} transparent={true} />
       </mesh>
-      <mesh ref={SHIP_BTN_START} userData={{id: 'SHIP_START_BTN'}} position={[-0.87, 0.08, 24.41]}>
-        <boxBufferGeometry args={[0.07, 0.07, 0.07]}/>
-        <meshLambertMaterial opacity={0.5} transparent={true}/>
+      <mesh ref={SHIP_BTN_START} userData={{ id: 'SHIP_START_BTN' }} position={[-0.87, 0.08, 24.41]}>
+        <boxBufferGeometry args={[0.07, 0.07, 0.07]} />
+        <meshLambertMaterial opacity={0.5} transparent={true} />
       </mesh>
     </>
   )

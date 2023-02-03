@@ -1,10 +1,10 @@
 import styles from '@/styles/Hud.module.css'
-import {useStore} from "@/utils/zustore";
-import {useEffect} from "react";
+import { useStore } from '@/utils/zustore'
+import { useEffect } from 'react'
 
 export const InteractPrompt = () => {
   // Display interact prompt if hoveredObject is defined
-  const hoveredObject = useStore(state => state.hoveredObject);
+  const hoveredObject = useStore((state) => state.hoveredObject)
 
   useEffect(() => {
     console.log(hoveredObject)

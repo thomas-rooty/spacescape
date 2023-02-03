@@ -2,7 +2,7 @@ import { SphereProps, useSphere } from '@react-three/cannon'
 import { useFrame, useThree } from '@react-three/fiber'
 import { useEffect, useRef, useMemo } from 'react'
 import { useControls } from '@/utils/useControls'
-import {useStore} from "@/utils/zustore";
+import { useStore } from '@/utils/zustore'
 import * as THREE from 'three'
 
 const BaseCharacter = (props: SphereProps) => {

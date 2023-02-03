@@ -1,32 +1,32 @@
-import styles from "@/styles/Hud.module.css"
-import React from "react";
-import {useStore} from "@/utils/zustore";
+import styles from '@/styles/Hud.module.css'
+import React from 'react'
+import { useStore } from '@/utils/zustore'
 
 interface CrosshairProps {
-  size: number;
-  color: string;
-  thickness: number;
+  size: number
+  color: string
+  thickness: number
 }
 
-export const Crosshair = ({size, color, thickness}: CrosshairProps) => {
+export const Crosshair = ({ size, color, thickness }: CrosshairProps) => {
   // Get animationDone
-  const animationDone = useStore(state => state.animationDone);
+  const animationDone = useStore((state) => state.animationDone)
 
   let crosshairVert = {
     position: 'absolute',
     width: size + 'px',
     height: thickness + 'px',
     backgroundColor: color,
-    left: ((-size / 2) + 1) + 'px',
-  } as React.CSSProperties;
+    left: -size / 2 + 1 + 'px',
+  } as React.CSSProperties
 
   let crosshairHoriz = {
     position: 'absolute',
     width: thickness + 'px',
     height: size + 'px',
     backgroundColor: color,
-    top: ((-size / 2) + 1) + 'px',
-  } as React.CSSProperties;
+    top: -size / 2 + 1 + 'px',
+  } as React.CSSProperties
 
   return (
     <div className={styles.null}>
