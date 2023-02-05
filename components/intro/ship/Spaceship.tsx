@@ -35,8 +35,8 @@ const Spaceship = ({ position, rotation, scale }: SpaceshipProps) => {
   const animationDone = useStore((state) => state.animationDone)
 
   const { z } = useSpring({
-    z: animationDone ? 24.8 : 26.1,
-    config: { mass: 1, tension: 100, friction: 100, precision: 0.003 },
+    z: animationDone ? 24.8 : 26,
+    config: { mass: 1, tension: 10, friction: 10, precision: 0.003 },
   })
 
   return (
