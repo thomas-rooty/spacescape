@@ -28,7 +28,7 @@ const DyingEarth = ({ position, rotation, scale }: DyingEarthProps) => {
     cloudsRef.current.rotation.y = clock.getElapsedTime() / 50
 
     // Begin dying animation on game start true using lerp
-    earthBaseRef.current.material.opacity = THREE.MathUtils.lerp(earthBaseRef.current.material.opacity, startedGame ? 0 : 1, delta / 10)
+    earthBaseRef.current.material.opacity = THREE.MathUtils.lerp(earthBaseRef.current.material.opacity, startedGame ? 0 : 1, delta / 2)
     if (!animationDone && startedGame && earthBaseRef.current.material.opacity <= 0.05) {
       earthBaseRef.current.material.opacity = 0
       earthBaseRef.current.visible = false
