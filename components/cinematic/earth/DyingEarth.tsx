@@ -22,14 +22,19 @@ const DyingEarth = ({ position, rotation, scale }: DyingEarthProps) => {
   const earthDyingRef = useRef<any>()
   const cloudsRef = useRef<any>()
 
+  // Useful variables
+  const animationDivisor = 2
+
   // Earth and clouds rotations
   useFrame(({ clock }, delta) => {
-    planetRef.current.rotation.y = clock.getElapsedTime() / 50
-    cloudsRef.current.rotation.y = clock.getElapsedTime() / 50
+    // Planet rotation speed
+    const rotationSpeed = clock.getElapsedTime() / 50
+    planetRef.current.rotation.y = rotationSpeed
+    cloudsRef.current.rotation.y = rotationSpeed
 
-    // Begin dying animation on game start true using lerp
-    earthBaseRef.current.material.opacity = THREE.MathUtils.lerp(earthBaseRef.current.material.opacity, startedGame ? 0 : 1, delta / 2)
-    if (!animationDone && startedGame && earthBaseRef.current.material.opacity <= 0.05) {
+    // Begin dying animation on game start true and while opacity is <= 0.03 and animationDone is false (meaning opacity is not 0.03 yet)
+    earthBaseRef.current.material.opacity = THREE.MathUtils.lerp(earthBaseRef.current.material.opacity, startedGame ? 0 : 1, delta / animationDivisor)
+    if (!animationDone && startedGame && earthBaseRef.current.material.opacity <= 0.03) {
       earthBaseRef.current.material.opacity = 0
       earthBaseRef.current.visible = false
       setAnimationDone(true)
