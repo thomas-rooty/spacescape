@@ -25,15 +25,18 @@ const Intro = () => {
         <Physics gravity={[0, -9.8, 0]}>
           <BaseCharacter position={[0, 0, distanceFromCenter + 0.09]} args={[0.14]} />
           <Debug scale={0} color="red">
-            <Floor rotation={[Math.PI / -2, 0, 0]} color={'black'} position={[-0.33, -0.17, distanceFromCenter + 0.2]} />
-            <CockpitCollision />
+            <Floor rotation={[Math.PI / -2, 0, 0]} color={'black'} position={[-0.33, -0.17, distanceFromCenter + 0.2]}/>
+            <CockpitCollision/>
           </Debug>
         </Physics>
-        {animationDone && <PointerLockControls />}
-        <Stars radius={1} depth={25} count={2500} factor={0.5} saturation={1} fade />
-        <DyingEarth position={[0, 0, -6]} rotation={[0, 0, 0]} scale={9.33} />
-        <Spaceship position={[0, -3.83, 26]} rotation={[0, 0, 0]} scale={0.006} />
+        {animationDone && <PointerLockControls/>}
+        <Stars radius={1} depth={25} count={2500} factor={0.5} saturation={1} fade/>
+        <DyingEarth position={[0, 0, -6]} rotation={[0, 0, 0]} scale={9.33}/>
+        <Spaceship position={[0, -3.83, 26]} rotation={[0, 0, 0]} scale={0.006}/>
       </Canvas>
+      <audio id="intro-music" autoPlay={true} loop={true}>
+        <source src="/musics/StartingCinematic/Interstellar_Main_Theme.mp3" type="audio/mpeg"/>
+      </audio>
     </>
   )
 }

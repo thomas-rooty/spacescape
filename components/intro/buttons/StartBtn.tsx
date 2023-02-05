@@ -5,6 +5,7 @@ import { createCinematicSlice } from '@/utils/zustore'
 const StartBtn = () => {
   const [showPointerLocker, setShowPointerLocker] = useState(true)
   const setStartedGame = createCinematicSlice((state) => state.setStartedGame)
+  const startedGame = createCinematicSlice((state) => state.startedGame)
 
   function _hideStartBtn() {
     // Hide start button, show pointer locker, and set startedGame to true
@@ -30,13 +31,22 @@ const StartBtn = () => {
     }
   })
 
+  // Handle audio intro music
+  useEffect(() => {
+    const introMusic = document.getElementById('intro-music') as HTMLAudioElement
+    if (startedGame) {
+      introMusic?.play()
+    }
+  }, [startedGame])
+
   return (
     <div id="startBtnContainer" className={showPointerLocker ? styles.show : styles.hide}>
       <div id="startBtn" className={styles.startBtn} onClick={_hideStartBtn}>
         <a className={styles.cta} href="#">
           <span className={styles.startSpan}>START</span>
           <span className={styles.startSpan}>
-            <svg width="66px" height="43px" viewBox="0 0 66 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
+            <svg width="66px" height="43px" viewBox="0 0 66 43" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                 xmlnsXlink="http://www.w3.org/1999/xlink">
               <g id="arrow" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                 <path
                   className={styles.one}
