@@ -2,13 +2,13 @@ import { Canvas } from '@react-three/fiber'
 import { Stars, PointerLockControls } from '@react-three/drei'
 import { Physics, Debug } from '@react-three/cannon'
 import { useStore } from '@/utils/zustore'
-import DyingEarth from '@/components/StartingCinematic/earth/DyingEarth'
-import Lights from '@/components/StartingCinematic/lights/Lights'
+import DyingEarth from '@/components/cinematic/earth/DyingEarth'
+import Lights from '@/components/cinematic/lights/Lights'
 import Effects from '@/components/effects/Effects'
-import Floor from '@/components/StartingCinematic/floor/Floor'
+import Floor from '@/components/cinematic/floor/Floor'
 import BaseCharacter from '@/components/character/BaseCharacter'
-import CockpitCollision from '@/components/StartingCinematic/ship/CockpitCollision'
-import Spaceship from '@/components/StartingCinematic/ship/Spaceship'
+import CockpitCollision from '@/components/cinematic/ship/CockpitCollision'
+import Spaceship from '@/components/cinematic/ship/Spaceship'
 
 const Scene = () => {
   // Base values

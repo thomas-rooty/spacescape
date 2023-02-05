@@ -1,4 +1,4 @@
-import Wall from '@/components/StartingCinematic/ship/Wall'
+import Wall from '@/components/cinematic/ship/Wall'
 
 const CockpitCollision = () => {
   return (
