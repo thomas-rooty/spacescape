@@ -10,7 +10,7 @@ import BaseCharacter from '@/components/character/BaseCharacter'
 import CockpitCollision from '@/components/cinematic/ship/CockpitCollision'
 import Spaceship from '@/components/cinematic/ship/Spaceship'
 
-const Scene = () => {
+const Cinematic = () => {
   // Base values
   const distanceFromCenter = 25
 
@@ -38,4 +38,4 @@ const Scene = () => {
   )
 }
 
-export default Scene
+export default Cinematic
