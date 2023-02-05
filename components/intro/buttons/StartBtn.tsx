@@ -5,7 +5,6 @@ import { createCinematicSlice } from '@/utils/zustore'
 const StartBtn = () => {
   const [showPointerLocker, setShowPointerLocker] = useState(true)
   const setStartedGame = createCinematicSlice((state) => state.setStartedGame)
-  const startedGame = createCinematicSlice((state) => state.startedGame)
 
   function _hideStartBtn() {
     // Hide start button, show pointer locker, and set startedGame to true
@@ -30,14 +29,6 @@ const StartBtn = () => {
       document.removeEventListener('pointerlockchange', _pointerLockChange, false)
     }
   })
-
-  // Handle audio intro music
-  useEffect(() => {
-    const introMusic = document.getElementById('intro-music') as HTMLAudioElement
-    if (startedGame) {
-      introMusic?.play()
-    }
-  }, [startedGame])
 
   return (
     <div id="startBtnContainer" className={showPointerLocker ? styles.show : styles.hide}>

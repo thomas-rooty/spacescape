@@ -9,6 +9,7 @@ import Floor from '@/components/intro/floor/Floor'
 import BaseCharacter from '@/components/character/BaseCharacter'
 import CockpitCollision from '@/components/intro/ship/CockpitCollision'
 import Spaceship from '@/components/intro/ship/Spaceship'
+import {useEffect} from "react";
 
 const Intro = () => {
   // Base values
@@ -16,6 +17,19 @@ const Intro = () => {
 
   // Store values
   const animationDone = createCinematicSlice((state) => state.animationDone)
+  const startedGame = createCinematicSlice((state) => state.startedGame)
+  const audioState = createCinematicSlice((state) => state.audioState)
+  const audioVolume = createCinematicSlice((state) => state.audioVolume)
+
+  // Handle audio intro music
+  useEffect(() => {
+    const introMusic = document.getElementById('intro-music') as HTMLAudioElement
+    if (startedGame) {
+      introMusic.volume = audioVolume
+      audioState ? introMusic.play() :
+        introMusic.pause()
+    }
+  }, [startedGame, audioState, audioVolume])
 
   return (
     <>
