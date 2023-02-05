@@ -1,7 +1,7 @@
 import { useFrame } from '@react-three/fiber'
 import { useRef } from 'react'
 import { useTexture } from '@react-three/drei'
-import { useStore } from '@/utils/zustore'
+import { createCinematicSlice } from '@/utils/zustore'
 import * as THREE from 'three'
 
 interface DyingEarthProps {
@@ -12,9 +12,9 @@ interface DyingEarthProps {
 
 const DyingEarth = ({ position, rotation, scale }: DyingEarthProps) => {
   // Get startedGame, animationDone and getAnimationDone from store
-  const startedGame = useStore((state) => state.startedGame)
-  const animationDone = useStore((state) => state.animationDone)
-  const setAnimationDone = useStore((state) => state.setAnimationDone)
+  const startedGame = createCinematicSlice((state) => state.startedGame)
+  const animationDone = createCinematicSlice((state) => state.animationDone)
+  const setAnimationDone = createCinematicSlice((state) => state.setAnimationDone)
 
   // Earth reference
   const planetRef = useRef<any>()

@@ -3,7 +3,7 @@ import React, { useRef } from 'react'
 import ShipButtons from '@/components/intro/ship/ShipButtons'
 import { useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
-import { useStore } from '@/utils/zustore'
+import { createCinematicSlice } from '@/utils/zustore'
 import { a, useSpring } from '@react-spring/three'
 
 type GLTFResult = GLTF & {
@@ -32,7 +32,7 @@ const Spaceship = ({ position, rotation, scale }: SpaceshipProps) => {
   const { nodes, materials } = useGLTF('/models/spaceship/spaceship_compressed.gltf') as unknown as GLTFResult
 
   // Get required values from store
-  const animationDone = useStore((state) => state.animationDone)
+  const animationDone = createCinematicSlice((state) => state.animationDone)
 
   const { z } = useSpring({
     z: animationDone ? 24.8 : 26,

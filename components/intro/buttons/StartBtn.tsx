@@ -1,10 +1,10 @@
 import styles from '@/styles/Buttons.module.css'
 import { useEffect, useState } from 'react'
-import { useStore } from '@/utils/zustore'
+import { createCinematicSlice } from '@/utils/zustore'
 
 const StartBtn = () => {
   const [showPointerLocker, setShowPointerLocker] = useState(true)
-  const setStartedGame = useStore((state) => state.setStartedGame)
+  const setStartedGame = createCinematicSlice((state) => state.setStartedGame)
 
   function _hideStartBtn() {
     // Hide start button, show pointer locker, and set startedGame to true

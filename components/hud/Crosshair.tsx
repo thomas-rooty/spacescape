@@ -1,6 +1,6 @@
 import styles from '@/styles/Hud.module.css'
 import React from 'react'
-import { useStore } from '@/utils/zustore'
+import { createCinematicSlice } from '@/utils/zustore'
 
 interface CrosshairProps {
   size: number
@@ -10,7 +10,7 @@ interface CrosshairProps {
 
 export const Crosshair = ({ size, color, thickness }: CrosshairProps) => {
   // Get animationDone
-  const animationDone = useStore((state) => state.animationDone)
+  const animationDone = createCinematicSlice((state) => state.animationDone)
 
   let crosshairVert = {
     position: 'absolute',

@@ -1,7 +1,7 @@
 import { Canvas } from '@react-three/fiber'
 import { Stars, PointerLockControls } from '@react-three/drei'
 import { Physics, Debug } from '@react-three/cannon'
-import { useStore } from '@/utils/zustore'
+import { createCinematicSlice } from '@/utils/zustore'
 import DyingEarth from '@/components/intro/earth/DyingEarth'
 import Lights from '@/components/intro/lights/Lights'
 import Effects from '@/components/effects/Effects'
@@ -15,7 +15,7 @@ const Intro = () => {
   const distanceFromCenter = 25
 
   // Store values
-  const animationDone = useStore((state) => state.animationDone)
+  const animationDone = createCinematicSlice((state) => state.animationDone)
 
   return (
     <>

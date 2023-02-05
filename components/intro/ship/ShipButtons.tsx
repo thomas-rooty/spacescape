@@ -1,12 +1,12 @@
 import { useFrame } from '@react-three/fiber'
 import { useRef } from 'react'
-import { useStore } from '@/utils/zustore'
+import { createCinematicSlice } from '@/utils/zustore'
 import { useControls } from '@/utils/useControls'
 
 const ShipButtons = () => {
   // Get store variables and functions
-  const addObjectAsHoverable = useStore((state) => state.addObjectAsHoverable)
-  const hoveredObject = useStore((state) => state.hoveredObject)
+  const addObjectAsHoverable = createCinematicSlice((state) => state.addObjectAsHoverable)
+  const hoveredObject = createCinematicSlice((state) => state.hoveredObject)
 
   // Create refs for the buttons
   const SHIP_BTN_SELECT = useRef<any>()

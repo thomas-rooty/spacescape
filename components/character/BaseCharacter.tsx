@@ -2,7 +2,7 @@ import { SphereProps, useSphere } from '@react-three/cannon'
 import { useFrame, useThree } from '@react-three/fiber'
 import { useEffect, useRef, useMemo } from 'react'
 import { useControls } from '@/utils/useControls'
-import { useStore } from '@/utils/zustore'
+import { createCinematicSlice } from '@/utils/zustore'
 import * as THREE from 'three'
 
 const BaseCharacter = (props: SphereProps) => {
@@ -30,8 +30,8 @@ const BaseCharacter = (props: SphereProps) => {
 
   // Raycast initialization, gathering of the functions and variables from the store needed to perform hoverable objects detection
   const raycaster = useMemo(() => new THREE.Raycaster(), [])
-  const hoverableObjects = useStore((state) => state.hoverableObjects)
-  const setObjectAsHovered = useStore((state) => state.setObjectAsHovered)
+  const hoverableObjects = createCinematicSlice((state) => state.hoverableObjects)
+  const setObjectAsHovered = createCinematicSlice((state) => state.setObjectAsHovered)
 
   useFrame(({ clock }) => {
     ref.current.getWorldPosition(camera.position)

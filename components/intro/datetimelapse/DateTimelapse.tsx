@@ -1,10 +1,10 @@
 import styles from '@/styles/DateTimelapse.module.css'
-import { useStore } from '@/utils/zustore'
+import { createCinematicSlice } from '@/utils/zustore'
 import { useState } from 'react'
 
 const DateTimelapse = () => {
   // Get animationDone
-  const startedGame = useStore((state) => state.startedGame)
+  const startedGame = createCinematicSlice((state) => state.startedGame)
 
   // Year variable that goes from 2023 to 2300
   const [year, setYear] = useState(2023)

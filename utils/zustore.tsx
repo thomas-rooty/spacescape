@@ -1,6 +1,6 @@
 import {create} from 'zustand'
 
-interface IStore {
+interface ICinematicStore {
   startedGame: boolean
   setStartedGame: (startedGame: boolean) => void
   animationDone: boolean
@@ -9,14 +9,21 @@ interface IStore {
   addObjectAsHoverable: (object: any) => void
   hoveredObject: any
   setObjectAsHovered: (hoveredObject: any) => void
+  audioState: boolean
+  setAudioState: (audioState: boolean) => void
+  audioVolume: number
+  setAudioVolume: (audioVolume: number) => void
 }
 
-export const useStore = create<IStore>((set) => ({
+export const createCinematicSlice = create<ICinematicStore>((set) => ({
+  // Handles the game start state
   startedGame: false,
   setStartedGame: (startedGame: boolean) => set({ startedGame }),
+  // Handles the animation done state
   animationDone: false,
   setAnimationDone: (animationDone: boolean) => set({ animationDone }),
-  // Add an object to the hoverable objects array, everything in this list will become a hoverable object for the player (if not already in the list)
+  // Add an object to the hoverable objects array
+  // Everything in this list will become a hoverable object for the player (if not already in the list)
   hoverableObjects: [],
   addObjectAsHoverable: (object) => {
     set((state) => {
@@ -35,4 +42,10 @@ export const useStore = create<IStore>((set) => ({
       };
     });
   },
+  // Handles the audio state (on/off)
+  audioState: true,
+  setAudioState: (audioState: boolean) => set({ audioState }),
+  // Handles the audio volume (0-1)
+  audioVolume: 0.5,
+  setAudioVolume: (audioVolume: number) => set({ audioVolume }),
 }));
