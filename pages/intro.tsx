@@ -2,15 +2,15 @@ import { Canvas } from '@react-three/fiber'
 import { Stars, PointerLockControls } from '@react-three/drei'
 import { Physics, Debug } from '@react-three/cannon'
 import { useStore } from '@/utils/zustore'
-import DyingEarth from '@/components/cinematic/earth/DyingEarth'
-import Lights from '@/components/cinematic/lights/Lights'
+import DyingEarth from '@/components/intro/earth/DyingEarth'
+import Lights from '@/components/intro/lights/Lights'
 import Effects from '@/components/effects/Effects'
-import Floor from '@/components/cinematic/floor/Floor'
+import Floor from '@/components/intro/floor/Floor'
 import BaseCharacter from '@/components/character/BaseCharacter'
-import CockpitCollision from '@/components/cinematic/ship/CockpitCollision'
-import Spaceship from '@/components/cinematic/ship/Spaceship'
+import CockpitCollision from '@/components/intro/ship/CockpitCollision'
+import Spaceship from '@/components/intro/ship/Spaceship'
 
-const Cinematic = () => {
+const Intro = () => {
   // Base values
   const distanceFromCenter = 25
 
@@ -38,4 +38,4 @@ const Cinematic = () => {
   )
 }
 
-export default Cinematic
+export default Intro

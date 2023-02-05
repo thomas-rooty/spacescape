@@ -1,10 +1,10 @@
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
-import Cinematic from '@/pages/cinematic'
-import DateTimelapse from '@/components/cinematic/datetimelapse/DateTimelapse'
+import Intro from '@/pages/intro'
+import DateTimelapse from '@/components/intro/datetimelapse/DateTimelapse'
 import { Suspense } from 'react'
 import Loader from '@/components/loader/Loader'
-import StartBtn from '@/components/cinematic/buttons/StartBtn'
+import StartBtn from '@/components/intro/buttons/StartBtn'
 import Hud from '@/components/hud/Hud'
 
 export default function Home() {
@@ -23,7 +23,7 @@ export default function Home() {
       </Head>
       <Suspense fallback={<Loader />}>
         <div className={styles.scene}>
-          <Cinematic />
+          <Intro />
           <Hud />
           <DateTimelapse />
           <StartBtn />
