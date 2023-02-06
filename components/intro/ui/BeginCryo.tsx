@@ -3,15 +3,21 @@ import { createCinematicSlice } from '@/utils/zustore'
 import { useEffect } from 'react'
 
 const BeginCryo = () => {
-  // Get launchInitiated from the store
+  // Get variables and functions from the store
   const launchInitiated = createCinematicSlice((state) => state.launchInitiated)
+  const setEndCryo = createCinematicSlice((state) => state.setEndCryo)
 
-  // After 10 seconds, append show class to the div
+  // Show the cryo state when the launch is initiated
   useEffect(() => {
     if (launchInitiated) {
       document.getElementById('begincryo')?.classList.add(styles.show)
+      // After 20 seconds, trigger the end of the cryo animation
+      setTimeout(() => {
+        setEndCryo(true)
+        console.log('End Cryo')
+      }, 20000)
     }
-  }, [launchInitiated])
+  }, [launchInitiated, setEndCryo])
 
   // A text that appears at the center of the screen saying "Initiating Cryogenic Sleep"
   return (

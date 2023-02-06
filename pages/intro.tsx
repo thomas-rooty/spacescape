@@ -34,8 +34,8 @@ const Intro = () => {
   return (
     <>
       <Canvas shadows={true} camera={{ position: [0, 0, distanceFromCenter], fov: 40 }}>
-        <Effects />
         <Lights />
+        <Effects />
         <Physics gravity={[0, -9.8, 0]}>
           <BaseCharacter position={[0, 0, distanceFromCenter + 0.09]} args={[0.14]} />
           <Debug scale={0} color="red">

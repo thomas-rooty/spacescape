@@ -15,6 +15,8 @@ interface ICinematicStore {
   setAudioVolume: (audioVolume: number) => void
   launchInitiated: boolean
   setLaunchInitiated: (launchInitiated: boolean) => void
+  endCryo: boolean
+  setEndCryo: (endCryo: boolean) => void
 }
 
 export const createCinematicSlice = create<ICinematicStore>((set) => ({
@@ -53,4 +55,7 @@ export const createCinematicSlice = create<ICinematicStore>((set) => ({
   // Handles the launch initiated statem which is used to trigger the launch animation of the ship
   launchInitiated: false,
   setLaunchInitiated: (launchInitiated: boolean) => set({ launchInitiated }),
+  // Handles the end cryo state, which is used to trigger the end of the cryo animation
+  endCryo: false,
+  setEndCryo: (endCryo: boolean) => set({ endCryo }),
 }));
