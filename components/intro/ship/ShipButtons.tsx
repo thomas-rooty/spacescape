@@ -8,7 +8,7 @@ const ShipButtons = () => {
   const addObjectAsHoverable = createCinematicSlice((state) => state.addObjectAsHoverable)
   const hoveredObject = createCinematicSlice((state) => state.hoveredObject)
   const setAudioState = createCinematicSlice((state) => state.setAudioState)
-  const setAudioVolume = createCinematicSlice((state) => state.setAudioVolume)
+  const setLaunchInitiated = createCinematicSlice((state) => state.setLaunchInitiated)
 
   // Create refs for the buttons
   const SHIP_BTN_START = useRef<any>()
@@ -68,6 +68,8 @@ const ShipButtons = () => {
     // Change the color of the SHIP_CMD_STEERING object if it is hovered
     if (hoveredObject === 'SHIP_CMD_STEERING' && interact) {
       SHIP_CMD_STEERING.current.material.color.set('orange')
+      // Initiate the launch
+      setLaunchInitiated(true)
     } else {
       SHIP_CMD_STEERING.current.material.color.set('#FFD580')
     }

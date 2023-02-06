@@ -13,6 +13,8 @@ interface ICinematicStore {
   setAudioState: (audioState: boolean) => void
   audioVolume: number
   setAudioVolume: (audioVolume: number) => void
+  launchInitiated: boolean
+  setLaunchInitiated: (launchInitiated: boolean) => void
 }
 
 export const createCinematicSlice = create<ICinematicStore>((set) => ({
@@ -48,4 +50,7 @@ export const createCinematicSlice = create<ICinematicStore>((set) => ({
   // Handles the audio volume (0-1)
   audioVolume: 0.5,
   setAudioVolume: (audioVolume: number) => set({ audioVolume }),
+  // Handles the launch initiated statem which is used to trigger the launch animation of the ship
+  launchInitiated: false,
+  setLaunchInitiated: (launchInitiated: boolean) => set({ launchInitiated }),
 }));

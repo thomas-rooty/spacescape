@@ -11,10 +11,11 @@ interface DyingEarthProps {
 }
 
 const DyingEarth = ({ position, rotation, scale }: DyingEarthProps) => {
-  // Get startedGame, animationDone and getAnimationDone from store
+  // Get variables and functions from store
   const startedGame = createCinematicSlice((state) => state.startedGame)
   const animationDone = createCinematicSlice((state) => state.animationDone)
   const setAnimationDone = createCinematicSlice((state) => state.setAnimationDone)
+  const launchInitiated = createCinematicSlice((state) => state.launchInitiated)
 
   // Earth reference
   const planetRef = useRef<any>()
@@ -34,10 +35,18 @@ const DyingEarth = ({ position, rotation, scale }: DyingEarthProps) => {
 
     // Begin dying animation on game start true and while opacity is <= 0.03 and animationDone is false (meaning opacity is not 0.03 yet)
     earthBaseRef.current.material.opacity = THREE.MathUtils.lerp(earthBaseRef.current.material.opacity, startedGame ? 0 : 1, delta / animationDivisor)
-    if (!animationDone && startedGame && earthBaseRef.current.material.opacity <= 0.03) {
+    if (!animationDone && startedGame && !launchInitiated && earthBaseRef.current.material.opacity <= 0.03) {
       earthBaseRef.current.material.opacity = 0
       earthBaseRef.current.visible = false
       setAnimationDone(true)
+    }
+
+    // Begin launch animation on launchInitiated true, which simply is a dying earth going further away and getting smaller
+    if (launchInitiated) {
+      planetRef.current.position.z = THREE.MathUtils.lerp(planetRef.current.position.z, -100, delta / animationDivisor)
+      planetRef.current.scale.x = THREE.MathUtils.lerp(planetRef.current.scale.x, 0.1, delta / animationDivisor)
+      planetRef.current.scale.y = THREE.MathUtils.lerp(planetRef.current.scale.y, 0.1, delta / animationDivisor)
+      planetRef.current.scale.z = THREE.MathUtils.lerp(planetRef.current.scale.z, 0.1, delta / animationDivisor)
     }
   })
 
