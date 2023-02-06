@@ -14,6 +14,7 @@ const ShipButtons = () => {
   const SHIP_BTN_START = useRef<any>()
   const SHIP_BTN_STOP = useRef<any>()
   const SHIP_BTN_SELECT = useRef<any>()
+  const SHIP_CMD_STEERING = useRef<any>()
   const {interact} = useControls()
 
   useFrame(() => {
@@ -57,6 +58,19 @@ const ShipButtons = () => {
     } else {
       SHIP_BTN_SELECT.current.material.color.set('#FFD580')
     }
+
+
+    // Add SHIP_CMD_STEERING as a hoverable object
+    if (SHIP_CMD_STEERING.current && SHIP_CMD_STEERING.current.uuid) {
+      addObjectAsHoverable(SHIP_CMD_STEERING.current)
+    }
+
+    // Change the color of the SHIP_CMD_STEERING object if it is hovered
+    if (hoveredObject === 'SHIP_CMD_STEERING' && interact) {
+      SHIP_CMD_STEERING.current.material.color.set('orange')
+    } else {
+      SHIP_CMD_STEERING.current.material.color.set('#FFD580')
+    }
   })
 
   return (
@@ -72,6 +86,11 @@ const ShipButtons = () => {
         <meshLambertMaterial opacity={0.3} transparent={true}/>
       </mesh>
       <mesh ref={SHIP_BTN_SELECT} userData={{id: 'SHIP_BTN_SELECT'}} position={[-0.68, 0.075, 24.3]}
+            rotation={[0.1, 0.7, -0.07]}>
+        <boxBufferGeometry args={[0.09, 0.04, 0]}/>
+        <meshLambertMaterial opacity={0.3} transparent={true}/>
+      </mesh>
+      <mesh ref={SHIP_CMD_STEERING} userData={{id: 'SHIP_CMD_STEERING'}} position={[-0.6, 0.075, 24.24]}
             rotation={[0.1, 0.7, -0.07]}>
         <boxBufferGeometry args={[0.09, 0.04, 0]}/>
         <meshLambertMaterial opacity={0.3} transparent={true}/>
