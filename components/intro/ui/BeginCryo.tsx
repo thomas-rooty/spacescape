@@ -16,7 +16,10 @@ const BeginCryo = () => {
   // A text that appears at the center of the screen saying "Initiating Cryogenic Sleep"
   return (
     <div id="begincryo" className={styles.beginCryo}>
-      <h1>Initiating Cryogenic Sleep</h1>
+      <div id="step1" className={styles.step1}>
+        <h1>Initiating Cryogenic Sleep...</h1>
+        <p>Goodbye commander, see you in a hundred years.</p>
+      </div>
     </div>
   )
 }
