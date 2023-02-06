@@ -90,9 +90,8 @@ const ShipButtons = () => {
         <boxBufferGeometry args={[0.09, 0.04, 0]}/>
         <meshLambertMaterial opacity={0.3} transparent={true}/>
       </mesh>
-      <mesh ref={SHIP_CMD_STEERING} userData={{id: 'SHIP_CMD_STEERING'}} position={[-0.6, 0.075, 24.24]}
-            rotation={[0.1, 0.7, -0.07]}>
-        <boxBufferGeometry args={[0.09, 0.04, 0]}/>
+      <mesh ref={SHIP_CMD_STEERING} userData={{id: 'SHIP_CMD_STEERING'}} position={[0, -0.45, 24.65]}>
+        <sphereBufferGeometry args={[0.07, 16, 16]}/>
         <meshLambertMaterial opacity={0.3} transparent={true}/>
       </mesh>
     </>
