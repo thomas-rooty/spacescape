@@ -1,6 +1,6 @@
 import styles from '@/styles/Buttons.module.css'
 import { useEffect, useState } from 'react'
-import { createCinematicSlice } from '@/utils/zustore'
+import { createCinematicSlice } from '@/utils/stores/storeIntro'
 
 const StartBtn = () => {
   const [showPointerLocker, setShowPointerLocker] = useState(true)

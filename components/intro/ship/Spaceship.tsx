@@ -3,7 +3,7 @@ import React, { useRef } from 'react'
 import ShipButtons from '@/components/intro/ship/ShipButtons'
 import { useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
-import { createCinematicSlice } from '@/utils/zustore'
+import { createCinematicSlice } from '@/utils/stores/storeIntro'
 import { a, useSpring } from '@react-spring/three'
 
 type GLTFResult = GLTF & {

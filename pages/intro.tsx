@@ -1,7 +1,7 @@
 import { Canvas } from '@react-three/fiber'
 import { Stars, PointerLockControls } from '@react-three/drei'
 import { Physics, Debug } from '@react-three/cannon'
-import { createCinematicSlice } from '@/utils/zustore'
+import { createCinematicSlice } from '@/utils/stores/storeIntro'
 import { useEffect } from 'react'
 import DyingEarth from '@/components/intro/earth/DyingEarth'
 import Lights from '@/components/intro/lights/Lights'

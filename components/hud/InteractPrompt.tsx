@@ -1,5 +1,5 @@
 import styles from '@/styles/Hud.module.css'
-import { createCinematicSlice } from '@/utils/zustore'
+import { createCinematicSlice } from '@/utils/stores/storeIntro'
 import { useEffect } from 'react'
 
 export const InteractPrompt = () => {

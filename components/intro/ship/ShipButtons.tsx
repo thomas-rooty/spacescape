@@ -1,6 +1,6 @@
 import { useFrame } from '@react-three/fiber'
 import { useRef } from 'react'
-import { createCinematicSlice } from '@/utils/zustore'
+import { createCinematicSlice } from '@/utils/stores/storeIntro'
 import { useControls } from '@/utils/useControls'
 
 const ShipButtons = () => {
