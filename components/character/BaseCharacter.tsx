@@ -34,6 +34,7 @@ const BaseCharacter = (props: SphereProps) => {
   const setObjectAsHovered = createCinematicSlice((state) => state.setObjectAsHovered)
 
   useFrame(({ clock }) => {
+    // Movement system gestion
     ref.current.getWorldPosition(camera.position)
     frontVector.set(0, 0, Number(backward) - Number(forward))
     sideVector.set(Number(left) - Number(right), 0, 0)
