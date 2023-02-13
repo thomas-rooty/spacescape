@@ -26,6 +26,9 @@ const DyingEarth = ({ position, rotation, scale }: DyingEarthProps) => {
   // Useful variables
   const animationDivisor = 2
 
+  // Load textures
+  const [baseTexture, dyingTexture, cloudsTexture] = useTexture(['/models/tex/earth_base.jpg', '/models/tex/earth_dying.jpeg', '/models/tex/earth_clouds.png'])
+
   // Earth and clouds rotations
   useFrame(({ clock }, delta) => {
     // Planet rotation speed
@@ -48,10 +51,20 @@ const DyingEarth = ({ position, rotation, scale }: DyingEarthProps) => {
       planetRef.current.scale.y = THREE.MathUtils.lerp(planetRef.current.scale.y, 0.1, delta / animationDivisor)
       planetRef.current.scale.z = THREE.MathUtils.lerp(planetRef.current.scale.z, 0.1, delta / animationDivisor)
     }
-  })
 
-  // Load textures
-  const [baseTexture, dyingTexture, cloudsTexture] = useTexture(['/models/tex/earth_base.jpg', '/models/tex/earth_dying.jpeg', '/models/tex/earth_clouds.png'])
+    // If condition is true, dispose of the earth and clouds geometry, material and texture
+    if (false) {
+      earthBaseRef.current.geometry.dispose()
+      earthBaseRef.current.material.dispose()
+      earthBaseRef.current.material.map.dispose()
+      earthDyingRef.current.geometry.dispose()
+      earthDyingRef.current.material.dispose()
+      earthDyingRef.current.material.map.dispose()
+      cloudsRef.current.geometry.dispose()
+      cloudsRef.current.material.dispose()
+      cloudsRef.current.material.map.dispose()
+    }
+  })
 
   return (
     <group ref={planetRef} name="earth" position={position} rotation={rotation} scale={scale}>
