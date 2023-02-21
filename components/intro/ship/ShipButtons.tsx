@@ -76,19 +76,19 @@ const ShipButtons = () => {
   return (
     <>
       <mesh ref={SHIP_BTN_START} userData={{ id: 'SHIP_BTN_START' }} position={[-0.87, 0.079, 24.415]} rotation={[0.1, 0.9, -0.07]}>
-        <boxBufferGeometry args={[0.1, 0.04, 0]} />
+        <boxGeometry args={[0.1, 0.04, 0]} />
         <meshLambertMaterial opacity={0.3} transparent={true} />
       </mesh>
       <mesh ref={SHIP_BTN_STOP} userData={{ id: 'SHIP_BTN_STOP' }} position={[-0.77, 0.077, 24.36]} rotation={[0.1, 0.5, -0.07]}>
-        <boxBufferGeometry args={[0.115, 0.04, 0]} />
+        <boxGeometry args={[0.115, 0.04, 0]} />
         <meshLambertMaterial opacity={0.3} transparent={true} />
       </mesh>
       <mesh ref={SHIP_BTN_SELECT} userData={{ id: 'SHIP_BTN_SELECT' }} position={[-0.68, 0.075, 24.3]} rotation={[0.1, 0.7, -0.07]}>
-        <boxBufferGeometry args={[0.09, 0.04, 0]} />
+        <boxGeometry args={[0.09, 0.04, 0]} />
         <meshLambertMaterial opacity={0.3} transparent={true} />
       </mesh>
       <mesh ref={SHIP_CMD_STEERING} userData={{ id: 'SHIP_CMD_STEERING' }} position={[0, -0.45, 24.65]}>
-        <sphereBufferGeometry args={[0.07, 16, 16]} />
+        <sphereGeometry args={[0.07, 16, 16]} />
         <meshLambertMaterial opacity={0.3} transparent={true} />
       </mesh>
     </>

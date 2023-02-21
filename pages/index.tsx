@@ -8,10 +8,14 @@ import StartBtn from '@/components/intro/buttons/StartBtn'
 import Hud from '@/components/hud/Hud'
 import { Canvas } from "@react-three/fiber";
 import BeginCryo from "@/components/intro/ui/BeginCryo";
+import { createCinematicSlice } from "@/utils/stores/storeIntro";
 
 export default function Home() {
   // Base values
   const distanceFromCenter = 25
+
+  // Store values
+  const endCryo = createCinematicSlice((state) => state.endCryo)
 
   return (
     <>
@@ -29,7 +33,7 @@ export default function Home() {
       <Suspense fallback={<Loader />}>
         <div className={styles.scene}>
           <Canvas shadows={true} camera={{ position: [0, 0, distanceFromCenter], fov: 40 }}>
-            <IntroScene />
+            {!endCryo && <IntroScene />}
           </Canvas>
           <Hud />
           <DateTimelapse />
