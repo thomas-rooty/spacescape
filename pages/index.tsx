@@ -1,22 +1,11 @@
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
-import IntroScene from '@/pages/introScene'
-import DateTimelapse from '@/components/intro/datetimelapse/DateTimelapse'
 import { Suspense } from 'react'
 import Loader from '@/components/loader/Loader'
-import StartBtn from '@/components/intro/buttons/StartBtn'
 import Hud from '@/components/hud/Hud'
-import { Canvas } from "@react-three/fiber";
-import BeginCryo from "@/components/intro/ui/BeginCryo";
-import { createCinematicSlice } from "@/utils/stores/storeIntro";
+import IntroWrapper from "@/components/intro/IntroWrapper";
 
 export default function Home() {
-  // Base values
-  const distanceFromCenter = 25
-
-  // Store values
-  const endCryo = createCinematicSlice((state) => state.endCryo)
-
   return (
     <>
       <Head>
@@ -31,17 +20,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Suspense fallback={<Loader />}>
+        <Hud />
         <div className={styles.scene}>
-          <Canvas shadows={true} camera={{ position: [0, 0, distanceFromCenter], fov: 40 }}>
-            {!endCryo && <IntroScene />}
-          </Canvas>
-          <Hud />
-          <DateTimelapse />
-          <StartBtn />
-          <BeginCryo />
-          <audio id="intro-music" autoPlay={true} loop={true}>
-            <source src="/musics/StartingCinematic/Interstellar_Main_Theme.mp3" type="audio/mpeg" />
-          </audio>
+          <IntroWrapper />
         </div>
       </Suspense>
     </>

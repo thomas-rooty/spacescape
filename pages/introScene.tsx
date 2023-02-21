@@ -1,4 +1,5 @@
 import { Stars, PointerLockControls } from '@react-three/drei'
+import { Canvas } from '@react-three/fiber'
 import { Physics } from '@react-three/cannon'
 import { createCinematicSlice } from '@/utils/stores/storeIntro'
 import { useEffect } from 'react'
@@ -19,6 +20,7 @@ const IntroScene = () => {
   const startedGame = createCinematicSlice((state) => state.startedGame)
   const audioState = createCinematicSlice((state) => state.audioState)
   const audioVolume = createCinematicSlice((state) => state.audioVolume)
+  const endCryo = createCinematicSlice((state) => state.endCryo)
 
   // Handle audio intro music
   useEffect(() => {
@@ -30,7 +32,7 @@ const IntroScene = () => {
   }, [startedGame, audioState, audioVolume])
 
   return (
-    <>
+    <Canvas shadows={true} camera={{ position: [0, 0, distanceFromCenter], fov: 40 }}>
       <Lights />
       <Effects />
       <Physics gravity={[0, -9.8, 0]}>
@@ -39,10 +41,10 @@ const IntroScene = () => {
         <CockpitCollision />
       </Physics>
       {animationDone && <PointerLockControls />}
+      {!endCryo && <DyingEarth position={[0, 0, -6]} rotation={[0, 0, 0]} scale={9.33} />}
       <Stars radius={1} depth={25} count={2500} factor={0.5} saturation={1} fade />
-      <DyingEarth position={[0, 0, -6]} rotation={[0, 0, 0]} scale={9.33} />
       <Spaceship position={[0, -3.83, 26]} rotation={[0, 0, 0]} scale={0.006} />
-    </>
+    </Canvas>
   )
 }
 
