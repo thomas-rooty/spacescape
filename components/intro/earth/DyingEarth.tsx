@@ -51,33 +51,20 @@ const DyingEarth = ({ position, rotation, scale }: DyingEarthProps) => {
       planetRef.current.scale.y = THREE.MathUtils.lerp(planetRef.current.scale.y, 0.1, delta / animationDivisor)
       planetRef.current.scale.z = THREE.MathUtils.lerp(planetRef.current.scale.z, 0.1, delta / animationDivisor)
     }
-
-    // If condition is true, dispose of the earth and clouds geometry, material and texture
-    if (false) {
-      earthBaseRef.current.geometry.dispose()
-      earthBaseRef.current.material.dispose()
-      earthBaseRef.current.material.map.dispose()
-      earthDyingRef.current.geometry.dispose()
-      earthDyingRef.current.material.dispose()
-      earthDyingRef.current.material.map.dispose()
-      cloudsRef.current.geometry.dispose()
-      cloudsRef.current.material.dispose()
-      cloudsRef.current.material.map.dispose()
-    }
   })
 
   return (
     <group ref={planetRef} name="earth" position={position} rotation={rotation} scale={scale}>
       <mesh name="lands" ref={earthBaseRef} castShadow={true} receiveShadow={true}>
-        <sphereBufferGeometry attach="geometry" args={[1, 32, 32]} />
+        <sphereGeometry attach="geometry" args={[1, 32, 32]} />
         <meshLambertMaterial attach="material" map={baseTexture} fog={false} transparent={true} />
       </mesh>
       <mesh name="lands" ref={earthDyingRef} castShadow={true} receiveShadow={true}>
-        <sphereBufferGeometry attach="geometry" args={[0.999, 32, 32]} />
+        <sphereGeometry attach="geometry" args={[0.999, 32, 32]} />
         <meshLambertMaterial attach="material" map={dyingTexture} fog={false} />
       </mesh>
       <mesh name="clouds" ref={cloudsRef} castShadow={true} receiveShadow={true}>
-        <sphereBufferGeometry attach="geometry" args={[1.01, 32, 32]} />
+        <sphereGeometry attach="geometry" args={[1.01, 32, 32]} />
         <meshLambertMaterial attach="material" map={cloudsTexture} fog={false} transparent={true} opacity={1} />
       </mesh>
     </group>
