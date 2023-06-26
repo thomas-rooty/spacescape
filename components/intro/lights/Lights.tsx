@@ -44,7 +44,7 @@ const Lights = () => {
   const endCryo = createCinematicSlice((state) => state.endCryo)
   const light2Color = useState('#f0f2ff')
 
-  // Make the light2 blink from red to #f0f2ff every half second when endCryo is true
+  // Alert light blinking
   useFrame(({ clock }) => {
     if (endCryo) {
       if (clock.getElapsedTime() % 1 < 0.3) {
