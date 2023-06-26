@@ -1,4 +1,4 @@
-import {create} from 'zustand'
+import { create } from 'zustand'
 
 interface ICinematicStore {
   startedGame: boolean
@@ -15,6 +15,8 @@ interface ICinematicStore {
   setAudioVolume: (audioVolume: number) => void
   launchInitiated: boolean
   setLaunchInitiated: (launchInitiated: boolean) => void
+  checkInitiated: boolean
+  setCheckInitiated: (checkInitiated: boolean) => void
   endCryo: boolean
   setEndCryo: (endCryo: boolean) => void
 }
@@ -31,11 +33,11 @@ export const createCinematicSlice = create<ICinematicStore>((set) => ({
   hoverableObjects: [],
   addObjectAsHoverable: (object) => {
     set((state) => {
-      if (state.hoverableObjects.find(element => element.uuid === object.uuid)) return {};
+      if (state.hoverableObjects.find(element => element.uuid === object.uuid)) return {}
       return {
         hoverableObjects: state.hoverableObjects.concat(object),
-      };
-    });
+      }
+    })
   },
   // Handles the current hovered object by the player (if any)
   hoveredObject: null,
@@ -43,8 +45,8 @@ export const createCinematicSlice = create<ICinematicStore>((set) => ({
     set(() => {
       return {
         hoveredObject: object,
-      };
-    });
+      }
+    })
   },
   // Handles the audio state (on/off)
   audioState: true,
@@ -55,7 +57,10 @@ export const createCinematicSlice = create<ICinematicStore>((set) => ({
   // Handles the launch initiated statem which is used to trigger the launch animation of the ship
   launchInitiated: false,
   setLaunchInitiated: (launchInitiated: boolean) => set({ launchInitiated }),
+  // Handles the check initiated state, which is used to trigger the check animation of the ship
+  checkInitiated: false,
+  setCheckInitiated: (checkInitiated: boolean) => set({ checkInitiated }),
   // Handles the end cryo state, which is used to trigger the end of the cryo animation
   endCryo: false,
   setEndCryo: (endCryo: boolean) => set({ endCryo }),
-}));
+}))
