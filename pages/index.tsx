@@ -3,6 +3,7 @@ import styles from '@/styles/Home.module.css'
 import { Suspense } from 'react'
 import Loader from '@/components/loader/Loader'
 import Hud from '@/components/hud/Hud'
+import Dialogs from '@/components/hud/dialogs/Dialogs'
 import IntroWrapper from '@/components/intro/IntroWrapper'
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
       </Head>
       <Suspense fallback={<Loader />}>
         <Hud />
+        <Dialogs />
         <div className={styles.scene}>
           <IntroWrapper />
         </div>

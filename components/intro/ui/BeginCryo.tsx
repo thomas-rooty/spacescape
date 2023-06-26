@@ -20,7 +20,7 @@ const BeginCryo = () => {
         if (alertSound) {
           alertSound.play()
         }
-      }, 2000)
+      }, 8000)
     }
   }, [launchInitiated, setEndCryo])
 

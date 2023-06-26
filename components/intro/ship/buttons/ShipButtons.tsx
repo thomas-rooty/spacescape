@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import ShipButton from './buttons/ShipButton'
+import ShipButton from './ShipButton'
 import { createCinematicSlice } from '@/utils/stores/storeIntro'
 
 const ShipButtons = () => {

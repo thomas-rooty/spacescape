@@ -1,0 +1,28 @@
+.checkDone {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 10000000000;
+  padding-left: 3rem;
+}
+
+.checkDone > h1,
+.checkDone > p {
+  font-family: "Montserrat Variable", sans-serif;
+  text-align: left;
+}
+
+.checkDone h1 {
+  color: #ee9c9c;
+  font-size: 3rem;
+  font-weight: 300;
+}
+
+.checkDone > p {
+  color: #c1e2ee;
+  font-size: 1.5rem;
+}
