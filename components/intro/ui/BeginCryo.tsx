@@ -1,15 +1,14 @@
 import styles from '@/styles/Intro.module.css'
-import { createCinematicSlice } from '@/utils/stores/storeIntro'
-import { useEffect } from 'react'
+import {createCinematicSlice} from '@/utils/stores/storeIntro'
+import {useEffect} from 'react'
 
 const BeginCryo = () => {
   // Get variables and functions from the store
   const launchInitiated = createCinematicSlice((state) => state.launchInitiated)
   const setEndCryo = createCinematicSlice((state) => state.setEndCryo)
 
-  // Show the cryo state when the launch is initiated
+  // Show the cryo state message when the launch is initiated
   useEffect(() => {
-    // Launch is initiated
     if (launchInitiated) {
       document.getElementById('begincryo')?.classList.add(styles.show)
       // After 20 seconds, trigger the end of the cryo animation
@@ -20,7 +19,7 @@ const BeginCryo = () => {
         if (alertSound) {
           alertSound.play()
         }
-      }, 1000)
+      }, 1000) // 20000
     }
   }, [launchInitiated, setEndCryo])
 
