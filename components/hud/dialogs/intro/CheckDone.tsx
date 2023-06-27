@@ -7,10 +7,14 @@ export const CheckDone = () => {
 
   return (
     <>
-      {endCryo && !checkInitiated && (
+      {endCryo && (
         <div className={`${styles.checkDone} ${endCryo ? styles.hide : ''}`}>
           <h1>ALERT</h1>
-          <p>Cryogenic Sleep has been interrupted. Please check the cryo pods status immediately.</p>
+          {checkInitiated ? (
+            <p>Critical state, you woke up way too early, initiating landing sequence.</p>
+          ) : (
+            <p>Cryogenic Sleep has been interrupted. Please check the cryo pods status immediately.</p>
+          )}
         </div>
       )}
     </>
