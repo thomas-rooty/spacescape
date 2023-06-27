@@ -9,6 +9,7 @@ const ShipButtons = () => {
   const SHIP_BTN_CHECK = useRef()
   const SHIP_CMD_STEERING = useRef()
   const endCryo = createCinematicSlice((state) => state.endCryo)
+  const checkInitiated = createCinematicSlice((state) => state.checkInitiated)
 
   return (
     <>
@@ -42,6 +43,7 @@ const ShipButtons = () => {
           geometryArgs={[0.1, 0.1, 0.04]}
         />
         :
+        !checkInitiated &&
         <ShipButton
           refProp={SHIP_BTN_CHECK}
           id='SHIP_BTN_CHECK'
