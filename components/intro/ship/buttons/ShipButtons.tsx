@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import ShipButton from './ShipButton'
-import { createCinematicSlice } from '@/utils/stores/storeIntro'
+import { createCinematicSlice } from '@/utils/stores/intro.store'
 
 const ShipButtons = () => {
   const SHIP_BTN_START = useRef()

@@ -1,5 +1,5 @@
 import styles from '@/styles/DateTimelapse.module.css'
-import { createCinematicSlice } from '@/utils/stores/storeIntro'
+import { createCinematicSlice } from '@/utils/stores/intro.store'
 import { useState } from 'react'
 
 const DateTimelapse = () => {

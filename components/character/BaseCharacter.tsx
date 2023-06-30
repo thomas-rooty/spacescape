@@ -2,7 +2,8 @@ import { SphereProps, useSphere } from '@react-three/cannon'
 import { useFrame, useThree } from '@react-three/fiber'
 import { useEffect, useRef, useMemo } from 'react'
 import { useControls } from '@/utils/useControls'
-import { createCinematicSlice } from '@/utils/stores/storeIntro'
+import { createCinematicSlice } from '@/utils/stores/intro.store'
+import { createCharacterSlice } from '@/utils/stores/character.store'
 import * as THREE from 'three'
 
 const BaseCharacter = (props: SphereProps) => {
@@ -32,6 +33,16 @@ const BaseCharacter = (props: SphereProps) => {
   const raycaster = useMemo(() => new THREE.Raycaster(), [])
   const hoverableObjects = createCinematicSlice((state) => state.hoverableObjects)
   const setObjectAsHovered = createCinematicSlice((state) => state.setObjectAsHovered)
+  const checkInitiated = createCinematicSlice((state) => state.checkInitiated)
+  const shaking = createCharacterSlice((state) => state.shaking)
+  const setShaking = createCharacterSlice((state) => state.setShaking)
+
+  // Shake camera if checkInitiated is true
+  useEffect(() => {
+    if (checkInitiated) {
+      setShaking(true)
+    }
+  }, [checkInitiated])
 
   useFrame(({ clock }) => {
     // Movement system gestion
@@ -49,6 +60,13 @@ const BaseCharacter = (props: SphereProps) => {
       camera.position.y += Math.sin(clock.getElapsedTime() * 20) / 250
     } else {
       camera.position.y += Math.sin(clock.getElapsedTime() * 2) / 1000
+    }
+
+    // Shake camera if shaking is true
+    if (shaking) {
+      camera.position.x += Math.sin(clock.getElapsedTime() * 200) / 250
+      camera.position.y += Math.sin(clock.getElapsedTime() * 100) / 250
+      camera.position.z += Math.sin(clock.getElapsedTime() * 200) / 250
     }
 
     // Raycast detection system

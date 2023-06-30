@@ -2,7 +2,7 @@ import IntroScene from '@/pages/introScene'
 import DateTimelapse from '@/components/intro/datetimelapse/DateTimelapse'
 import StartBtn from '@/components/intro/buttons/StartBtn'
 import BeginCryo from '@/components/intro/ui/BeginCryo'
-import {createCinematicSlice} from '@/utils/stores/storeIntro'
+import {createCinematicSlice} from '@/utils/stores/intro.store'
 
 const IntroWrapper = () => {
   // Store values

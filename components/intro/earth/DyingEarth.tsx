@@ -1,7 +1,7 @@
 import { useFrame } from '@react-three/fiber'
 import { useRef } from 'react'
 import { useTexture } from '@react-three/drei'
-import { createCinematicSlice } from '@/utils/stores/storeIntro'
+import { createCinematicSlice } from '@/utils/stores/intro.store'
 import * as THREE from 'three'
 
 interface DyingEarthProps {

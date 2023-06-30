@@ -1,5 +1,5 @@
 import styles from '@/styles/Dialogs.module.css'
-import { createCinematicSlice } from '@/utils/stores/storeIntro'
+import { createCinematicSlice } from '@/utils/stores/intro.store'
 
 export const CheckDone = () => {
   const endCryo = createCinematicSlice((state) => state.endCryo)
