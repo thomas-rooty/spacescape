@@ -42,7 +42,7 @@ const BaseCharacter = (props: SphereProps) => {
     if (checkInitiated) {
       setShaking(true)
     }
-  }, [checkInitiated])
+  }, [checkInitiated, setShaking])
 
   useFrame(({ clock }) => {
     // Movement system gestion
