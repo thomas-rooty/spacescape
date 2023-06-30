@@ -6,7 +6,7 @@ import Hud from '@/components/hud/Hud'
 import Dialogs from '@/components/hud/dialogs/Dialogs'
 import IntroWrapper from '@/components/intro/IntroWrapper'
 
-export default function Home() {
+const Home = () => {
   return (
     <>
       <Head>
@@ -30,3 +30,5 @@ export default function Home() {
     </>
   )
 }
+
+export default Home

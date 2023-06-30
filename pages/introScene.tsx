@@ -2,7 +2,6 @@ import { Stars, PointerLockControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { Physics } from '@react-three/cannon'
 import { createCinematicSlice } from '@/utils/stores/intro.store'
-import { useEffect } from 'react'
 import DyingEarth from '@/components/intro/earth/DyingEarth'
 import Lights from '@/components/intro/lights/Lights'
 import Effects from '@/components/fx/Effects'
@@ -17,19 +16,7 @@ const IntroScene = () => {
 
   // Store values
   const animationDone = createCinematicSlice((state) => state.animationDone)
-  const startedGame = createCinematicSlice((state) => state.startedGame)
-  const audioState = createCinematicSlice((state) => state.audioState)
-  const audioVolume = createCinematicSlice((state) => state.audioVolume)
   const endCryo = createCinematicSlice((state) => state.endCryo)
-
-  // Handle audio intro music
-  useEffect(() => {
-    const introMusic = document.getElementById('intro-music') as HTMLAudioElement
-    if (startedGame) {
-      introMusic.volume = audioVolume
-      audioState ? introMusic.play() : introMusic.pause()
-    }
-  }, [startedGame, audioState, audioVolume])
 
   return (
     <Canvas shadows={true} camera={{ position: [0, 0, distanceFromCenter], fov: 40 }}>

@@ -2,6 +2,7 @@ import IntroScene from '@/pages/introScene'
 import DateTimelapse from '@/components/intro/datetimelapse/DateTimelapse'
 import StartBtn from '@/components/intro/buttons/StartBtn'
 import BeginCryo from '@/components/intro/ui/BeginCryo'
+import Audios from '@/components/audios/Audios'
 import {createCinematicSlice} from '@/utils/stores/intro.store'
 
 const IntroWrapper = () => {
@@ -19,14 +20,7 @@ const IntroWrapper = () => {
           <StartBtn/>
         </>
       }
-      <audio id='intro-music' autoPlay={true} loop={true}>
-        <source src='/musics/StartingCinematic/Interstellar_Main_Theme.mp3' type='audio/mpeg'/>
-      </audio>
-      {!checkInitiated &&
-        <audio id='alert-sound' loop={true}>
-          <source src='/musics/StartingCinematic/Alert.mp3' type='audio/mpeg'/>
-        </audio>
-      }
+      <Audios checkInitiated={checkInitiated}/>
     </>
   )
 }
