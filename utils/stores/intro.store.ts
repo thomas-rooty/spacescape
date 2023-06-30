@@ -19,6 +19,8 @@ interface ICinematicStore {
   setCheckInitiated: (checkInitiated: boolean) => void
   endCryo: boolean
   setEndCryo: (endCryo: boolean) => void
+  adventureStarted: boolean
+  setAdventureStarted: (beginAdventure: boolean) => void
 }
 
 export const createCinematicSlice = create<ICinematicStore>((set) => ({
@@ -33,7 +35,7 @@ export const createCinematicSlice = create<ICinematicStore>((set) => ({
   hoverableObjects: [],
   addObjectAsHoverable: (object) => {
     set((state) => {
-      if (state.hoverableObjects.find(element => element.uuid === object.uuid)) return {}
+      if (state.hoverableObjects.find((element) => element.uuid === object.uuid)) return {}
       return {
         hoverableObjects: state.hoverableObjects.concat(object),
       }
@@ -63,4 +65,7 @@ export const createCinematicSlice = create<ICinematicStore>((set) => ({
   // Handles the end cryo state, which is used to trigger the end of the cryo animation
   endCryo: false,
   setEndCryo: (endCryo: boolean) => set({ endCryo }),
+  // Handles the beginning adventure function, which is used to trigger the end of the cinematic and the beginning of the game
+  adventureStarted: false,
+  setAdventureStarted: (beginAdventure: boolean) => set({ adventureStarted: beginAdventure }),
 }))

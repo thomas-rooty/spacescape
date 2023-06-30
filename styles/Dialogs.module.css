@@ -26,3 +26,109 @@
   color: #c1e2ee;
   font-size: 1.5rem;
 }
+
+/* Counter component */
+.counter {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  filter: contrast(20);
+  background-color: black;
+  overflow: hidden;
+  padding-top: 33%;
+}
+
+.counter > span {
+  color: rgb(230, 255, 230);
+  font-size: 8rem;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  line-height: 1;
+  display: block;
+  transition: all 1.5s ease;
+  opacity: 0;
+  filter: blur(0.6rem);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.counter > span:nth-child(1) {
+  animation: letteranim 11s infinite ease;
+  animation-delay: 0s;
+}
+
+.counter > span:nth-child(2) {
+  animation: letteranim 11s infinite ease;
+  animation-delay: 1s;
+}
+
+.counter > span:nth-child(3) {
+  animation: letteranim 11s infinite ease;
+  animation-delay: 2s;
+}
+
+.counter > span:nth-child(4) {
+  animation: letteranim 11s infinite ease;
+  animation-delay: 3s;
+}
+
+.counter > span:nth-child(5) {
+  animation: letteranim 11s infinite ease;
+  animation-delay: 4s;
+}
+
+.counter > span:nth-child(6) {
+  animation: letteranim 11s infinite ease;
+  animation-delay: 5s;
+}
+
+.counter > span:nth-child(7) {
+  animation: letteranim 11s infinite ease;
+  animation-delay: 6s;
+}
+
+.counter > span:nth-child(8) {
+  animation: letteranim 11s infinite ease;
+  animation-delay: 7s;
+}
+
+.counter > span:nth-child(9) {
+  animation: letteranim 11s infinite ease;
+  animation-delay: 8s;
+}
+
+.counter > span:nth-child(10) {
+  animation: letteranim 11s infinite ease;
+  animation-delay: 9s;
+}
+
+.counter > span:nth-child(11) {
+  animation: letteranim 11s infinite ease;
+  animation-delay: 10s;
+}
+
+@keyframes letteranim {
+  0% {
+    opacity: 0;
+    filter: blur(0.6rem);
+  }
+  5% {
+    opacity: 1;
+    filter: blur(0.2rem);
+  }
+  10% {
+    opacity: 1;
+    filter: blur(0.2rem);
+  }
+  20% {
+    opacity: 0;
+    filter: blur(0.6rem);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(0.6rem);
+  }
+}
