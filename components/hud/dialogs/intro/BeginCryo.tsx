@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 
 const BeginCryo = () => {
   // Get variables and functions from the store
+  const endCryo = createCinematicSlice((state) => state.endCryo)
   const launchInitiated = createCinematicSlice((state) => state.launchInitiated)
   const setEndCryo = createCinematicSlice((state) => state.setEndCryo)
 
@@ -19,12 +20,16 @@ const BeginCryo = () => {
   }, [launchInitiated, setEndCryo])
 
   return (
-    <div id="begincryo" className={styles.beginCryo}>
-      <div id="step1" className={styles.step1}>
-        <h1>Initiating Cryogenic Sleep...</h1>
-        <p>Goodbye commander, see you in a hundred years.</p>
-      </div>
-    </div>
+    <>
+      {!endCryo && (
+        <div id="begincryo" className={styles.beginCryo}>
+          <div id="step1" className={styles.step1}>
+            <h1>Initiating Cryogenic Sleep...</h1>
+            <p>Goodbye commander, see you in a hundred years.</p>
+          </div>
+        </div>
+      )}
+    </>
   )
 }
 

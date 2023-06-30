@@ -4,12 +4,13 @@
 }
 
 .show {
-  opacity: 1!important;
-  top: 0!important;
+  opacity: 1 !important;
+  top: 0 !important;
   pointer-events: none;
 }
 
-.beginCryo {
+.beginCryo,
+.landingMessage {
   position: absolute;
   z-index: 10000000000;
   top: -100%;
@@ -18,6 +19,13 @@
   height: 100%;
   background: #000;
   opacity: 0;
+}
+
+.beginCryo {
+  transition: opacity 10s ease-in-out;
+}
+
+.landingMessage {
   transition: opacity 10s ease-in-out;
 }
 
