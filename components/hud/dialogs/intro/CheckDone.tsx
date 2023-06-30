@@ -1,13 +1,15 @@
 import styles from '@/styles/Dialogs.module.css'
 import { createCinematicSlice } from '@/utils/stores/intro.store'
+import { createCharacterSlice } from '@/utils/stores/character.store'
 
 export const CheckDone = () => {
   const endCryo = createCinematicSlice((state) => state.endCryo)
   const checkInitiated = createCinematicSlice((state) => state.checkInitiated)
+  const eyesClosed = createCharacterSlice((state) => state.eyesClosed)
 
   return (
     <>
-      {endCryo && (
+      {endCryo && !eyesClosed && (
         <div className={`${styles.checkDone} ${endCryo ? styles.hide : ''}`}>
           <h1>ALERT</h1>
           {checkInitiated ? (

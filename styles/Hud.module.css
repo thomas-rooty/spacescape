@@ -1,3 +1,8 @@
+/* Global styles */
+.hide {
+  opacity: 0;
+}
+
 /* Crosshair component */
 #crosshair {
   position: absolute;
@@ -20,7 +25,19 @@
   transition: all .3s;
 }
 
-/* Global styles */
-.hide {
-  opacity: 0;
+/* Eyes component */
+.eyes {
+  position: absolute;
+  z-index: 1000000000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  transition: all .3s;
+  pointer-events: none;
+}
+
+.closed {
+  background: black;
 }

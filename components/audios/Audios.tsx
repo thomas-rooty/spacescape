@@ -27,8 +27,18 @@ const Audios = (props: AudiosProps) => {
     const alertSound = document.getElementById('alert-sound') as HTMLAudioElement
     if (endCryo && alertSound) {
       alertSound.play()
+      alertSound.volume = audioVolume
     }
-  }, [endCryo])
+  }, [audioVolume, endCryo])
+
+  // Emergency sound handler
+  useEffect(() => {
+    const emergencySound = document.getElementById('emergency-sound') as HTMLAudioElement
+    if (checkInitiated && emergencySound) {
+      emergencySound.play()
+      emergencySound.volume = audioVolume
+    }
+  }, [audioVolume, checkInitiated])
 
   return (
     <>
@@ -39,7 +49,12 @@ const Audios = (props: AudiosProps) => {
       )}
       {!checkInitiated && (
         <audio id="alert-sound" loop={true}>
-          <source src="/musics/StartingCinematic/Alert.mp3" type="audio/mpeg" />
+          <source src="/sounds/ship/Alert.mp3" type="audio/mpeg" />
+        </audio>
+      )}
+      {checkInitiated && (
+        <audio id="emergency-sound" loop={false}>
+          <source src="/sounds/ship/emergency.mp3" type="audio/mpeg" />
         </audio>
       )}
     </>

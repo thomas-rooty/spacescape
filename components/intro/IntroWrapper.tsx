@@ -1,7 +1,7 @@
 import IntroScene from '@/pages/introScene'
 import DateTimelapse from '@/components/intro/datetimelapse/DateTimelapse'
 import StartBtn from '@/components/intro/buttons/StartBtn'
-import BeginCryo from '@/components/intro/ui/BeginCryo'
+import BeginCryo from '@/components/hud/dialogs/intro/BeginCryo'
 import Audios from '@/components/audios/Audios'
 import {createCinematicSlice} from '@/utils/stores/intro.store'
 

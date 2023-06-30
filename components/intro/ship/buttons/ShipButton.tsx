@@ -21,6 +21,7 @@ const useShipButtonInteractions = (
   const setLaunchInitiated = createCinematicSlice((state) => state.setLaunchInitiated)
   const setCheckInitiated = createCinematicSlice((state) => state.setCheckInitiated)
 
+  // Ship button interactions
   useFrame(() => {
     if (refProp.current && refProp.current.uuid) {
       addObjectAsHoverable(refProp.current)
