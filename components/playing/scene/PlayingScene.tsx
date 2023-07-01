@@ -29,7 +29,7 @@ const PlayingScene = () => {
         </Debug>
       </Physics>
       <FloorMesh rotation={[Math.PI / -2, 0, 0]} position={[-0.33, -0.17, distanceFromCenter]} size={100} />
-      <Spaceship position={[1, 0.2, 26]} rotation={[1.8, 1.7, 0]} scale={0.0008} />
+      <Spaceship position={[1, 0.2, 26]} rotation={[1.8, 1.8, 0]} scale={0.0008} />
     </Canvas>
   )
 }

@@ -31,7 +31,7 @@ function Spot({ target, position, ...props }: SpotProps) {
     light.current.target.position.set(...target)
     light.current.position.set(...position)
   })
-  return <SpotLight volumetric={false} castShadow ref={light} {...props} />
+  return <SpotLight debug={false} volumetric={false} castShadow ref={light} {...props} />
 }
 
 const PlayingLights = () => {
@@ -42,12 +42,12 @@ const PlayingLights = () => {
 
   const lightsPosition: LightsPosition = {
     position: [position['x'], position['y'] + 2, position['z']],
-    lightShip: [1, 0.2, 24.9], // Updated position of the alert light
+    lightShip: [1, 0.1, 25.6], // Updated position of the alert light
   }
 
   // Alert light blinking
   useFrame(({ clock }) => {
-    if (clock.getElapsedTime() % 1 < 0.3) {
+    if (clock.getElapsedTime() % 1 < 0.5) {
       lightShip[1]('#ff0000')
     } else {
       lightShip[1]('#f0f2ff')
@@ -72,7 +72,7 @@ const PlayingLights = () => {
         color={lightColor[0]}
       />
       {/* Ship alert light */}
-      <Spot position={lightsPosition.lightShip} target={[1, 0, 26.2]} color={lightShip[0]} penumbra={1} distance={2} angle={0.5} attenuation={1} anglePower={1} intensity={2} />
+      <Spot position={lightsPosition.lightShip} target={[0.5, 0, 24.6]} color={lightShip[0]} penumbra={1} distance={1} angle={1} attenuation={1} anglePower={0.5} intensity={2} />
     </>
   )
 }
