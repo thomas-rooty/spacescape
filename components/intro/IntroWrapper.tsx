@@ -1,6 +1,6 @@
 import IntroScene from '@/components/intro/scene/IntroScene'
-import DateTimelapse from '@/components/intro/datetimelapse/DateTimelapse'
-import StartBtn from '@/components/intro/buttons/StartBtn'
+import DateTimelapse from '@/components/intro/scene/datetimelapse/DateTimelapse'
+import StartBtn from '@/components/intro/scene/buttons/StartBtn'
 import { createCinematicSlice } from '@/utils/stores/intro.store'
 
 const IntroWrapper = () => {

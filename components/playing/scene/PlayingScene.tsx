@@ -7,6 +7,7 @@ import BaseCharacter from '@/components/character/BaseCharacter'
 import FloorMesh from '@/components/playing/scene/planet/floor/FloorMesh'
 import FloorColBox from '@/components/playing/scene/planet/floor/FloorColBox'
 import PlayingLights from '@/components/playing/lights/PlayingLights'
+import Spaceship from '@/components/objects/ship/Spaceship'
 
 const PlayingScene = () => {
   // Base values
@@ -28,6 +29,7 @@ const PlayingScene = () => {
         </Debug>
       </Physics>
       <FloorMesh rotation={[Math.PI / -2, 0, 0]} position={[-0.33, -0.17, distanceFromCenter]} size={100} />
+      <Spaceship position={[1, 0.2, 26]} rotation={[1.8, 1.7, 0]} scale={0.0008} />
     </Canvas>
   )
 }

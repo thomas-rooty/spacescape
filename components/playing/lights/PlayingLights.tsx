@@ -9,6 +9,7 @@ import { createCharacterSlice } from '@/utils/stores/character.store'
 
 type LightsPosition = {
   position: [number, number, number]
+  lightShip: [number, number, number]
 }
 
 type SpotProps = {
@@ -30,21 +31,35 @@ function Spot({ target, position, ...props }: SpotProps) {
     light.current.target.position.set(...target)
     light.current.position.set(...position)
   })
-  return <SpotLight castShadow ref={light} {...props} />
+  return <SpotLight volumetric={false} castShadow ref={light} {...props} />
 }
 
 const PlayingLights = () => {
   // Store values
   const lightColor = useState('#e8e8e8')
+  const lightShip = useState('#f0f2ff')
   const position = createCharacterSlice((state) => state.position)
 
   const lightsPosition: LightsPosition = {
-    position: [position['x'], position['y'] + 2, position['z']]
+    position: [position['x'], position['y'] + 2, position['z']],
+    lightShip: [1, 0.2, 24.9], // Updated position of the alert light
   }
+
+  // Alert light blinking
+  useFrame(({ clock }) => {
+    if (clock.getElapsedTime() % 1 < 0.3) {
+      lightShip[1]('#ff0000')
+    } else {
+      lightShip[1]('#f0f2ff')
+    }
+  })
 
   return (
     <>
-      {/* Main light */}
+      {/* Ambient light and fog */}
+      <ambientLight intensity={0.025} />
+      <fog attach="fog" args={['black', 0, 10]} />
+      {/* Character light */}
       <Spot
         penumbra={1}
         distance={10}
@@ -56,8 +71,8 @@ const PlayingLights = () => {
         position={lightsPosition.position}
         color={lightColor[0]}
       />
-      <ambientLight intensity={0.025} />
-      <fog attach="fog" args={['black', 0, 10]} />
+      {/* Ship alert light */}
+      <Spot position={lightsPosition.lightShip} target={[1, 0, 26.2]} color={lightShip[0]} penumbra={1} distance={2} angle={0.5} attenuation={1} anglePower={1} intensity={2} />
     </>
   )
 }

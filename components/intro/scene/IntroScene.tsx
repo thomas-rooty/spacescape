@@ -2,13 +2,13 @@ import { Stars, PointerLockControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { Physics } from '@react-three/cannon'
 import { createCinematicSlice } from '@/utils/stores/intro.store'
-import DyingEarth from '@/components/intro/earth/DyingEarth'
+import DyingEarth from '@/components/intro/scene/earth/DyingEarth'
 import IntroLights from '@/components/intro/lights/IntroLights'
 import Effects from '@/components/character/fx/Effects'
-import ShipFloor from '@/components/intro/ship/ShipFloor'
+import ShipFloor from '@/components/objects/ship/ShipFloor'
 import BaseCharacter from '@/components/character/BaseCharacter'
-import ShipCollision from '@/components/intro/ship/ShipCollision'
-import Spaceship from '@/components/intro/ship/Spaceship'
+import ShipCollision from '@/components/objects/ship/ShipCollision'
+import Spaceship from '@/components/objects/ship/Spaceship'
 
 const IntroScene = () => {
   // Base values
