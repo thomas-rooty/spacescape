@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react'
 import { SpotLight } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
-import { createCinematicSlice } from '@/utils/stores/intro.store'
 
 // Summary:
 // 1. The first light is a spotlight that is used to light up the planet
@@ -34,37 +33,22 @@ function Spot({ target, ...props }: SpotProps) {
   return <SpotLight castShadow ref={light} {...props} />
 }
 
-const Lights = () => {
+const PlayingLights = () => {
   const LightsPosition: LightsPosition = {
     light1: [-20, -20, 25],
     light2: [0, 0.7, 24.8],
   }
 
   // Store values
-  const endCryo = createCinematicSlice((state) => state.endCryo)
-  const checkInitiated = createCinematicSlice((state) => state.checkInitiated)
-  const light2Color = useState('#f0f2ff')
-
-  // Alert light blinking
-  useFrame(({ clock }) => {
-    if (endCryo && !checkInitiated) {
-      if (clock.getElapsedTime() % 1 < 0.3) {
-        light2Color[1]('#ff0000')
-      } else {
-        light2Color[1]('#f0f2ff')
-      }
-    }
-  })
+  const light2Color = useState('#e8e8e8')
 
   return (
     <>
-      {/* These are the lights that are used to light up the scene */}
-      <Spot position={LightsPosition.light1} target={[0, 0, -6]} color='white' penumbra={0} distance={100} angle={90} attenuation={1} anglePower={5} intensity={2} />
-      <Spot position={LightsPosition.light2} target={[0, 0, 25 + 0.09]} color={light2Color[0]} penumbra={1} distance={5} angle={3} attenuation={1} anglePower={0} intensity={2} />
-      <ambientLight intensity={0.1} />
-      {/* These are the boxes that are used to visualize the light sources */}
+      <Spot position={LightsPosition.light2} target={[0, 0, 25 + 0.09]} color={light2Color[0]} penumbra={1} distance={4} angle={Math.PI/2} attenuation={1} anglePower={0} intensity={1.5} />
+      <ambientLight intensity={0.025} />
+      <fog attach='fog' args={['black', 0, 10]} />
     </>
   )
 }
 
-export default Lights
+export default PlayingLights

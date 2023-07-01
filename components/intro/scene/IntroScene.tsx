@@ -3,7 +3,7 @@ import { Canvas } from '@react-three/fiber'
 import { Physics } from '@react-three/cannon'
 import { createCinematicSlice } from '@/utils/stores/intro.store'
 import DyingEarth from '@/components/intro/earth/DyingEarth'
-import Lights from '@/components/intro/lights/Lights'
+import IntroLights from '@/components/intro/lights/IntroLights'
 import Effects from '@/components/character/fx/Effects'
 import ShipFloor from '@/components/intro/ship/ShipFloor'
 import BaseCharacter from '@/components/character/BaseCharacter'
@@ -20,7 +20,7 @@ const IntroScene = () => {
 
   return (
     <Canvas shadows={true} camera={{ position: [0, 0, distanceFromCenter], fov: 40 }}>
-      <Lights />
+      <IntroLights />
       <Effects />
       <Physics gravity={[0, -9.8, 0]}>
         <BaseCharacter position={[0, 0, distanceFromCenter + 0.09]} args={[0.14]} />
