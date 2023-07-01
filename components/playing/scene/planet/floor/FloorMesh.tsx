@@ -36,7 +36,7 @@ const FloorMesh = ({ rotation = [Math.PI / -2, 0, 0], position = [0, 0, 0], size
   ao_map.repeat.set(size, size)
 
   return (
-    <mesh rotation={rotation} position={position} scale={[size, size, 1]}>
+    <mesh rotation={rotation} position={position} scale={[size, size, 1]} receiveShadow={true}>
       <planeBufferGeometry />
       <meshStandardMaterial map={colorMap} displacementMap={displacementMap} normalMap={normalMap} displacementScale={1} roughnessMap={roughness_map} aoMap={ao_map} />
     </mesh>
