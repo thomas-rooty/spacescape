@@ -4,10 +4,10 @@ import { Physics } from '@react-three/cannon'
 import { createCinematicSlice } from '@/utils/stores/intro.store'
 import DyingEarth from '@/components/intro/earth/DyingEarth'
 import Lights from '@/components/intro/lights/Lights'
-import Effects from '@/components/fx/Effects'
-import Floor from '@/components/intro/floor/Floor'
+import Effects from '@/components/character/fx/Effects'
+import ShipFloor from '@/components/intro/ship/ShipFloor'
 import BaseCharacter from '@/components/character/BaseCharacter'
-import CockpitCollision from '@/components/intro/ship/CockpitCollision'
+import ShipCollision from '@/components/intro/ship/ShipCollision'
 import Spaceship from '@/components/intro/ship/Spaceship'
 
 const IntroScene = () => {
@@ -24,8 +24,8 @@ const IntroScene = () => {
       <Effects />
       <Physics gravity={[0, -9.8, 0]}>
         <BaseCharacter position={[0, 0, distanceFromCenter + 0.09]} args={[0.14]} />
-        <Floor rotation={[Math.PI / -2, 0, 0]} color={'black'} position={[-0.33, -0.17, distanceFromCenter + 0.2]} />
-        <CockpitCollision />
+        <ShipFloor rotation={[Math.PI / -2, 0, 0]} color={'black'} position={[-0.33, -0.17, distanceFromCenter + 0.2]} />
+        <ShipCollision />
       </Physics>
       {animationDone && <PointerLockControls />}
       {!endCryo && <DyingEarth position={[0, 0, -6]} rotation={[0, 0, 0]} scale={9.33} />}

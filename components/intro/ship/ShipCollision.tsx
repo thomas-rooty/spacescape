@@ -1,6 +1,6 @@
-import Wall from '@/components/intro/ship/Wall'
+import Wall from '@/components/objects/walls/Wall'
 
-const CockpitCollision = () => {
+const ShipCollision = () => {
   return (
     <>
       <Wall position={[0.15, 0, 25.25 + 0.25]} rotation={[0, 0, 0]} args={[0.1, 0.4, 0.6]} />
@@ -11,4 +11,4 @@ const CockpitCollision = () => {
   )
 }
 
-export default CockpitCollision
+export default ShipCollision
