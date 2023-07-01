@@ -33,7 +33,7 @@ const BaseCharacter = (props: SphereProps) => {
   // Subscribe to the velocity of the character
   useEffect(() => api.velocity.subscribe((v) => (velocity.current = v)), [api.velocity])
 
-  // Subscribe to the position of the character
+  // Subscribe to the position of the character and store it in the store
   useEffect(() => api.position.subscribe((p) => setPosition({ x: p[0], y: p[1], z: p[2] })), [api.position, setPosition])
 
   // Raycast initialization, gathering of the functions and variables from the store needed to perform hoverable objects detection
