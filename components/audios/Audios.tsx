@@ -1,13 +1,9 @@
 import { useEffect } from 'react'
 import { createCinematicSlice } from '@/utils/stores/intro.store'
 
-interface AudiosProps {
-  checkInitiated: boolean
-}
-
-const Audios = (props: AudiosProps) => {
+const Audios = () => {
   // Variables and functions from the store
-  const { checkInitiated } = props
+  const checkInitiated = createCinematicSlice((state) => state.checkInitiated)
   const startedGame = createCinematicSlice((state) => state.startedGame)
   const audioState = createCinematicSlice((state) => state.audioState)
   const audioVolume = createCinematicSlice((state) => state.audioVolume)

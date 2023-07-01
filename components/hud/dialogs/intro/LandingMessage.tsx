@@ -18,7 +18,7 @@ const LandingMessage = () => {
         // Wait 10 seconds before starting the adventure
         setTimeout(() => {
           setAdventureStarted(true)
-        }, 10000)
+        }, 1000) // 10000
       }, 1000)
     }
   }, [eyesClosed, setAdventureStarted])

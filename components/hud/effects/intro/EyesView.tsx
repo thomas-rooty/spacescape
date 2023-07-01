@@ -6,6 +6,7 @@ import { createCharacterSlice } from '@/utils/stores/character.store'
 export const EyesView = () => {
   const checkInitiated = createCinematicSlice((state) => state.checkInitiated)
   const setEyesClosed = createCharacterSlice((state) => state.setEyesClosed)
+  const adventureStarted = createCinematicSlice((state) => state.adventureStarted)
 
   // If check is initiated, add a class called 'closed' to the eyes
   useEffect(() => {
@@ -18,7 +19,7 @@ export const EyesView = () => {
     }
   }, [checkInitiated, setEyesClosed])
 
-  return <div id="eyes" className={styles.eyes} />
+  return <>{!adventureStarted && <div id="eyes" className={styles.eyes} />}</>
 }
 
 export default EyesView

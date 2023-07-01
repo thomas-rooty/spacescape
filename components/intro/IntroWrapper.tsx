@@ -1,24 +1,21 @@
-import IntroScene from '@/pages/introScene'
+import IntroScene from '@/components/intro/scene/IntroScene'
 import DateTimelapse from '@/components/intro/datetimelapse/DateTimelapse'
 import StartBtn from '@/components/intro/buttons/StartBtn'
-import Audios from '@/components/audios/Audios'
-import {createCinematicSlice} from '@/utils/stores/intro.store'
+import { createCinematicSlice } from '@/utils/stores/intro.store'
 
 const IntroWrapper = () => {
   // Store values
   const endCryo = createCinematicSlice((state) => state.endCryo)
-  const checkInitiated = createCinematicSlice((state) => state.checkInitiated)
 
   return (
     <>
-      <IntroScene/>
-      {!endCryo &&
+      <IntroScene />
+      {!endCryo && (
         <>
-          <DateTimelapse/>
-          <StartBtn/>
+          <DateTimelapse />
+          <StartBtn />
         </>
-      }
-      <Audios checkInitiated={checkInitiated}/>
+      )}
     </>
   )
 }

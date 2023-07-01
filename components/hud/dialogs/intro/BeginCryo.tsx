@@ -15,7 +15,7 @@ const BeginCryo = () => {
       // After 20 seconds, trigger the end of the cryo animation
       setTimeout(() => {
         setEndCryo(true)
-      }, 20000) // 20000
+      }, 1000) // 20000
     }
   }, [launchInitiated, setEndCryo])
 
