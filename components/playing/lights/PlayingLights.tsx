@@ -21,6 +21,7 @@ type SpotProps = {
   intensity: number
   target: [number, number, number]
   position: [number, number, number]
+  castShadow: boolean
   color: string | number
 }
 
@@ -31,17 +32,17 @@ function Spot({ target, position, ...props }: SpotProps) {
     light.current.target.position.set(...target)
     light.current.position.set(...position)
   })
-  return <SpotLight debug={false} volumetric={false} castShadow ref={light} {...props} />
+  return <SpotLight debug={false} volumetric={false} ref={light} {...props} />
 }
 
 const PlayingLights = () => {
   // Store values
-  const lightColor = useState('#e8e8e8')
+  const lightColor = useState('#fff')
   const lightShip = useState('#f0f2ff')
   const position = createCharacterSlice((state) => state.position)
 
   const lightsPosition: LightsPosition = {
-    position: [position['x'], position['y'] + 2, position['z']],
+    position: [position['x'], position['y'] + 0.66, position['z']],
     lightShip: [1, 0.1, 25.6], // Updated position of the alert light
   }
 
@@ -57,22 +58,12 @@ const PlayingLights = () => {
   return (
     <>
       {/* Ambient light and fog */}
-      <ambientLight intensity={0.025} />
+      <ambientLight intensity={0.04} />
       <fog attach="fog" args={['black', 0, 10]} />
-      {/* Character light */}
-      <Spot
-        penumbra={1}
-        distance={10}
-        angle={Math.PI / 4}
-        attenuation={0.5}
-        anglePower={2}
-        intensity={0.5}
-        target={[position['x'], position['y'] - 2, position['z']]}
-        position={lightsPosition.position}
-        color={lightColor[0]}
-      />
+      {/* Main light following character */}
+      <Spot position={lightsPosition.position} castShadow={false} target={[position['x'], 0, position['z']]} color={lightColor[0]} penumbra={1} distance={2} angle={2} attenuation={1} anglePower={0.5} intensity={1} />
       {/* Ship alert light */}
-      <Spot position={lightsPosition.lightShip} target={[0.5, 0, 24.6]} color={lightShip[0]} penumbra={1} distance={1} angle={1} attenuation={1} anglePower={0.5} intensity={2} />
+      <Spot position={lightsPosition.lightShip} castShadow={true} target={[0.5, 0, 24.6]} color={lightShip[0]} penumbra={1} distance={1} angle={1} attenuation={1} anglePower={0.5} intensity={2} />
     </>
   )
 }
