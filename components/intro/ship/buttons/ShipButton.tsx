@@ -1,25 +1,23 @@
 import { useControls } from '@/utils/useControls'
 import { useFrame } from '@react-three/fiber'
+import { createCharacterSlice } from '@/utils/stores/character.store'
 import { createCinematicSlice } from '@/utils/stores/intro.store'
 
 interface ShipButtonProps {
-  refProp: any;
-  id: string;
-  position: [number, number, number];
-  rotation: [number, number, number];
-  geometryArgs: [number, number, number];
+  refProp: any
+  id: string
+  position: [number, number, number]
+  rotation: [number, number, number]
+  geometryArgs: [number, number, number]
 }
 
-const useShipButtonInteractions = (
-  refProp: React.MutableRefObject<any>,
-  id: string,
-  interact: boolean,
-) => {
+const useShipButtonInteractions = (refProp: React.MutableRefObject<any>, id: string, interact: boolean) => {
   const addObjectAsHoverable = createCinematicSlice((state) => state.addObjectAsHoverable)
   const hoveredObject = createCinematicSlice((state) => state.hoveredObject)
   const setAudioState = createCinematicSlice((state) => state.setAudioState)
   const setLaunchInitiated = createCinematicSlice((state) => state.setLaunchInitiated)
   const setCheckInitiated = createCinematicSlice((state) => state.setCheckInitiated)
+  const setShaking = createCharacterSlice((state) => state.setShaking)
 
   // Ship button interactions
   useFrame(() => {
@@ -36,6 +34,7 @@ const useShipButtonInteractions = (
         setAudioState(false)
       } else if (id === 'SHIP_BTN_CHECK') {
         setCheckInitiated(true)
+        setShaking(true)
       } else if (id === 'SHIP_CMD_STEERING') {
         setLaunchInitiated(true)
       }
@@ -45,13 +44,7 @@ const useShipButtonInteractions = (
   })
 }
 
-const ShipButton = ({
-                      refProp,
-                      id,
-                      position,
-                      rotation,
-                      geometryArgs,
-                    }: ShipButtonProps) => {
+const ShipButton = ({ refProp, id, position, rotation, geometryArgs }: ShipButtonProps) => {
   const { interact } = useControls()
 
   useShipButtonInteractions(refProp, id, interact)

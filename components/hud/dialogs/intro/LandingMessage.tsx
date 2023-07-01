@@ -9,6 +9,7 @@ const LandingMessage = () => {
   const eyesClosed = createCharacterSlice((state) => state.eyesClosed)
   const setAdventureStarted = createCinematicSlice((state) => state.setAdventureStarted)
   const adventureStarted = createCinematicSlice((state) => state.adventureStarted)
+  const setShaking = createCharacterSlice((state) => state.setShaking)
 
   // If the eyes are closed, show the landing message
   useEffect(() => {
@@ -18,6 +19,7 @@ const LandingMessage = () => {
         // Wait 10 seconds before starting the adventure
         setTimeout(() => {
           setAdventureStarted(true)
+          setShaking(false)
         }, 1000) // 10000
       }, 1000)
     }

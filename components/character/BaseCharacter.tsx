@@ -33,16 +33,7 @@ const BaseCharacter = (props: SphereProps) => {
   const raycaster = useMemo(() => new THREE.Raycaster(), [])
   const hoverableObjects = createCinematicSlice((state) => state.hoverableObjects)
   const setObjectAsHovered = createCinematicSlice((state) => state.setObjectAsHovered)
-  const checkInitiated = createCinematicSlice((state) => state.checkInitiated)
   const shaking = createCharacterSlice((state) => state.shaking)
-  const setShaking = createCharacterSlice((state) => state.setShaking)
-
-  // Shake camera if checkInitiated is true
-  useEffect(() => {
-    if (checkInitiated) {
-      setShaking(true)
-    }
-  }, [checkInitiated, setShaking])
 
   useFrame(({ clock }) => {
     // Movement system gestion
