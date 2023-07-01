@@ -25,9 +25,16 @@ const BaseCharacter = (props: SphereProps) => {
   }))
 
   // Character movement
+  const setPosition = createCharacterSlice((state) => state.setPosition)
   const { forward, backward, left, right, jump } = useControls()
   const velocity = useRef<any>([0, 0, 0])
+
+
+  // Subscribe to the velocity of the character
   useEffect(() => api.velocity.subscribe((v) => (velocity.current = v)), [api.velocity])
+
+  // Subscribe to the position of the character
+  useEffect(() => api.position.subscribe((p) => setPosition({ x: p[0], y: p[1], z: p[2] })), [api.position, setPosition])
 
   // Raycast initialization, gathering of the functions and variables from the store needed to perform hoverable objects detection
   const raycaster = useMemo(() => new THREE.Raycaster(), [])
