@@ -42,7 +42,7 @@ const PlayingLights = () => {
   const position = createCharacterSlice((state) => state.position)
 
   const lightsPosition: LightsPosition = {
-    position: [position['x'], position['y'] + 0.66, position['z']],
+    position: [position['x'] - 0.33, position['y'] + 0.66, position['z'] + 0.5],
     lightShip: [1, 0.1, 25.6], // Updated position of the alert light
   }
 

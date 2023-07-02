@@ -8,6 +8,7 @@ const Audios = () => {
   const audioState = createCinematicSlice((state) => state.audioState)
   const audioVolume = createCinematicSlice((state) => state.audioVolume)
   const endCryo = createCinematicSlice((state) => state.endCryo)
+  const adventureStarted = createCinematicSlice((state) => state.adventureStarted)
 
   // Intro music handler
   useEffect(() => {
@@ -36,6 +37,15 @@ const Audios = () => {
     }
   }, [audioVolume, checkInitiated])
 
+  // Breathing sound handler
+  useEffect(() => {
+    const breathingSound = document.getElementById('breathing-sound') as HTMLAudioElement
+    if (adventureStarted && breathingSound) {
+      breathingSound.play()
+      breathingSound.volume = audioVolume
+    }
+  }, [audioVolume, adventureStarted])
+
   return (
     <>
       {!endCryo && (
@@ -51,6 +61,11 @@ const Audios = () => {
       {checkInitiated && (
         <audio id="emergency-sound" loop={false}>
           <source src="/sounds/ship/emergency.mp3" type="audio/mpeg" />
+        </audio>
+      )}
+      {adventureStarted && (
+        <audio id="breathing-sound" loop={true}>
+          <source src="/sounds/character/breathing.mp3" type="audio/mpeg" />
         </audio>
       )}
     </>
