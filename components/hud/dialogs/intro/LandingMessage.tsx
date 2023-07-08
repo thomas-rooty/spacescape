@@ -20,8 +20,8 @@ const LandingMessage = () => {
         setTimeout(() => {
           setAdventureStarted(true)
           setShaking(false)
-        }, 10000) // 10000
-      }, 1000)
+        }, 1) // 10000
+      }, 1000) // 1000
     }
   }, [eyesClosed, setAdventureStarted, setShaking])
 

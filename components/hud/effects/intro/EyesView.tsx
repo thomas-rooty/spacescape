@@ -15,7 +15,7 @@ export const EyesView = () => {
       setTimeout(() => {
         document.getElementById('eyes')?.classList.add(styles.closed)
         setEyesClosed(true)
-      }, 20000)
+      }, 1) // 20000
     }
   }, [checkInitiated, setEyesClosed])
 
