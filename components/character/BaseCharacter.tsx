@@ -70,7 +70,7 @@ const BaseCharacter = (props: SphereProps) => {
     // Raycast detection system
     raycaster.set(camera.position, camera.getWorldDirection(new THREE.Vector3()))
     const intersects = raycaster.intersectObjects(hoverableObjects && Object.keys(hoverableObjects).length > 0 ? hoverableObjects : [])
-    if (intersects.length > 0 && intersects[0].distance < 0.7) {
+    if (intersects.length > 0 && intersects[0].distance < 1.3) {
       setObjectAsHovered(intersects[0].object.userData.id)
     } else {
       setObjectAsHovered(null)
