@@ -10,6 +10,7 @@ const LandingMessage = () => {
   const setAdventureStarted = createCinematicSlice((state) => state.setAdventureStarted)
   const adventureStarted = createCinematicSlice((state) => state.adventureStarted)
   const setShaking = createCharacterSlice((state) => state.setShaking)
+  const time = process.env.NODE_ENV === 'production' ? 10000 : 1
 
   // If the eyes are closed, show the landing message
   useEffect(() => {
@@ -20,10 +21,10 @@ const LandingMessage = () => {
         setTimeout(() => {
           setAdventureStarted(true)
           setShaking(false)
-        }, 1) // 10000
+        }, time) // 10000 in production, 1 in development
       }, 1000) // 1000
     }
-  }, [eyesClosed, setAdventureStarted, setShaking])
+  }, [eyesClosed, setAdventureStarted, setShaking, time])
 
   return (
     <>

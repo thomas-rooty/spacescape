@@ -7,6 +7,7 @@ export const EyesView = () => {
   const checkInitiated = createCinematicSlice((state) => state.checkInitiated)
   const setEyesClosed = createCharacterSlice((state) => state.setEyesClosed)
   const adventureStarted = createCinematicSlice((state) => state.adventureStarted)
+  const time = process.env.NODE_ENV === 'production' ? 20000 : 1
 
   // If check is initiated, add a class called 'closed' to the eyes
   useEffect(() => {
@@ -15,9 +16,9 @@ export const EyesView = () => {
       setTimeout(() => {
         document.getElementById('eyes')?.classList.add(styles.closed)
         setEyesClosed(true)
-      }, 1) // 20000
+      }, time) // 20000 in production, 1 in development
     }
-  }, [checkInitiated, setEyesClosed])
+  }, [checkInitiated, setEyesClosed, time])
 
   return <>{!adventureStarted && <div id="eyes" className={styles.eyes} />}</>
 }

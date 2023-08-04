@@ -7,6 +7,7 @@ const BeginCryo = () => {
   const endCryo = createCinematicSlice((state) => state.endCryo)
   const launchInitiated = createCinematicSlice((state) => state.launchInitiated)
   const setEndCryo = createCinematicSlice((state) => state.setEndCryo)
+  const time = process.env.NODE_ENV === 'production' ? 20000 : 1
 
   // Show the cryo state message when the launch is initiated
   useEffect(() => {
@@ -15,9 +16,9 @@ const BeginCryo = () => {
       // After 20 seconds, trigger the end of the cryo animation
       setTimeout(() => {
         setEndCryo(true)
-      }, 1) // 20000
+      }, time) // 20000 in production, 1 in development
     }
-  }, [launchInitiated, setEndCryo])
+  }, [launchInitiated, setEndCryo, time])
 
   return (
     <>
