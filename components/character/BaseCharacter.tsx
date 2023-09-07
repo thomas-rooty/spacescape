@@ -7,15 +7,16 @@ import { createCharacterSlice } from '@/utils/stores/character.store'
 import * as THREE from 'three'
 
 const BaseCharacter = (props: SphereProps) => {
+  // Base variables
   const direction = useMemo(() => new THREE.Vector3(), [])
   const frontVector = useMemo(() => new THREE.Vector3(), [])
   const sideVector = useMemo(() => new THREE.Vector3(), [])
   const speed = useMemo(() => new THREE.Vector3(), [])
   const worldDirection = useMemo(() => new THREE.Vector3(), [])
-
   const SPEED = 0.5
   const { camera } = useThree()
 
+  // Collision sphere for character
   const [ref, api] = useSphere<any>(() => ({
     mass: 1,
     type: 'Dynamic',
@@ -23,6 +24,7 @@ const BaseCharacter = (props: SphereProps) => {
     ...props,
   }))
 
+  // Movement system
   const setPosition = createCharacterSlice((state) => state.setPosition)
   const { forward, backward, left, right, jump } = useControls()
   const velocity = useRef<any>([0, 0, 0])
@@ -34,6 +36,7 @@ const BaseCharacter = (props: SphereProps) => {
     z: p[2],
   })), [api.position, setPosition])
 
+  // Detecting objects in front of the character
   const raycaster = useMemo(() => new THREE.Raycaster(), [])
   const hoverableObjects = createCinematicSlice((state) => state.hoverableObjects)
   const setObjectAsHovered = createCinematicSlice((state) => state.setObjectAsHovered)
@@ -42,6 +45,7 @@ const BaseCharacter = (props: SphereProps) => {
   useFrame(({ clock }) => {
     const elapsedTime = clock.getElapsedTime()
 
+    // Movement
     ref.current.getWorldPosition(camera.position)
     frontVector.set(0, 0, Number(backward) - Number(forward))
     sideVector.set(Number(left) - Number(right), 0, 0)
@@ -57,12 +61,14 @@ const BaseCharacter = (props: SphereProps) => {
       camera.position.y += Math.sin(elapsedTime * 2) / 1000
     }
 
+    // Shaking effect
     if (shaking) {
       camera.position.x += Math.sin(elapsedTime * 200) / 250
       camera.position.y += Math.sin(elapsedTime * 100) / 250
       camera.position.z += Math.sin(elapsedTime * 200) / 250
     }
 
+    // Raycast detection system
     raycaster.set(camera.position, camera.getWorldDirection(worldDirection))
     const intersects = raycaster.intersectObjects(hoverableObjects && Object.keys(hoverableObjects).length > 0 ? hoverableObjects : [])
     if (intersects.length > 0 && intersects[0].distance < 1.3) {
