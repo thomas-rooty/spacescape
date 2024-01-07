@@ -13,20 +13,17 @@ export const SocketManager = () => {
       console.log('disconnected')
     }
 
-    function onHello() {
-      console.log('hello')
+    function onAstronauts(astronaut: any) {
+      console.log(astronaut)
     }
 
-    // Corrected event name from 'connection' to 'connect'
     socket.on('connect', onConnect)
     socket.on('disconnect', onDisconnect)
-    socket.on('hello', onHello)
-
+    socket.on('astronauts', onAstronauts)
     return () => {
-      // Corrected event name from 'connection' to 'connect'
       socket.off('connect', onConnect)
       socket.off('disconnect', onDisconnect)
-      socket.off('hello', onHello)
+      socket.off('astronauts', onAstronauts)
     }
   }, [])
 
