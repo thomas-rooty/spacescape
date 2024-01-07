@@ -10,6 +10,7 @@ import FloorColBox from '@/components/playing/scene/planet/floor/FloorColBox'
 import PlayingLights from '@/components/playing/lights/PlayingLights'
 import Spaceship from '@/components/objects/ship/Spaceship'
 import ShipHitbox from '@/components/objects/ship/ShipHitbox'
+import RenderAstronauts from '@/components/playing/multiplayer/RenderAstronauts'
 
 const PlayingScene = () => {
   // Base values
@@ -28,6 +29,7 @@ const PlayingScene = () => {
       {animationDone && <PointerLockControls />}
       <Stars radius={1} depth={250} count={2500} factor={0.5} saturation={1} fade />
       <Physics gravity={[0, -9.8, 0]}>
+        <RenderAstronauts />
         <BaseCharacter position={[0, 0, distanceFromCenter + 0.09]} args={[0.14]} />
         <Debug scale={1} color="red">
           <FloorColBox rotation={[Math.PI / -2, 0, 0]} color={'pink'} position={[-0.33, -0.17, distanceFromCenter + 0.2]} />
