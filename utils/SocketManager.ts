@@ -22,6 +22,7 @@ export const SocketManager = () => {
 
     function onAstronauts(astronauts: any) {
       setAstronauts(astronauts)
+      console.log(astronauts)
     }
 
     socket.on('connect', onConnect)

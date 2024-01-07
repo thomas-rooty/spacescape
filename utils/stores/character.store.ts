@@ -11,6 +11,8 @@ interface ICharacterStore {
   setShaking: (shaking: boolean) => void
   eyesClosed: boolean
   setEyesClosed: (eyesClosed: boolean) => void
+  isMoving: boolean
+  setIsMoving: (isMoving: boolean) => void
 }
 
 export const createCharacterSlice = create<ICharacterStore>((set) => ({
@@ -24,4 +26,6 @@ export const createCharacterSlice = create<ICharacterStore>((set) => ({
   setShaking: (shaking: boolean) => set({ shaking }),
   eyesClosed: false,
   setEyesClosed: (eyesClosed: boolean) => set({ eyesClosed }),
+  isMoving: false,
+  setIsMoving: (isMoving: boolean) => set({ isMoving }),
 }))

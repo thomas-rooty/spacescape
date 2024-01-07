@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { createCharacterSlice } from '@/utils/stores/character.store'
 
 export const useControls = () => {
   const keys = { KeyW: 'forward', KeyS: 'backward', KeyA: 'left', KeyD: 'right', Space: 'jump', KeyE: 'interact' }
@@ -9,18 +10,22 @@ export const useControls = () => {
   const moveFieldByButton = (button: number) => buttons[button as keyof typeof buttons]
 
   const [movement, setMovement] = useState({ forward: false, backward: false, left: false, right: false, jump: false, interact: false, leftClick: false, rightClick: false })
-
+  const setIsMoving = createCharacterSlice((state) => state.setIsMoving)
   useEffect(() => {
-    const handleKeyDown = (e: { code: string | number }) =>
+    const handleKeyDown = (e: { code: string | number }) => {
       setMovement((m) => ({
         ...m,
         [moveFieldByKey(e.code)]: true,
       }))
-    const handleKeyUp = (e: { code: string | number }) =>
+      setIsMoving(true)
+    }
+    const handleKeyUp = (e: { code: string | number }) => {
       setMovement((m) => ({
         ...m,
         [moveFieldByKey(e.code)]: false,
       }))
+      setIsMoving(false)
+    }
     const handleMouseDown = (e: { button: number }) =>
       setMovement((m) => ({
         ...m,

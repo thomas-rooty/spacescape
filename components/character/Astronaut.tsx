@@ -2,7 +2,8 @@ import * as THREE from 'three'
 import React, { useRef, useEffect, useState, useMemo } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
 import { GLTF, SkeletonUtils } from 'three-stdlib'
-import { useGraph } from '@react-three/fiber'
+import { useGraph, useFrame } from '@react-three/fiber'
+import { createCharacterSlice } from '@/utils/stores/character.store'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -31,10 +32,13 @@ type GLTFResult = GLTF & {
 }
 
 interface AstronautProps {
-  headColor?: string
+  headColor: string
+  position: any
 }
 
 export function Astronaut({ headColor = '#f5f5f5', ...props }: AstronautProps) {
+  const position = useMemo(() => props.position, [])
+  const isMoving = createCharacterSlice((state) => state.isMoving)
   const group = useRef<THREE.Group>(null)
   const { scene, materials, animations } = useGLTF('/models/astronaut/Astronaut.glb') as unknown as GLTFResult
   const { actions } = useAnimations(animations, group)
@@ -46,16 +50,29 @@ export function Astronaut({ headColor = '#f5f5f5', ...props }: AstronautProps) {
   // Animate the astronaut
   const [animation, setAnimation] = useState('CharacterArmature|Idle')
   useEffect(() => {
-    actions[animation]?.reset().fadeIn(0.5).play()
+    console.log('animation', animation)
+    actions[animation]?.reset().fadeIn(0.1).play()
     return () => {
       if (actions[animation]) {
-        actions[animation]?.fadeOut(0.5)
+        actions[animation]?.fadeOut(0.1)
       }
     }
   }, [animation])
 
+  // Update the position of the astronaut and detect when it's moving
+  useFrame(() => {
+    if (group.current) {
+      group.current.position.set(props.position.x, props.position.y, props.position.z)
+      if (isMoving) {
+        setAnimation('CharacterArmature|Run')
+      } else {
+        setAnimation('CharacterArmature|Idle')
+      }
+    }
+  })
+
   return (
-    <group ref={group} {...props} dispose={null} scale={0.1} position={[0, -0.15, 0.15]}>
+    <group ref={group} {...props} dispose={null} scale={0.1} position={position}>
       <group name="Root_Scene">
         <group name="RootNode">
           <group name="CharacterArmature" rotation={[-Math.PI / 2, 0, 0]} scale={100}>

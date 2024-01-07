@@ -1,12 +1,11 @@
 import { SphereProps, useSphere } from '@react-three/cannon'
 import { useFrame, useThree } from '@react-three/fiber'
-import { useEffect, useRef, useMemo } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import { useControls } from '@/utils/useControls'
 import { createSocketSlice } from '@/utils/stores/socket.store'
 import { createCinematicSlice } from '@/utils/stores/intro.store'
 import { createCharacterSlice } from '@/utils/stores/character.store'
 import { createAstronautSlice } from '@/utils/stores/astronauts.store'
-import { Astronaut } from '@/components/character/Astronaut'
 import * as THREE from 'three'
 
 const BaseCharacter = (props: SphereProps) => {
@@ -32,9 +31,6 @@ const BaseCharacter = (props: SphereProps) => {
     position: [0, 10, 0],
     ...props,
   }))
-
-  // Astronaut model
-  const astronaut = useRef<any>(null)
 
   // Movement system
   const setPosition = createCharacterSlice((state) => state.setPosition)
@@ -74,15 +70,12 @@ const BaseCharacter = (props: SphereProps) => {
     api.velocity.set(direction.x, velocity.current[1], direction.z)
     if (jump && Math.abs(velocity.current[1].toFixed(3)) < 0.001) api.velocity.set(velocity.current[0], 1.07, velocity.current[2])
 
-    // Update astronaut model position
-    //astronaut.current.position.copy(ref.current.getWorldPosition(camera.position))
-
     // Calculate the horizontal look at position
-    //const horizontalLookAtPosition = new THREE.Vector3()
-    //camera.getWorldDirection(lookAtDirection)
-    //lookAtDirection.y = 0 // Ignore Y axis
-    //lookAtDirection.normalize()
-    //horizontalLookAtPosition.copy(camera.position).add(lookAtDirection.multiplyScalar(10)) // Adjust scalar as needed
+    const horizontalLookAtPosition = new THREE.Vector3()
+    camera.getWorldDirection(lookAtDirection)
+    lookAtDirection.y = 0 // Ignore Y axis
+    lookAtDirection.normalize()
+    horizontalLookAtPosition.copy(camera.position).add(lookAtDirection.multiplyScalar(10)) // Adjust scalar as needed
 
     // Update astronaut model orientation
     //astronaut.current.lookAt(horizontalLookAtPosition)
@@ -116,11 +109,6 @@ const BaseCharacter = (props: SphereProps) => {
         <sphereGeometry args={props.args} />
         <meshStandardMaterial color="red" />
       </mesh>
-      {/*
-        <mesh ref={astronaut}>
-          <Astronaut position-x={0} headColor={'#ff0000'} />
-        </mesh>
-      */}
     </group>
   )
 }
