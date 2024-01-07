@@ -7,5 +7,5 @@ interface IAstronautStore {
 
 export const createAstronautSlice = create<IAstronautStore>((set) => ({
   astronauts: [],
-  setAstronauts: (astronauts: any[]) => set({ astronauts }),
+  setAstronauts: (astronauts) => set({ astronauts }),
 }))
