@@ -67,17 +67,17 @@ const BaseCharacter = (props: SphereProps) => {
     api.velocity.set(direction.x, velocity.current[1], direction.z)
     if (jump && Math.abs(velocity.current[1].toFixed(3)) < 0.001) api.velocity.set(velocity.current[0], 1.07, velocity.current[2])
 
-    // Update astronaut position
+    // Update astronaut model position
     astronaut.current.position.copy(ref.current.getWorldPosition(camera.position))
 
     // Calculate the horizontal look at position
     const horizontalLookAtPosition = new THREE.Vector3()
     camera.getWorldDirection(lookAtDirection)
-    lookAtDirection.y = 0 // Set Y component to 0 to ignore vertical movement
-    lookAtDirection.normalize() // Re-normalize the vector after modifying it
+    lookAtDirection.y = 0 // Ignore Y axis
+    lookAtDirection.normalize()
     horizontalLookAtPosition.copy(camera.position).add(lookAtDirection.multiplyScalar(10)) // Adjust scalar as needed
 
-    // Update astronaut orientation
+    // Update astronaut model orientation
     astronaut.current.lookAt(horizontalLookAtPosition)
 
     // Shaking effect
@@ -105,6 +105,7 @@ const BaseCharacter = (props: SphereProps) => {
       </mesh>
       <mesh ref={astronaut}>
         <Astronaut />
+        <Astronaut position-x={0.01} headColor={'#ff0000'} />
       </mesh>
     </group>
   )

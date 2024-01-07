@@ -1,7 +1,8 @@
 import * as THREE from 'three'
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState, useMemo } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
-import { GLTF } from 'three-stdlib'
+import { GLTF, SkeletonUtils } from 'three-stdlib'
+import { useGraph } from '@react-three/fiber'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -29,21 +30,33 @@ type GLTFResult = GLTF & {
   }
 }
 
-export function Astronaut(props: JSX.IntrinsicElements['group']) {
+interface AstronautProps {
+  headColor?: string
+}
+
+export function Astronaut({ headColor = '#f5f5f5', ...props }: AstronautProps) {
   const group = useRef<THREE.Group>(null)
-  const { nodes, materials, animations } = useGLTF('/models/astronaut/Astronaut.glb') as unknown as GLTFResult
+  const { scene, materials, animations } = useGLTF('/models/astronaut/Astronaut.glb') as unknown as GLTFResult
   const { actions } = useAnimations(animations, group)
 
-  // Set the materials to double-sided
+  // Clone the mesh to avoid mutating the original GLTF nodes
+  const clone = useMemo(() => SkeletonUtils.clone(scene), [scene])
+  const { nodes } = useGraph(clone) as GLTFResult
+
+  // Animate the astronaut
+  const [animation, setAnimation] = useState('CharacterArmature|Idle')
   useEffect(() => {
-    Object.values(materials).forEach((material) => {
-      material.side = THREE.DoubleSide
-    })
-  }, [materials])
+    actions[animation]?.reset().fadeIn(0.5).play()
+    return () => {
+      if (actions[animation]) {
+        actions[animation]?.fadeOut(0.5)
+      }
+    }
+  }, [animation])
 
   return (
-    <group ref={group} {...props} dispose={null} scale={0.1} position={[0, -0.15, 0.3]}>
-    <group name="Root_Scene">
+    <group ref={group} {...props} dispose={null} scale={0.1} position={[0, -0.15, 0.15]}>
+      <group name="Root_Scene">
         <group name="RootNode">
           <group name="CharacterArmature" rotation={[-Math.PI / 2, 0, 0]} scale={100}>
             <primitive object={nodes.Root} />
@@ -67,7 +80,9 @@ export function Astronaut(props: JSX.IntrinsicElements['group']) {
           <group name="SpaceSuit_Head" rotation={[-Math.PI / 2, 0, 0]} scale={100}>
             <skinnedMesh name="SpaceSuit_Head_1" geometry={nodes.SpaceSuit_Head_1.geometry} material={materials.SciFi_Light_Accent} skeleton={nodes.SpaceSuit_Head_1.skeleton} />
             <skinnedMesh name="SpaceSuit_Head_2" geometry={nodes.SpaceSuit_Head_2.geometry} material={materials.SciFi_Light} skeleton={nodes.SpaceSuit_Head_2.skeleton} />
-            <skinnedMesh name="SpaceSuit_Head_3" geometry={nodes.SpaceSuit_Head_3.geometry} material={materials.Grey} skeleton={nodes.SpaceSuit_Head_3.skeleton} />
+            <skinnedMesh name="SpaceSuit_Head_3" geometry={nodes.SpaceSuit_Head_3.geometry} material={materials.Grey} skeleton={nodes.SpaceSuit_Head_3.skeleton}>
+              <meshStandardMaterial color={headColor} />
+            </skinnedMesh>
           </group>
         </group>
       </group>
