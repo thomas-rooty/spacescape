@@ -3,10 +3,6 @@ import { SpotLight } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { createCharacterSlice } from '@/utils/stores/character.store'
 
-// Summary:
-// 1. The spotlight shall target the ground of the playing area
-// 2. The position of the spotlight shall move along with the base character.
-
 type LightsPosition = {
   position: [number, number, number]
   lightShip: [number, number, number]

@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import React, { useRef } from 'react'
+import React, { useRef, useEffect } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
 
@@ -31,12 +31,19 @@ type GLTFResult = GLTF & {
 
 export function Astronaut(props: JSX.IntrinsicElements['group']) {
   const group = useRef<THREE.Group>(null)
-  const { nodes, materials, animations } = useGLTF('/Astronaut.glb') as unknown as GLTFResult
+  const { nodes, materials, animations } = useGLTF('/models/astronaut/Astronaut.glb') as unknown as GLTFResult
   const { actions } = useAnimations(animations, group)
 
+  // Set the materials to double-sided
+  useEffect(() => {
+    Object.values(materials).forEach((material) => {
+      material.side = THREE.DoubleSide
+    })
+  }, [materials])
+
   return (
-    <group ref={group} {...props} dispose={null}>
-      <group name="Root_Scene">
+    <group ref={group} {...props} dispose={null} scale={0.1} position={[0, -0.15, 0.3]}>
+    <group name="Root_Scene">
         <group name="RootNode">
           <group name="CharacterArmature" rotation={[-Math.PI / 2, 0, 0]} scale={100}>
             <primitive object={nodes.Root} />
@@ -68,4 +75,4 @@ export function Astronaut(props: JSX.IntrinsicElements['group']) {
   )
 }
 
-useGLTF.preload('/Astronaut.glb')
+useGLTF.preload('/models/astronaut/Astronaut.glb')
