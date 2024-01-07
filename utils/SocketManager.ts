@@ -1,8 +1,10 @@
-import { useEffect } from 'react'
 import io from 'socket.io-client'
+import { useEffect } from 'react'
+import { createAstronautSlice } from '@/utils/stores/astronauts.store'
 
 export const SocketManager = () => {
   const socket = io('http://localhost:3001')
+  const setAstronauts = createAstronautSlice((state) => state.setAstronauts)
 
   useEffect(() => {
     function onConnect() {
@@ -13,8 +15,9 @@ export const SocketManager = () => {
       console.log('disconnected')
     }
 
-    function onAstronauts(astronaut: any) {
-      console.log(astronaut)
+    function onAstronauts(astronauts: any) {
+      console.log(astronauts)
+      setAstronauts(astronauts)
     }
 
     socket.on('connect', onConnect)
