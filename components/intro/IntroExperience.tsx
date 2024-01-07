@@ -3,7 +3,7 @@ import DateTimelapse from '@/components/intro/scene/datetimelapse/DateTimelapse'
 import StartBtn from '@/components/intro/scene/buttons/StartBtn'
 import { createCinematicSlice } from '@/utils/stores/intro.store'
 
-const IntroWrapper = () => {
+const IntroExperience = () => {
   // Store values
   const endCryo = createCinematicSlice((state) => state.endCryo)
 
@@ -20,4 +20,4 @@ const IntroWrapper = () => {
   )
 }
 
-export default IntroWrapper
+export default IntroExperience

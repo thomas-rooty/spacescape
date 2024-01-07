@@ -5,9 +5,9 @@ import styles from '@/styles/Home.module.css'
 import Loader from '@/components/loader/Loader'
 import Hud from '@/components/hud/Hud'
 import Dialogs from '@/components/hud/dialogs/Dialogs'
-import IntroWrapper from '@/components/intro/IntroWrapper'
+import IntroExperience from '@/components/intro/IntroExperience'
 import Audios from '@/components/audios/Audios'
-import PlayingWrapper from '@/components/playing/PlayingWrapper'
+import PlayingExperience from '@/components/playing/PlayingExperience'
 
 const Home = () => {
   const adventureStarted = createCinematicSlice((state) => state.adventureStarted)
@@ -28,7 +28,7 @@ const Home = () => {
         <Hud />
         <Dialogs />
         <Audios />
-        <div className={styles.scenes}>{!adventureStarted ? <IntroWrapper /> : <PlayingWrapper />}</div>
+        <div className={styles.scenes}>{!adventureStarted ? <IntroExperience /> : <PlayingExperience />}</div>
       </Suspense>
     </>
   )

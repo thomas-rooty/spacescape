@@ -1,6 +1,6 @@
 import PlayingScene from '@/components/playing/scene/PlayingScene'
 
-const PlayingWrapper = () => {
+const PlayingExperience = () => {
   return (
     <>
       <PlayingScene />
@@ -8,4 +8,4 @@ const PlayingWrapper = () => {
   )
 }
 
-export default PlayingWrapper
+export default PlayingExperience

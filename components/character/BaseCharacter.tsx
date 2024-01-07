@@ -52,13 +52,19 @@ const BaseCharacter = (props: SphereProps) => {
     direction.subVectors(frontVector, sideVector).normalize().multiplyScalar(SPEED).applyEuler(camera.rotation)
     speed.fromArray(velocity.current)
 
+    // Apply movement
     api.velocity.set(direction.x, velocity.current[1], direction.z)
     if (jump && Math.abs(velocity.current[1].toFixed(3)) < 0.001) api.velocity.set(velocity.current[0], 1.07, velocity.current[2])
 
+    // Bobbing effect
+    const breathSpeed = 2
+    const sway = 250
     if (direction.x !== 0 || direction.z !== 0) {
-      camera.position.y += Math.sin(elapsedTime * 20) / 250
+      // Walking
+      camera.position.y += Math.sin(elapsedTime * (breathSpeed * 9)) / sway * 1.2
     } else {
-      camera.position.y += Math.sin(elapsedTime * 2) / 1000
+      // Idling
+      camera.position.y += Math.sin(elapsedTime * breathSpeed) / sway
     }
 
     // Shaking effect

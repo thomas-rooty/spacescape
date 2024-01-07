@@ -29,37 +29,10 @@ type GLTFResult = GLTF & {
   }
 }
 
-type ActionName =
-  | 'CharacterArmature|Death'
-  | 'CharacterArmature|Gun_Shoot'
-  | 'CharacterArmature|HitRecieve'
-  | 'CharacterArmature|HitRecieve_2'
-  | 'CharacterArmature|Idle'
-  | 'CharacterArmature|Idle_Gun'
-  | 'CharacterArmature|Idle_Gun_Pointing'
-  | 'CharacterArmature|Idle_Gun_Shoot'
-  | 'CharacterArmature|Idle_Neutral'
-  | 'CharacterArmature|Idle_Sword'
-  | 'CharacterArmature|Interact'
-  | 'CharacterArmature|Kick_Left'
-  | 'CharacterArmature|Kick_Right'
-  | 'CharacterArmature|Punch_Left'
-  | 'CharacterArmature|Punch_Right'
-  | 'CharacterArmature|Roll'
-  | 'CharacterArmature|Run'
-  | 'CharacterArmature|Run_Back'
-  | 'CharacterArmature|Run_Left'
-  | 'CharacterArmature|Run_Right'
-  | 'CharacterArmature|Run_Shoot'
-  | 'CharacterArmature|Sword_Slash'
-  | 'CharacterArmature|Walk'
-  | 'CharacterArmature|Wave'
-type GLTFActions = Record<ActionName, THREE.AnimationAction>
-
-export function Model(props: JSX.IntrinsicElements['group']) {
-  const group = useRef<any>()
-  const { nodes, materials, animations } = useGLTF('/Astronaut.glb') as any
-  const { actions } = useAnimations<any>(animations, group)
+export function Astronaut(props: JSX.IntrinsicElements['group']) {
+  const group = useRef<THREE.Group>(null)
+  const { nodes, materials, animations } = useGLTF('/Astronaut.glb') as unknown as GLTFResult
+  const { actions } = useAnimations(animations, group)
 
   return (
     <group ref={group} {...props} dispose={null}>
