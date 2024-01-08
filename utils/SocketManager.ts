@@ -5,7 +5,7 @@ import { createSocketSlice } from '@/utils/stores/socket.store'
 import { createCharacterSlice } from '@/utils/stores/character.store'
 
 export const SocketManager = () => {
-  const url = process.env.NODE_ENV === 'production' ? 'https://13.36.167.164:3001' : 'localhost:3001'
+  const url = process.env.NODE_ENV === 'production' ? 'https://spacescape.eu-4.evennode.com' : 'localhost:3001'
   const socket = io(url)
   const setSocket = createSocketSlice((state) => state.setSocket)
   const setAstronauts = createAstronautSlice((state) => state.setAstronauts)
