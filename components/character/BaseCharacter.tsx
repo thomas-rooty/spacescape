@@ -82,16 +82,18 @@ const BaseCharacter = (props: SphereProps) => {
     // Determine current movement state
     const isCurrentlyMoving = forward || backward || left || right || jump
 
-    if (isCurrentlyMoving) {
-      const newPosition = [camera.position.x, camera.position.y, camera.position.z]
-      // Emit movement continuously while moving
-      socket.emit('move', { newPosition, isMoving: true })
-    } else if (prevMovementRef.current) {
-      // Emit stop movement when movement just stopped
-      const newPosition = [camera.position.x, camera.position.y, camera.position.z]
-      socket.emit('move', { newPosition, isMoving: false })
+    if (socket !== null) {
+      if (isCurrentlyMoving) {
+        const newPosition = [camera.position.x, camera.position.y, camera.position.z]
+        // Emit movement continuously while moving
+        socket.emit('move', { newPosition, isMoving: true })
+      } else if (prevMovementRef.current) {
+        // Emit stop movement when movement just stopped
+        const newPosition = [camera.position.x, camera.position.y, camera.position.z]
+        socket.emit('move', { newPosition, isMoving: false })
+      }
+      prevMovementRef.current = isCurrentlyMoving
     }
-    prevMovementRef.current = isCurrentlyMoving
 
     // Shaking effect
     if (shaking) {
