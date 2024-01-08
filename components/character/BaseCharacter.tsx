@@ -5,14 +5,11 @@ import { useControls } from '@/utils/useControls'
 import { createSocketSlice } from '@/utils/stores/socket.store'
 import { createCinematicSlice } from '@/utils/stores/intro.store'
 import { createCharacterSlice } from '@/utils/stores/character.store'
-import { createAstronautSlice } from '@/utils/stores/astronauts.store'
 import * as THREE from 'three'
 
 const BaseCharacter = (props: SphereProps) => {
   // Astronauts list
   const socket = createSocketSlice((state) => state.socket)
-  const astronauts = createAstronautSlice((state) => state.astronauts)
-  const setAstronauts = createAstronautSlice((state) => state.setAstronauts)
 
   // Base variables
   const direction = useMemo(() => new THREE.Vector3(), [])
@@ -56,6 +53,8 @@ const BaseCharacter = (props: SphereProps) => {
   const setObjectAsHovered = createCinematicSlice((state) => state.setObjectAsHovered)
   const shaking = createCharacterSlice((state) => state.shaking)
 
+  const prevMovementRef = useRef<boolean>(false)
+
   useFrame(({ clock }) => {
     const elapsedTime = clock.getElapsedTime()
 
@@ -80,11 +79,19 @@ const BaseCharacter = (props: SphereProps) => {
     // Update astronaut model orientation
     //astronaut.current.lookAt(horizontalLookAtPosition)
 
-    // Multiplayer movement
-    if (forward || backward || left || right || jump) {
+    // Determine current movement state
+    const isCurrentlyMoving = forward || backward || left || right || jump
+
+    if (isCurrentlyMoving) {
       const newPosition = [camera.position.x, camera.position.y, camera.position.z]
-      socket.emit('move', newPosition)
+      // Emit movement continuously while moving
+      socket.emit('move', { newPosition, isMoving: true })
+    } else if (prevMovementRef.current) {
+      // Emit stop movement when movement just stopped
+      const newPosition = [camera.position.x, camera.position.y, camera.position.z]
+      socket.emit('move', { newPosition, isMoving: false })
     }
+    prevMovementRef.current = isCurrentlyMoving
 
     // Shaking effect
     if (shaking) {

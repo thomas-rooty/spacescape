@@ -3,7 +3,6 @@ import React, { useRef, useEffect, useState, useMemo } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
 import { GLTF, SkeletonUtils } from 'three-stdlib'
 import { useGraph, useFrame } from '@react-three/fiber'
-import { createCharacterSlice } from '@/utils/stores/character.store'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -34,11 +33,11 @@ type GLTFResult = GLTF & {
 interface AstronautProps {
   headColor: string
   position: any
+  isMoving: boolean
 }
 
-export function Astronaut({ headColor = '#f5f5f5', ...props }: AstronautProps) {
+export function Astronaut({ headColor = '#f5f5f5', isMoving, ...props }: AstronautProps) {
   const position = useMemo(() => props.position, [])
-  const isMoving = createCharacterSlice((state) => state.isMoving)
   const group = useRef<THREE.Group>(null)
   const { scene, materials, animations } = useGLTF('/models/astronaut/Astronaut.glb') as unknown as GLTFResult
   const { actions } = useAnimations(animations, group)
@@ -63,11 +62,7 @@ export function Astronaut({ headColor = '#f5f5f5', ...props }: AstronautProps) {
   useFrame(() => {
     if (group.current) {
       group.current.position.set(props.position.x, props.position.y, props.position.z)
-      if (isMoving) {
-        setAnimation('CharacterArmature|Run')
-      } else {
-        setAnimation('CharacterArmature|Idle')
-      }
+      setAnimation(isMoving ? 'CharacterArmature|Run' : 'CharacterArmature|Idle')
     }
   })
 
