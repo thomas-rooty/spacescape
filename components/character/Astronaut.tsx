@@ -49,7 +49,6 @@ export function Astronaut({ headColor = '#f5f5f5', isMoving, ...props }: Astrona
   // Animate the astronaut
   const [animation, setAnimation] = useState('CharacterArmature|Idle')
   useEffect(() => {
-    console.log('animation', animation)
     actions[animation]?.reset().fadeIn(0.1).play()
     return () => {
       if (actions[animation]) {

@@ -23,7 +23,6 @@ export const SocketManager = () => {
 
     function onAstronauts(astronauts: any) {
       setAstronauts(astronauts)
-      console.log(astronauts)
     }
 
     function onAstronautMove(astronaut: any) {
