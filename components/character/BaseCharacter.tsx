@@ -1,10 +1,11 @@
 import { SphereProps, useSphere } from '@react-three/cannon'
 import { useFrame, useThree } from '@react-three/fiber'
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useControls } from '@/utils/useControls'
 import { createSocketSlice } from '@/utils/stores/socket.store'
 import { createCinematicSlice } from '@/utils/stores/intro.store'
 import { createCharacterSlice } from '@/utils/stores/character.store'
+import { RecMovements } from '@/components/character/movements/recMovements'
 import * as THREE from 'three'
 
 const BaseCharacter = (props: SphereProps) => {
@@ -18,6 +19,8 @@ const BaseCharacter = (props: SphereProps) => {
   const speed = useMemo(() => new THREE.Vector3(), [])
   const worldDirection = useMemo(() => new THREE.Vector3(), [])
   const lookAtDirection = new THREE.Vector3()
+  const prevMovementRef = useRef<boolean>(false)
+  const [jumpStartTime, setJumpStartTime] = useState<number | null>(null)
   const SPEED = 0.5
   const { camera } = useThree()
 
@@ -53,8 +56,6 @@ const BaseCharacter = (props: SphereProps) => {
   const setObjectAsHovered = createCinematicSlice((state) => state.setObjectAsHovered)
   const shaking = createCharacterSlice((state) => state.shaking)
 
-  const prevMovementRef = useRef<boolean>(false)
-
   useFrame(({ clock }) => {
     const elapsedTime = clock.getElapsedTime()
 
@@ -78,18 +79,8 @@ const BaseCharacter = (props: SphereProps) => {
 
     // Determine current movement state
     const isCurrentlyMoving = forward || backward || left || right || jump
-
     if (socket !== null) {
-      if (isCurrentlyMoving) {
-        // Moving
-        const newPosition = [camera.position.x, camera.position.y, camera.position.z]
-        socket.emit('move', { newPosition, isMoving: true, lookingAt: horizontalLookAtPosition })
-      } else if (prevMovementRef.current) {
-        // Stopped
-        const newPosition = [camera.position.x, camera.position.y, camera.position.z]
-        socket.emit('move', { newPosition, isMoving: false, lookingAt: horizontalLookAtPosition })
-      }
-      prevMovementRef.current = isCurrentlyMoving
+      RecMovements(isCurrentlyMoving, camera, socket, horizontalLookAtPosition, prevMovementRef, jump, elapsedTime, jumpStartTime, setJumpStartTime)
     }
 
     // Bobbing effect
@@ -123,14 +114,16 @@ const BaseCharacter = (props: SphereProps) => {
   })
 
   return (
-    <group>
+    <>
       {props.position && (
-        <mesh castShadow={true} ref={ref}>
-          <sphereGeometry args={[0, 16, 16]} />
-          <meshStandardMaterial color="red" side={THREE.DoubleSide} />
-        </mesh>
+        <group ref={ref}>
+          <mesh castShadow={true}>
+            <sphereGeometry args={[0, 16, 16]} />
+            <meshStandardMaterial color="red" side={THREE.DoubleSide} />
+          </mesh>
+        </group>
       )}
-    </group>
+    </>
   )
 }
 
