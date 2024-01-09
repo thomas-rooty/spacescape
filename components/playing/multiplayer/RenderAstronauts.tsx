@@ -17,7 +17,7 @@ const RenderAstronauts = () => {
             )
           }
           headColor={player.headColor}
-          isMoving={player.isMoving}
+          animationName={player.animation}
           lookingAt={player.lookingAt}
         />
       ))}

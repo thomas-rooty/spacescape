@@ -15,10 +15,10 @@ export const RecMovements = (
   // Handle movement emission
   if (isCurrentlyMoving) {
     const newPosition = [camera.position.x, camera.position.y, camera.position.z]
-    socket.emit('move', { newPosition, isMoving: true, lookingAt: horizontalLookAtPosition })
+    socket.emit('move', { newPosition, animation: 'CharacterArmature|Run', lookingAt: horizontalLookAtPosition })
   } else if (prevMovementRef.current) {
     const newPosition = [camera.position.x, camera.position.y, camera.position.z]
-    socket.emit('move', { newPosition, isMoving: false, lookingAt: horizontalLookAtPosition })
+    socket.emit('move', { newPosition, animation: 'CharacterArmature|Idle', lookingAt: horizontalLookAtPosition })
   }
 
   // Handle jump initiation
@@ -31,10 +31,10 @@ export const RecMovements = (
     const timeSinceJump = elapsedTime - jumpStartTime
     const newPosition = [camera.position.x, camera.position.y, camera.position.z]
     if (timeSinceJump < 1.5) {
-      socket.emit('move', { newPosition, isMoving: true, lookingAt: horizontalLookAtPosition })
+      socket.emit('move', { newPosition, animation: 'CharacterArmature|Run', lookingAt: horizontalLookAtPosition })
     } else {
       setJumpStartTime(null)
-      socket.emit('move', { newPosition, isMoving: false, lookingAt: horizontalLookAtPosition })
+      socket.emit('move', { newPosition, animation: 'CharacterArmature|Idle', lookingAt: horizontalLookAtPosition })
     }
   }
   prevMovementRef.current = isCurrentlyMoving

@@ -28,7 +28,7 @@ const PlayingScene = () => {
       <Effects />
       {animationDone && <PointerLockControls />}
       <Stars radius={1} depth={250} count={2500} factor={0.5} saturation={1} fade />
-      <Physics gravity={[0, -3, 0]}>
+      <Physics gravity={[0, -1.5, 0]}>
         <RenderAstronauts />
         <BaseCharacter position={[0, 0, distanceFromCenter + 0.09]} args={[0.14]} />
         <Debug scale={1} color="red">

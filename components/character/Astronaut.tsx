@@ -33,11 +33,11 @@ type GLTFResult = GLTF & {
 interface AstronautProps {
   headColor: string
   position: any
-  isMoving: boolean
+  animationName: string
   lookingAt: any
 }
 
-export function Astronaut({ headColor = '#f5f5f5', isMoving, ...props }: AstronautProps) {
+export function Astronaut({ headColor = '#f5f5f5', animationName, ...props }: AstronautProps) {
   const position = useMemo(() => props.position, [])
   const group = useRef<THREE.Group>(null)
   const { scene, materials, animations } = useGLTF('/models/astronaut/Astronaut.glb') as unknown as GLTFResult
@@ -69,7 +69,7 @@ export function Astronaut({ headColor = '#f5f5f5', isMoving, ...props }: Astrona
       group.current.lookAt(target)
 
       // Animate the astronaut
-      setAnimation(isMoving ? 'CharacterArmature|Run' : 'CharacterArmature|Idle')
+      setAnimation(animationName)
     }
   })
 
