@@ -74,10 +74,7 @@ const BaseCharacter = (props: SphereProps) => {
     camera.getWorldDirection(lookAtDirection)
     lookAtDirection.y = 0 // Ignore Y axis
     lookAtDirection.normalize()
-    horizontalLookAtPosition.copy(camera.position).add(lookAtDirection.multiplyScalar(10)) // Adjust scalar as needed
-
-    // Update astronaut model orientation
-    //astronaut.current.lookAt(horizontalLookAtPosition)
+    horizontalLookAtPosition.copy(camera.position).add(lookAtDirection.multiplyScalar(10))
 
     // Determine current movement state
     const isCurrentlyMoving = forward || backward || left || right || jump
@@ -93,6 +90,19 @@ const BaseCharacter = (props: SphereProps) => {
         socket.emit('move', { newPosition, isMoving: false, lookingAt: horizontalLookAtPosition })
       }
       prevMovementRef.current = isCurrentlyMoving
+    }
+
+    // Bobbing effect
+    const breathSpeed = 2
+    const sway = 250
+    if (direction.x !== 0 || direction.z !== 0) {
+      // Walking
+      camera.position.y += Math.sin(elapsedTime * 20) / 250
+      camera.position.y += Math.sin(elapsedTime * (breathSpeed * 9)) / sway * 1.2
+    } else {
+      // Idling
+      camera.position.y += Math.sin(elapsedTime * 2) / 1000
+      camera.position.y += Math.sin(elapsedTime * breathSpeed) / sway
     }
 
     // Shaking effect
