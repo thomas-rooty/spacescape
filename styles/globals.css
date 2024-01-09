@@ -4,3 +4,8 @@ body {
   overflow: hidden;
   background: black;
 }
+
+@font-face {
+  font-family: 'Akira Expanded';
+  src: url('../public/fonts/Akira-Expanded.otf');
+}
