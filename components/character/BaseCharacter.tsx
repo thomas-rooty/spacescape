@@ -23,7 +23,7 @@ const BaseCharacter = (props: SphereProps) => {
 
   // Collision sphere for character
   const [ref, api] = useSphere<any>(() => ({
-    mass: 1,
+    mass: 0.01,
     type: 'Dynamic',
     position: [0, 10, 0],
     ...props,
@@ -67,7 +67,7 @@ const BaseCharacter = (props: SphereProps) => {
 
     // Apply movement
     api.velocity.set(direction.x, velocity.current[1], direction.z)
-    if (jump && Math.abs(velocity.current[1].toFixed(3)) < 0.001) api.velocity.set(velocity.current[0], 1.07, velocity.current[2])
+    if (jump && Math.abs(velocity.current[1].toFixed(3)) < 0.001) api.velocity.set(velocity.current[0], 1, velocity.current[2])
 
     // Calculate the horizontal look at position
     const horizontalLookAtPosition = new THREE.Vector3()
@@ -98,7 +98,7 @@ const BaseCharacter = (props: SphereProps) => {
     if (direction.x !== 0 || direction.z !== 0) {
       // Walking
       camera.position.y += Math.sin(elapsedTime * 20) / 250
-      camera.position.y += Math.sin(elapsedTime * (breathSpeed * 9)) / sway * 1.2
+      camera.position.y += (Math.sin(elapsedTime * (breathSpeed * 9)) / sway) * 1.2
     } else {
       // Idling
       camera.position.y += Math.sin(elapsedTime * 2) / 1000
@@ -124,10 +124,12 @@ const BaseCharacter = (props: SphereProps) => {
 
   return (
     <group>
-      <mesh castShadow={true} position={props.position} ref={ref}>
-        <sphereGeometry args={props.args} />
-        <meshStandardMaterial color="red" />
-      </mesh>
+      {props.position && (
+        <mesh castShadow={true} ref={ref}>
+          <sphereGeometry args={[0, 16, 16]} />
+          <meshStandardMaterial color="red" side={THREE.DoubleSide} />
+        </mesh>
+      )}
     </group>
   )
 }
