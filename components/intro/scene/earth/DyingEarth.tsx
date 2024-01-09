@@ -28,7 +28,7 @@ const DyingEarth = ({ position, rotation, scale }: DyingEarthProps) => {
   const [baseTexture, dyingTexture, cloudsTexture] = useTexture(['/models/tex/earth_base.jpg', '/models/tex/earth_dying.jpeg', '/models/tex/earth_clouds.png'])
 
   useFrame(({ clock }, delta) => {
-    const rotationSpeed = clock.getElapsedTime() / 50
+    const rotationSpeed = clock.getElapsedTime() / 100
     planetRef.current.rotation.y = rotationSpeed
     cloudsRef.current.rotation.y = rotationSpeed
 
@@ -54,15 +54,15 @@ const DyingEarth = ({ position, rotation, scale }: DyingEarthProps) => {
     <group ref={planetRef} name='earth' position={position} rotation={rotation} scale={scale}>
       <mesh name='lands' ref={earthBaseRef} castShadow={true} receiveShadow={true}>
         <sphereGeometry attach='geometry' args={[1, 32, 32]} />
-        <meshLambertMaterial attach='material' map={baseTexture} fog={false} transparent={true} />
+        <meshLambertMaterial attach='material' toneMapped={false} map={baseTexture} transparent={true} />
       </mesh>
       <mesh name='lands' ref={earthDyingRef} castShadow={true} receiveShadow={true}>
         <sphereGeometry attach='geometry' args={[0.999, 32, 32]} />
-        <meshLambertMaterial attach='material' map={dyingTexture} fog={false} />
+        <meshLambertMaterial attach='material' toneMapped={false} map={dyingTexture} />
       </mesh>
       <mesh name='clouds' ref={cloudsRef} castShadow={true} receiveShadow={true}>
-        <sphereGeometry attach='geometry' args={[1.01, 32, 32]} />
-        <meshLambertMaterial attach='material' map={cloudsTexture} fog={false} transparent={true} opacity={1} />
+        <sphereGeometry attach='geometry' args={[1.003, 64, 64]} />
+        <meshLambertMaterial attach='material' toneMapped={false} map={cloudsTexture} transparent={true} opacity={0.7} />
       </mesh>
     </group>
   )

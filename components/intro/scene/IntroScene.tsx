@@ -19,7 +19,7 @@ const IntroScene = () => {
   const endCryo = createCinematicSlice((state) => state.endCryo)
 
   return (
-    <Canvas shadows={true} camera={{ position: [0, 0, distanceFromCenter], fov: 40 }}>
+    <Canvas shadows={true} camera={{ position: [0, 0, distanceFromCenter], fov: 25 }}>
       <IntroLights />
       <Effects />
       <Physics gravity={[0, -9.8, 0]}>
@@ -28,7 +28,7 @@ const IntroScene = () => {
         <ShipCollision />
       </Physics>
       {animationDone && <PointerLockControls />}
-      {!endCryo && <DyingEarth position={[0, 0, -6]} rotation={[0, 0, 0]} scale={9.33} />}
+      {!endCryo && <DyingEarth position={[0, -9, 8]} rotation={[0, 0, 0]} scale={9.33} />}
       <Stars radius={1} depth={25} count={2500} factor={0.5} saturation={1} fade />
       <Spaceship position={[0, -3.83, 26]} rotation={[0, 0, 0]} scale={0.006} />
     </Canvas>
