@@ -50,13 +50,13 @@ export function Astronaut({ headColor = '#f5f5f5', animationName, ...props }: As
   // Animate the astronaut
   const [animation, setAnimation] = useState('CharacterArmature|Idle')
   useEffect(() => {
-    actions[animation]?.reset().fadeIn(0.1).play()
+    actions[animation]?.reset().fadeIn(0.3).play()
     return () => {
       if (actions[animation]) {
-        actions[animation]?.fadeOut(0.1)
+        actions[animation]?.fadeOut(0.3)
       }
     }
-  }, [animation])
+  }, [actions, animation])
 
   // Movements
   useFrame(() => {
