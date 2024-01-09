@@ -53,3 +53,24 @@
     opacity: 0;
     pointer-events: none;
 }
+
+.showSidebarBtn {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 3rem;
+    height: 3rem;
+    background-color: white;
+    border-radius: 35%;
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+}
+
+.showSidebarBtn:hover {
+    background-color: #d0f0ff;
+}

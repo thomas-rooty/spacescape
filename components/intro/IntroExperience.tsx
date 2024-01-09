@@ -6,8 +6,8 @@ import { useEffect, useState } from 'react'
 
 const IntroExperience = () => {
   // Store values
-  const endCryo = createCinematicSlice((state) => state.endCryo)
   const [showPointerLocker, setShowPointerLocker] = useState(true)
+  const endCryo = createCinematicSlice((state) => state.endCryo)
   const setStartedGame = createCinematicSlice((state) => state.setStartedGame)
 
   const hideStartBtn = () => {
@@ -42,6 +42,9 @@ const IntroExperience = () => {
           EXPLORE
         </h1>
         <h3 className={styles.subtitle}>a new world</h3>
+      </div>
+      <div className={styles.showSidebarBtn}>
+        <img className={styles.caret} src={'/icons/caret-sidebar.svg'} alt="caret-left" />
       </div>
       {!endCryo && <DateTimelapse />}
     </div>
