@@ -23,13 +23,13 @@ const IntroScene = () => {
       <IntroLights />
       <Effects />
       <Physics gravity={[0, -9.8, 0]}>
-        <BaseCharacter position={[0, 0, distanceFromCenter + 0.09]} args={[0.14]} />
+        <BaseCharacter position={[0, 0, distanceFromCenter + 0.09]} args={[0.14]} canMove={false} />
         <ShipFloor rotation={[Math.PI / -2, 0, 0]} color={'black'} position={[-0.33, -0.17, distanceFromCenter + 0.2]} />
         <ShipCollision />
       </Physics>
       {animationDone && <PointerLockControls />}
       {!endCryo && <DyingEarth position={[0, -9, 8]} rotation={[0, 0, 0]} scale={9.33} />}
-      <Stars radius={1} depth={25} count={2500} factor={0.5} saturation={1} fade />
+      <Stars radius={1} depth={25} count={10000} factor={0.5} saturation={1} fade />
       <Spaceship position={[0, -3.83, 26]} rotation={[0, 0, 0]} scale={0.006} />
     </Canvas>
   )

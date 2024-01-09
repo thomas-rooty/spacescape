@@ -27,10 +27,10 @@ const PlayingScene = () => {
       <PlayingLights />
       <Effects />
       {animationDone && <PointerLockControls />}
-      <Stars radius={1} depth={250} count={2500} factor={0.5} saturation={1} fade />
+      <Stars radius={1} depth={250} count={10000} factor={0.5} saturation={1} fade />
       <Physics gravity={[0, -1.5, 0]}>
         <RenderAstronauts />
-        <BaseCharacter position={[0, 0, distanceFromCenter + 0.09]} args={[0.14]} />
+        <BaseCharacter position={[0, 0, distanceFromCenter + 0.09]} args={[0.14]} canMove={true} />
         <Debug scale={1} color="red">
           <FloorColBox rotation={[Math.PI / -2, 0, 0]} color={'pink'} position={[-0.33, -0.17, distanceFromCenter + 0.2]} />
         </Debug>

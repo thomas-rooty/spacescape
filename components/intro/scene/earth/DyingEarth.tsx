@@ -32,6 +32,7 @@ const DyingEarth = ({ position, rotation, scale }: DyingEarthProps) => {
     planetRef.current.rotation.y = rotationSpeed
     cloudsRef.current.rotation.y = rotationSpeed
 
+    // Earth starts to die
     if (startedGame && !animationDone && !launchInitiated) {
       earthBaseRef.current.material.opacity = THREE.MathUtils.lerp(earthBaseRef.current.material.opacity, 0, delta / animationDivisor)
 
@@ -42,6 +43,7 @@ const DyingEarth = ({ position, rotation, scale }: DyingEarthProps) => {
       }
     }
 
+    // Ship has launched
     if (launchInitiated) {
       planetRef.current.position.z = THREE.MathUtils.lerp(planetRef.current.position.z, -100, delta / animationDivisor)
 
@@ -53,15 +55,15 @@ const DyingEarth = ({ position, rotation, scale }: DyingEarthProps) => {
   return (
     <group ref={planetRef} name='earth' position={position} rotation={rotation} scale={scale}>
       <mesh name='lands' ref={earthBaseRef} castShadow={true} receiveShadow={true}>
-        <sphereGeometry attach='geometry' args={[1, 32, 32]} />
+        <sphereGeometry attach='geometry' args={[1, 64, 64]} />
         <meshLambertMaterial attach='material' toneMapped={false} map={baseTexture} transparent={true} />
       </mesh>
       <mesh name='lands' ref={earthDyingRef} castShadow={true} receiveShadow={true}>
-        <sphereGeometry attach='geometry' args={[0.999, 32, 32]} />
+        <sphereGeometry attach='geometry' args={[0.999, 64, 64]} />
         <meshLambertMaterial attach='material' toneMapped={false} map={dyingTexture} />
       </mesh>
       <mesh name='clouds' ref={cloudsRef} castShadow={true} receiveShadow={true}>
-        <sphereGeometry attach='geometry' args={[1.003, 64, 64]} />
+        <sphereGeometry attach='geometry' args={[1.001, 64, 64]} />
         <meshLambertMaterial attach='material' toneMapped={false} map={cloudsTexture} transparent={true} opacity={0.7} />
       </mesh>
     </group>
