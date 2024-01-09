@@ -34,6 +34,7 @@ interface AstronautProps {
   headColor: string
   position: any
   isMoving: boolean
+  lookingAt: any
 }
 
 export function Astronaut({ headColor = '#f5f5f5', isMoving, ...props }: AstronautProps) {
@@ -57,10 +58,17 @@ export function Astronaut({ headColor = '#f5f5f5', isMoving, ...props }: Astrona
     }
   }, [animation])
 
-  // Update the position of the astronaut and detect when it's moving
+  // Movements
   useFrame(() => {
     if (group.current) {
-      group.current.position.set(props.position.x, props.position.y, props.position.z)
+      group.current.position.set(props.position.x, props.position.y, props.position.z) // Position
+      const target = new THREE.Vector3(0, 0, 0) // Direction
+      target.x = props.lookingAt.x
+      target.y = props.lookingAt.y
+      target.z = props.lookingAt.z
+      group.current.lookAt(target)
+
+      // Animate the astronaut
       setAnimation(isMoving ? 'CharacterArmature|Run' : 'CharacterArmature|Idle')
     }
   })

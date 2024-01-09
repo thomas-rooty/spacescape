@@ -18,6 +18,7 @@ const RenderAstronauts = () => {
           }
           headColor={player.headColor}
           isMoving={player.isMoving}
+          lookingAt={player.lookingAt}
         />
       ))}
     </>

@@ -84,13 +84,13 @@ const BaseCharacter = (props: SphereProps) => {
 
     if (socket !== null) {
       if (isCurrentlyMoving) {
+        // Moving
         const newPosition = [camera.position.x, camera.position.y, camera.position.z]
-        // Emit movement continuously while moving
-        socket.emit('move', { newPosition, isMoving: true })
+        socket.emit('move', { newPosition, isMoving: true, lookingAt: horizontalLookAtPosition })
       } else if (prevMovementRef.current) {
-        // Emit stop movement when movement just stopped
+        // Stopped
         const newPosition = [camera.position.x, camera.position.y, camera.position.z]
-        socket.emit('move', { newPosition, isMoving: false })
+        socket.emit('move', { newPosition, isMoving: false, lookingAt: horizontalLookAtPosition })
       }
       prevMovementRef.current = isCurrentlyMoving
     }
