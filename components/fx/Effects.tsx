@@ -7,9 +7,9 @@ const Effects = () => {
       <Bloom
         mipmapBlur={true}
         luminanceThreshold={0}
-        luminanceSmoothing={0}
-        opacity={0.666}
-        intensity={1}
+        luminanceSmoothing={0.5}
+        opacity={0.8}
+        intensity={1.5}
         kernelSize={KernelSize.HUGE}
       />
     </EffectComposer>

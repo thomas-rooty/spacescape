@@ -4,7 +4,7 @@ import { Physics } from '@react-three/cannon'
 import { createCinematicSlice } from '@/utils/stores/intro.store'
 import DyingEarth from '@/components/intro/scene/earth/DyingEarth'
 import IntroLights from '@/components/intro/lights/IntroLights'
-import Effects from '@/components/character/fx/Effects'
+import Effects from '@/components/fx/Effects'
 import ShipFloor from '@/components/objects/ship/ShipFloor'
 import BaseCharacter from '@/components/character/BaseCharacter'
 import ShipCollision from '@/components/objects/ship/ShipCollision'
@@ -28,7 +28,7 @@ const IntroScene = () => {
         <ShipCollision />
       </Physics>
       {animationDone && <PointerLockControls />}
-      {!endCryo && <DyingEarth position={[0, -9, 8]} rotation={[0, 0, 0]} scale={9.33} />}
+      {!endCryo && <DyingEarth position={[0, -9.8, 8]} rotation={[0, 0, 0]} scale={9.33} />}
       <Stars radius={1} depth={25} count={10000} factor={0.5} saturation={1} fade />
       <Spaceship position={[0, -3.83, 26]} rotation={[0, 0, 0]} scale={0.006} />
     </Canvas>
