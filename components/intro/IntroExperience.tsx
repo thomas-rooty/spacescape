@@ -3,7 +3,7 @@ import IntroScene from '@/components/intro/scene/IntroScene'
 import DateTimelapse from '@/components/intro/scene/datetimelapse/DateTimelapse'
 import { createCinematicSlice } from '@/utils/stores/intro.store'
 import { useEffect, useState } from 'react'
-import Sidebar from "@/components/intro/sidebar/Sidebar";
+import Sidebar from '@/components/intro/sidebar/Sidebar'
 
 const IntroExperience = () => {
   // Store values
@@ -14,6 +14,7 @@ const IntroExperience = () => {
 
   const hideStartBtn = () => {
     // Hide start button, show pointer locker, and set startedGame to true
+    clickSound()
     const startBtn = document.getElementById('startBtn')
     if (startBtn) {
       startBtn.classList.add(styles.rocketAnim)
@@ -36,6 +37,14 @@ const IntroExperience = () => {
     }
   })
 
+  // Click sound
+  const clickSound = () => {
+    const click = document.getElementById('click-sound') as HTMLAudioElement
+    if (!click) return
+    click.volume = 0.25
+    click.play()
+  }
+
   return (
     <div className={styles.scenes}>
       <IntroScene />
@@ -50,6 +59,9 @@ const IntroExperience = () => {
       </div>
       <Sidebar showSidebar={showSidebar} />
       {!endCryo && <DateTimelapse />}
+      <audio id="click-sound">
+        <source src="/sounds/ui/scifi-click.wav" type="audio/mpeg" />
+      </audio>
     </div>
   )
 }

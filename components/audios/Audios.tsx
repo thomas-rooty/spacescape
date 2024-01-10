@@ -50,7 +50,7 @@ const Audios = () => {
     <>
       {!endCryo && (
         <audio id="intro-music" autoPlay={true} loop={true}>
-          <source src="/musics/StartingCinematic/Interstellar_Main_Theme.mp3" type="audio/mpeg" />
+          <source src="/musics/StartingCinematic/FarFarFar.mp3" type="audio/mpeg" />
         </audio>
       )}
       {!checkInitiated && (
