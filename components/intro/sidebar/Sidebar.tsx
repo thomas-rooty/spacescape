@@ -5,13 +5,13 @@ const Sidebar = ({ showSidebar }: { showSidebar: boolean }) => {
     <div className={`${styles.sidebar} ${showSidebar ? styles.show : styles.hide}`}>
       <h1 className={styles.title}>
         Spacescape
-        <span className={styles.subtitle}> a web experience</span>
+        <span className={styles.subtitle}> a unique <br/>web experience</span>
       </h1>
       <div className={styles.synopsis}>
         <h2 className={styles.synopsisTitle}>- What is Spacescape?</h2>
         <hr />
         <p>
-          In the year 2300, Earth has succumbed to an environmental crisis, compelling humanity to venture into the cosmos in search of a new sanctuary. Welcome to Spacescape, a multiplayer survival
+          <b>Year 2300</b>, Earth has succumbed to an environmental crisis, compelling humanity to venture into the cosmos in search of a new sanctuary. Welcome to Spacescape, a multiplayer survival
           adventure where you are not just a spectator, but an active participant in this interstellar odyssey.
           <br />
           <br />
