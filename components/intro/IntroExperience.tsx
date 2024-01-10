@@ -3,10 +3,12 @@ import IntroScene from '@/components/intro/scene/IntroScene'
 import DateTimelapse from '@/components/intro/scene/datetimelapse/DateTimelapse'
 import { createCinematicSlice } from '@/utils/stores/intro.store'
 import { useEffect, useState } from 'react'
+import Sidebar from "@/components/intro/sidebar/Sidebar";
 
 const IntroExperience = () => {
   // Store values
   const [showPointerLocker, setShowPointerLocker] = useState(true)
+  const [showSidebar, setShowSidebar] = useState(false)
   const endCryo = createCinematicSlice((state) => state.endCryo)
   const setStartedGame = createCinematicSlice((state) => state.setStartedGame)
 
@@ -43,9 +45,10 @@ const IntroExperience = () => {
         </h1>
         <h3 className={styles.subtitle}>a new world</h3>
       </div>
-      <div className={styles.showSidebarBtn}>
+      <div onClick={() => setShowSidebar(!showSidebar)} className={`${styles.showSidebarBtn} ${showSidebar ? styles.offsetBtn : ''}`}>
         <img className={styles.caret} src={'/icons/caret-sidebar.svg'} alt="caret-left" />
       </div>
+      <Sidebar showSidebar={showSidebar} />
       {!endCryo && <DateTimelapse />}
     </div>
   )

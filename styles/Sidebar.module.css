@@ -1,0 +1,70 @@
+.sidebar {
+    position: absolute;
+    top: 0;
+    padding-top: 1.3rem;
+    height: 100vh;
+    width: 600px;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: all 600ms ease-in-out;
+}
+
+.title {
+    font-family: 'Akira Expanded', sans-serif;
+    font-weight: bold;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: white;
+    transition: all 0.5s ease;
+    text-align: center;
+}
+
+.title:hover {
+    color: #b0e8ff;
+}
+
+.subtitle {
+    position: relative;
+    font-family: 'Montserrat Variable', sans-serif;
+    color: white;
+    font-weight: 100;
+    font-size: 1.1rem;
+    opacity: 0.8;
+    bottom: .3rem;
+}
+
+.show {
+    right: 0;
+}
+
+.hide {
+    right: -600px;
+}
+
+.synopsis {
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+.synopsisTitle {
+    font-family: 'Montserrat Variable', sans-serif;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: white;
+    margin-bottom: .5rem;
+    padding: 0;
+}
+
+.synopsis > hr {
+    border: 0;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.synopsis > p {
+    margin: 0;
+    padding: 0;
+    font-size: .9rem;
+    font-family: 'Montserrat Variable', sans-serif;
+    color: white;
+    text-align: justify;
+}
