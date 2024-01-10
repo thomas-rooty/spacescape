@@ -6,8 +6,8 @@ const DateTimelapse = () => {
   // Get animationDone
   const startedGame = createCinematicSlice((state) => state.startedGame)
 
-  // Year variable that goes from 2023 to 2300
-  const [year, setYear] = useState(2023)
+  // Year variable that goes from 2024 to 2300
+  const [year, setYear] = useState(2024)
 
   // The dates are going from 2023 to 2300
   if (startedGame) {
