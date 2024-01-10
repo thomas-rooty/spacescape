@@ -8,7 +8,7 @@ const Sidebar = ({showSidebar}: { showSidebar: boolean }) => {
                 <h2 className={styles.synopsisTitle}>- What is Spacescape?</h2>
                 <hr />
                 <p>In the year 2300, Earth has succumbed to an environmental crisis, compelling humanity to venture into
-                    the cosmos in search of a new sanctuary. Welcome to "Space Scape," a multiplayer survival adventure
+                    the cosmos in search of a new sanctuary. Welcome to Spacescape, a multiplayer survival adventure
                     where you are not just a spectator, but an active participant in this interstellar
                     odyssey.<br/><br/>
 
@@ -16,7 +16,7 @@ const Sidebar = ({showSidebar}: { showSidebar: boolean }) => {
                     uninhabitable Earth. Your spacecraft, once a beacon of hope, lies in ruins, challenging you to
                     summon your inner resilience. Survival is your primary goal.<br/><br/>
 
-                    In "Space Scape," every decision you make has profound implications. You must scavenge for
+                    In Spacescape, every decision you make has profound implications. You must scavenge for
                     resources, harnessing the alien environment to sustain life. The elements here are unlike anything
                     known to humanity, demanding innovative strategies for water procurement, food cultivation, and
                     energy generation.<br/><br/>
