@@ -16,10 +16,10 @@ const IntroExperience = () => {
     // Hide start button, show pointer locker, and set startedGame to true
     const startBtn = document.getElementById('startBtn')
     if (startBtn) {
-      startBtn.classList.add(styles.hide)
+      startBtn.classList.add(styles.rocketAnim)
       setTimeout(() => {
         startBtn.remove()
-      }, 1000)
+      }, 2000)
     }
     setStartedGame(true)
   }
