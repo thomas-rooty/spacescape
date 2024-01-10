@@ -1,30 +1,42 @@
 .loader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 1);
-  z-index: 100;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 1);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .loader > svg {
-  position: fixed;
-  top: 20%;
-  height: 60%;
-  left: 20%;
-  width: 60%;
+    position: fixed;
+    top: 20%;
+    height: 60%;
+    left: 20%;
+    width: 60%;
 }
 
 .loaderText {
-  position: fixed;
-  bottom: 30px;
-  left: 30px;
-  color: #fff;
-  font-size: 1.5rem;
-  font-family: "Microsoft JhengHei", sans-serif;
-  font-style: italic;
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    color: #fff;
+    font-size: 1.5rem;
+    font-family: "Microsoft JhengHei", sans-serif;
+    font-style: italic;
+}
+
+.progressBarContainer {
+    width: 200px;
+    margin-top: 10px;
+    background-color: #ddd;
+}
+
+.progressBar {
+    width: 0;
+    height: 10px;
+    background-color: #4c6baf;
 }
