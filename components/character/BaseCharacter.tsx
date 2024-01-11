@@ -179,9 +179,10 @@ const BaseCharacter = (props: SphereProps & BaseCharacterProps) => {
     }
 
     // Raycast detection system
+    const intersectDistance = socket !== null ? 0.5 : 1.3
     raycaster.set(camera.position, camera.getWorldDirection(worldDirection))
     const intersects = raycaster.intersectObjects(hoverableObjects && Object.keys(hoverableObjects).length > 0 ? hoverableObjects : [])
-    if (intersects.length > 0 && intersects[0].distance < 1.3) {
+    if (intersects.length > 0 && intersects[0].distance < intersectDistance) {
       setObjectAsHovered(intersects[0].object.userData.id)
     } else {
       setObjectAsHovered(null)

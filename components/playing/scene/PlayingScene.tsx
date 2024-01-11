@@ -36,8 +36,8 @@ const PlayingScene = () => {
         </Debug>
       </Physics>
       <FloorMesh />
-      <SpaceshipOuters position={[2, 0.41, 25]} scale={0.2} rotation={[0, -2, 0]} />
-      <ShipHitbox refProp={SHIP_HITBOX} id="SHIP_HITBOX" position={[1.8, 0.2, 24.9]} rotation={[0, -2, 0]} geometryArgs={[0.5, 0.5, 2.5]} />
+      <SpaceshipOuters position={[3, 0.85, 26]} scale={0.4} rotation={[0, -2, 0]} />
+      <ShipHitbox refProp={SHIP_HITBOX} id="SHIP_HITBOX" position={[4, 0, 26.5]} rotation={[0, -2, 0]} geometryArgs={[2, 0.5, 1]} />
     </Canvas>
   )
 }
