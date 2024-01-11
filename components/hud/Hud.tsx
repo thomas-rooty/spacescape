@@ -4,9 +4,12 @@ import { InteractPrompt } from '@/components/hud/InteractPrompt'
 import EyesView from '@/components/hud/effects/intro/EyesView'
 
 const Hud = () => {
+  // Crosshair is for the crosshair, duh
+  // EyesView is for blinking eyes effect
+  // InteractPrompt is for the "Press E to interact" prompt
   return (
     <div className={styles.hud}>
-      <Crosshair size={20} color={'#fff'} thickness={2} />
+      <Crosshair size={25} thickness={2} />
       <InteractPrompt />
       <EyesView />
     </div>

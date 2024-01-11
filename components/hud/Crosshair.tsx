@@ -4,13 +4,19 @@ import { createCinematicSlice } from '@/utils/stores/intro.store'
 
 interface CrosshairProps {
   size: number
-  color: string
   thickness: number
 }
 
-export const Crosshair = ({ size, color, thickness }: CrosshairProps) => {
+export const Crosshair = ({ size, thickness }: CrosshairProps) => {
   // Get animationDone
   const animationDone = createCinematicSlice((state) => state.animationDone)
+  const hoveredObject = createCinematicSlice((state) => state.hoveredObject)
+
+  // Crosshair color
+  let color = 'white'
+  if (hoveredObject) {
+    color = 'orange'
+  }
 
   let crosshairVert = {
     position: 'absolute',

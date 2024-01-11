@@ -24,7 +24,7 @@ const useShipButtonInteractions = (refProp: React.MutableRefObject<any>, id: str
       refProp.current.material.color.set('orange')
 
       if (id === 'SHIP_HITBOX') {
-        console.log(id + ' clicked')
+        console.log('Ship hitbox clicked')
       }
     } else {
       refProp.current.material.color.set('#FFD580')
