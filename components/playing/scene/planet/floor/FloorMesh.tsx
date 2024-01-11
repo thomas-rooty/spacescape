@@ -1,44 +1,26 @@
+import React from 'react'
 import { useLoader } from '@react-three/fiber'
-import { TextureLoader, RepeatWrapping } from 'three'
+import { TextureLoader } from 'three/src/loaders/TextureLoader'
+import { RepeatWrapping } from 'three'
 
-interface FloorMeshProps {
-  rotation: [number, number, number]
-  position: [number, number, number]
-  size: number
-}
-
-const FloorMesh = ({ rotation = [Math.PI / -2, 0, 0], position = [0, 0, 0], size }: FloorMeshProps) => {
-  const colorMap = useLoader(TextureLoader, '/models/tex/planetx/ao_map.jpg')
+const FloorMesh = ({ size = [100, 100], subdivisions = [1000, 1000] }) => {
+  const colorMap = useLoader(TextureLoader, '/models/tex/planetx/color_map.jpg')
   const displacementMap = useLoader(TextureLoader, '/models/tex/planetx/displacement_map.jpg')
   const normalMap = useLoader(TextureLoader, '/models/tex/planetx/normal_map_opengl.jpg')
-  const roughness_map = useLoader(TextureLoader, '/models/tex/planetx/roughness_map.jpg')
-  const ao_map = useLoader(TextureLoader, '/models/tex/planetx/ao_map.jpg')
+  const aoMap = useLoader(TextureLoader, '/models/tex/planetx/ao_map.jpg')
 
-  // Set texture properties
-  colorMap.wrapS = RepeatWrapping
-  colorMap.wrapT = RepeatWrapping
-  colorMap.repeat.set(size, size)
-
-  displacementMap.wrapS = RepeatWrapping
-  displacementMap.wrapT = RepeatWrapping
-  displacementMap.repeat.set(size, size)
-
-  normalMap.wrapS = RepeatWrapping
-  normalMap.wrapT = RepeatWrapping
-  normalMap.repeat.set(size, size)
-
-  roughness_map.wrapS = RepeatWrapping
-  roughness_map.wrapT = RepeatWrapping
-  roughness_map.repeat.set(size, size)
-
-  ao_map.wrapS = RepeatWrapping
-  ao_map.wrapT = RepeatWrapping
-  ao_map.repeat.set(size, size)
+  // Repeat the texture over the large floor
+  const repeatFactor = 25 // Adjust this based on your preference
+  ;[colorMap, displacementMap, normalMap, aoMap].forEach((texture) => {
+    texture.wrapS = RepeatWrapping
+    texture.wrapT = RepeatWrapping
+    texture.repeat.set(repeatFactor, repeatFactor)
+  })
 
   return (
-    <mesh rotation={rotation} position={position} scale={[size, size, 1]} receiveShadow={true}>
-      <planeBufferGeometry />
-      <meshStandardMaterial map={colorMap} displacementMap={displacementMap} normalMap={normalMap} displacementScale={1} roughnessMap={roughness_map} aoMap={ao_map} />
+    <mesh rotation={[Math.PI / -2, 0, 0]} position={[0, -0.15, 0]} receiveShadow={true}>
+      <planeGeometry attach="geometry" args={[size[0], size[1], subdivisions[0], subdivisions[1]]} />
+      <meshLambertMaterial attach="material" map={colorMap} displacementMap={displacementMap} displacementScale={0.1} normalMap={normalMap} aoMap={aoMap} />
     </mesh>
   )
 }

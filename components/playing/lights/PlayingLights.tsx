@@ -3,11 +3,6 @@ import { ContactShadows, SpotLight } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { createCharacterSlice } from '@/utils/stores/character.store'
 
-type LightsPosition = {
-  position: [number, number, number]
-  lightShip: [number, number, number]
-}
-
 type SpotProps = {
   penumbra: number
   distance: number
@@ -28,38 +23,17 @@ function Spot({ target, position, ...props }: SpotProps) {
     light.current.target.position.set(...target)
     light.current.position.set(...position)
   })
-  return <SpotLight debug={false} volumetric={false} ref={light} {...props} />
+  return <SpotLight debug={true} volumetric={false} ref={light} {...props} />
 }
 
 const PlayingLights = () => {
-  // Store values
-  const lightColor = useState('#fff')
-  const lightShip = useState('#f0f2ff')
-  const position = createCharacterSlice((state) => state.position)
-
-  const lightsPosition: LightsPosition = {
-    position: [position['x'] - 0.33, position['y'] + 0.66, position['z'] + 0.5],
-    lightShip: [1, 0.1, 25.6], // Updated position of the alert light
-  }
-
-  // Alert light blinking
-  useFrame(({ clock }) => {
-    if (clock.getElapsedTime() % 1 < 0.5) {
-      lightShip[1]('#ff0000')
-    } else {
-      lightShip[1]('#f0f2ff')
-    }
-  })
-
   return (
     <>
       {/* Ambient light and fog */}
       <ambientLight intensity={0.1} />
-      <fog attach="fog" args={['black', 0, 4]} />
-      {/* Main light following character */}
-      <Spot position={lightsPosition.position} castShadow={true} target={[position['x'], 0, position['z']]} color={lightColor[0]} penumbra={1} distance={2} angle={2} attenuation={1} anglePower={0.5} intensity={1} />
-      {/* Ship alert light */}
-      <Spot position={lightsPosition.lightShip} castShadow={true} target={[0.5, 0, 24.6]} color={lightShip[0]} penumbra={1} distance={1} angle={1} attenuation={1} anglePower={0.5} intensity={2} />
+      <fog attach="fog" args={['black', 0, 10000000000]} />
+      {/* Sun */}
+      <Spot position={[0, 10, 25]} castShadow={true} target={[0, 0, 25]} color={'#cceaff'} penumbra={1} distance={100} angle={360} attenuation={0} anglePower={0} intensity={2} />
     </>
   )
 }
