@@ -45,6 +45,8 @@ const BaseCharacter = (props: SphereProps & BaseCharacterProps) => {
   const setPosition = createCharacterSlice((state) => state.setPosition)
   const { forward, backward, left, right, jump } = useControls()
   const velocity = useRef<any>([0, 0, 0])
+  const swayFrequency = 2
+  const swayAmplitude = 0.005
 
   useEffect(() => api.velocity.subscribe((v) => (velocity.current = v)), [api.velocity])
   useEffect(
@@ -138,6 +140,22 @@ const BaseCharacter = (props: SphereProps & BaseCharacterProps) => {
         .add(new THREE.Vector3().copy(cameraDirection).multiplyScalar(handsDistance))
       rHandRef.current.position.copy(rightHandPosition)
       rHandRef.current.lookAt(lookAtPosition)
+
+      // Idle - apply sway effect
+      const swayOffset = Math.sin(elapsedTime * swayFrequency) * swayAmplitude
+      lHandRef.current.position.x += swayOffset
+      lHandRef.current.rotation.z += swayOffset
+      rHandRef.current.position.x -= swayOffset
+      rHandRef.current.rotation.z -= swayOffset
+
+      // Walking - apply sway effect
+      if (direction.x !== 0 || direction.z !== 0) {
+        const swayOffset = Math.sin(elapsedTime * swayFrequency * 5) * swayAmplitude
+        lHandRef.current.position.x += swayOffset
+        lHandRef.current.rotation.z += swayOffset
+        rHandRef.current.position.x -= swayOffset
+        rHandRef.current.rotation.z -= swayOffset
+      }
     }
 
     // Calculate the horizontal look at position
