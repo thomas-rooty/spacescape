@@ -40,6 +40,7 @@ const BaseCharacter = (props: SphereProps & BaseCharacterProps) => {
 
   // Hands ref
   const lHandRef = useRef<any>()
+  const rHandRef = useRef<any>()
 
   // Movement system
   const setPosition = createCharacterSlice((state) => state.setPosition)
@@ -124,27 +125,44 @@ const BaseCharacter = (props: SphereProps & BaseCharacterProps) => {
     }
 
     // Hands position
-    const handsDistance = -0.9
+    const handsDistance = -0.85
     const cameraDirection = new THREE.Vector3()
     camera.getWorldDirection(cameraDirection)
-    const leftOffset = -0.05
-    const downOffset = -0.04
+    const sideOffset = -0.12
+    const downOffset = -0.05
 
     // LHand left offset
     const leftDirection = new THREE.Vector3()
       .crossVectors(cameraDirection, camera.up)
       .normalize()
 
+    // RHand right offset
+    const rightDirection = new THREE.Vector3()
+      .crossVectors(cameraDirection, camera.up)
+      .normalize()
+      .negate()
+
     // Calculate left hand position + direction
     const leftHandPosition = new THREE.Vector3()
       .copy(cameraDirection)
       .normalize()
       .add(camera.position)
-      .add(leftDirection.multiplyScalar(leftOffset))
+      .add(leftDirection.multiplyScalar(sideOffset))
       .add(new THREE.Vector3().copy(camera.up).multiplyScalar(downOffset))
       .add(new THREE.Vector3().copy(cameraDirection).multiplyScalar(handsDistance))
     lHandRef.current.position.copy(leftHandPosition)
     lHandRef.current.lookAt(horizontalLookAtPosition)
+
+    // Calculate right hand position + direction
+    const rightHandPosition = new THREE.Vector3()
+      .copy(cameraDirection)
+      .normalize()
+      .add(camera.position)
+      .add(rightDirection.multiplyScalar(sideOffset))
+      .add(new THREE.Vector3().copy(camera.up).multiplyScalar(downOffset))
+      .add(new THREE.Vector3().copy(cameraDirection).multiplyScalar(handsDistance))
+    rHandRef.current.position.copy(rightHandPosition)
+    rHandRef.current.lookAt(horizontalLookAtPosition)
   })
 
   return (
@@ -153,6 +171,9 @@ const BaseCharacter = (props: SphereProps & BaseCharacterProps) => {
       </group>
       <group ref={lHandRef}>
         <LHand />
+      </group>
+      <group ref={rHandRef}>
+        <RHand />
       </group>
     </>
   )
