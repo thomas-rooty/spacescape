@@ -1,7 +1,6 @@
-import { useRef, useState } from 'react'
-import { ContactShadows, SpotLight } from '@react-three/drei'
+import { useRef } from 'react'
+import { SpotLight } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
-import { createCharacterSlice } from '@/utils/stores/character.store'
 
 type SpotProps = {
   penumbra: number
