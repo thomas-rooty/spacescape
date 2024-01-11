@@ -6,6 +6,7 @@ import { createSocketSlice } from '@/utils/stores/socket.store'
 import { createCinematicSlice } from '@/utils/stores/intro.store'
 import { createCharacterSlice } from '@/utils/stores/character.store'
 import { RecMovements } from '@/components/character/movements/recMovements'
+import { LHand, RHand } from '@/components/character/hands/InHands'
 import * as THREE from 'three'
 
 interface BaseCharacterProps {
@@ -37,6 +38,9 @@ const BaseCharacter = (props: SphereProps & BaseCharacterProps) => {
     ...props,
   }))
 
+  // Hands ref
+  const lHandRef = useRef<any>()
+
   // Movement system
   const setPosition = createCharacterSlice((state) => state.setPosition)
   const { forward, backward, left, right, jump } = useControls()
@@ -50,9 +54,9 @@ const BaseCharacter = (props: SphereProps & BaseCharacterProps) => {
           x: p[0],
           y: p[1],
           z: p[2],
-        })
+        }),
       ),
-    [api.position, setPosition]
+    [api.position, setPosition],
   )
 
   // Detecting objects in front of the character
@@ -118,18 +122,38 @@ const BaseCharacter = (props: SphereProps & BaseCharacterProps) => {
     } else {
       setObjectAsHovered(null)
     }
+
+    // Hands position
+    const handsDistance = -0.9
+    const cameraDirection = new THREE.Vector3()
+    camera.getWorldDirection(cameraDirection)
+    const leftOffset = -0.05
+    const downOffset = -0.04
+
+    // LHand left offset
+    const leftDirection = new THREE.Vector3()
+      .crossVectors(cameraDirection, camera.up)
+      .normalize()
+
+    // Calculate left hand position + direction
+    const leftHandPosition = new THREE.Vector3()
+      .copy(cameraDirection)
+      .normalize()
+      .add(camera.position)
+      .add(leftDirection.multiplyScalar(leftOffset))
+      .add(new THREE.Vector3().copy(camera.up).multiplyScalar(downOffset))
+      .add(new THREE.Vector3().copy(cameraDirection).multiplyScalar(handsDistance))
+    lHandRef.current.position.copy(leftHandPosition)
+    lHandRef.current.lookAt(horizontalLookAtPosition)
   })
 
   return (
     <>
-      {props.position && (
-        <group ref={ref}>
-          <mesh castShadow={true}>
-            <sphereGeometry args={[0, 16, 16]} />
-            <meshStandardMaterial color="red" side={THREE.DoubleSide} />
-          </mesh>
-        </group>
-      )}
+      <group ref={ref} position={props.position}>
+      </group>
+      <group ref={lHandRef}>
+        <LHand />
+      </group>
     </>
   )
 }
