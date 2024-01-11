@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import Knife from '@/components/items/Knife'
+import Knife from '@/components/assets/items/Knife'
 
 export const LHand = () => {
   return (

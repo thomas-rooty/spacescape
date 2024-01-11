@@ -5,10 +5,10 @@ import { createCinematicSlice } from '@/utils/stores/intro.store'
 import DyingEarth from '@/components/intro/scene/earth/DyingEarth'
 import IntroLights from '@/components/intro/lights/IntroLights'
 import Effects from '@/components/fx/Effects'
-import ShipFloor from '@/components/objects/ship/ShipFloor'
+import ShipFloor from '@/components/assets/ship/ShipFloor'
 import BaseCharacter from '@/components/character/BaseCharacter'
-import ShipCollision from '@/components/objects/ship/ShipCollision'
-import Spaceship from '@/components/objects/ship/Spaceship'
+import ShipCollision from '@/components/assets/ship/ShipCollision'
+import SpaceshipInteriors from '@/components/assets/ship/SpaceshipInteriors'
 
 const IntroScene = () => {
   // Base values
@@ -30,7 +30,7 @@ const IntroScene = () => {
       {animationDone && <PointerLockControls />}
       {!endCryo && <DyingEarth position={[0, -9.8, 8]} rotation={[0, 0, 0]} scale={9.33} />}
       <Stars radius={1} depth={25} count={10000} factor={0.5} saturation={1} fade />
-      <Spaceship position={[0, -3.83, 26]} rotation={[0, 0, 0]} scale={0.006} />
+      <SpaceshipInteriors position={[0, -3.83, 26]} rotation={[0, 0, 0]} scale={0.006} />
     </Canvas>
   )
 }

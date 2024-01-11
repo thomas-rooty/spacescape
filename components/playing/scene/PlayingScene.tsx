@@ -8,8 +8,8 @@ import BaseCharacter from '@/components/character/BaseCharacter'
 import FloorMesh from '@/components/playing/scene/planet/floor/FloorMesh'
 import FloorColBox from '@/components/playing/scene/planet/floor/FloorColBox'
 import PlayingLights from '@/components/playing/lights/PlayingLights'
-import Spaceship from '@/components/objects/ship/Spaceship'
-import ShipHitbox from '@/components/objects/ship/ShipHitbox'
+import SpaceshipOuters from '@/components/assets/ship/ShipshipOuters'
+import ShipHitbox from '@/components/assets/ship/ShipHitbox'
 import RenderAstronauts from '@/components/playing/multiplayer/RenderAstronauts'
 
 const PlayingScene = () => {
@@ -36,7 +36,7 @@ const PlayingScene = () => {
         </Debug>
       </Physics>
       <FloorMesh rotation={[Math.PI / -2, 0, 0]} position={[-0.33, -0.17, distanceFromCenter]} size={100} />
-      <Spaceship position={[1, 0.2, 26]} rotation={[1.8, 1.8, 0]} scale={0.0008} />
+      <SpaceshipOuters position={[2, 0.41, 25]} scale={0.2} rotation={[0, -1, 0]} />
       <ShipHitbox refProp={SHIP_HITBOX} id="SHIP_HITBOX" position={[0.98, 0.15, 25.2]} rotation={[1.8, 1.8, 0]} geometryArgs={[0.33, 0.66, 0.33]} />
     </Canvas>
   )

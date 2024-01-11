@@ -54,7 +54,7 @@ const PlayingLights = () => {
   return (
     <>
       {/* Ambient light and fog */}
-      <ambientLight intensity={0.033} />
+      <ambientLight intensity={0.5} />
       <fog attach="fog" args={['black', 0, 7]} />
       <ContactShadows blur={2}/>
       {/* Main light following character */}
