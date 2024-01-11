@@ -22,12 +22,12 @@ const Audios = () => {
 
   // Intro welcome voice handler
   useEffect(() => {
-    const introVoice = document.getElementById('welcome-commander') as HTMLAudioElement
     if (animationDone) {
+      const introVoice = document.getElementById('welcome-commander') as HTMLAudioElement
       introVoice.volume = audioVolume
       introVoice.play()
     }
-  }, [startedGame, audioVolume])
+  }, [animationDone, audioVolume])
 
   // Alert sound handler
   useEffect(() => {
