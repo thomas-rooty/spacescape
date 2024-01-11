@@ -9,6 +9,7 @@ const Audios = () => {
   const audioVolume = createCinematicSlice((state) => state.audioVolume)
   const endCryo = createCinematicSlice((state) => state.endCryo)
   const adventureStarted = createCinematicSlice((state) => state.adventureStarted)
+  const animationDone = createCinematicSlice((state) => state.animationDone)
 
   // Intro music handler
   useEffect(() => {
@@ -18,6 +19,15 @@ const Audios = () => {
       audioState ? introMusic.play() : introMusic.pause()
     }
   }, [startedGame, audioState, audioVolume])
+
+  // Intro welcome voice handler
+  useEffect(() => {
+    const introVoice = document.getElementById('welcome-commander') as HTMLAudioElement
+    if (animationDone) {
+      introVoice.volume = audioVolume
+      introVoice.play()
+    }
+  }, [startedGame, audioVolume])
 
   // Alert sound handler
   useEffect(() => {
@@ -51,6 +61,11 @@ const Audios = () => {
       {!endCryo && (
         <audio id="intro-music" autoPlay={true} loop={true}>
           <source src="/musics/StartingCinematic/FarFarFar.mp3" type="audio/mpeg" />
+        </audio>
+      )}
+      {animationDone && (
+        <audio id="welcome-commander" autoPlay={true} loop={false}>
+          <source src="/sounds/voices/WelcomeCommander.mp3" type="audio/mpeg" />
         </audio>
       )}
       {!checkInitiated && (
