@@ -103,7 +103,7 @@ const BaseCharacter = (props: SphereProps & BaseCharacterProps) => {
 
       // Hands position
       const handsDistance = -0.85
-      const sideOffset = -0.12
+      const sideOffset = -0.1
       const downOffset = -0.05
       const cameraDirection = new THREE.Vector3()
       camera.getWorldDirection(cameraDirection)
