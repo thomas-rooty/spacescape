@@ -93,13 +93,53 @@ const BaseCharacter = (props: SphereProps & BaseCharacterProps) => {
         camera.position.y += Math.sin(elapsedTime * 2) / 1000
         camera.position.y += Math.sin(elapsedTime * breathSpeed) / sway
       }
-    }
 
-    // Calculate the look at position
-    const lookAtPosition = new THREE.Vector3()
-    camera.getWorldDirection(lookAtDirection)
-    lookAtDirection.normalize()
-    lookAtPosition.copy(camera.position).add(lookAtDirection.multiplyScalar(10))
+      // Calculate the look at position
+      const lookAtPosition = new THREE.Vector3()
+      camera.getWorldDirection(lookAtDirection)
+      lookAtDirection.normalize()
+      lookAtPosition.copy(camera.position).add(lookAtDirection.multiplyScalar(10))
+
+      // Hands position
+      const handsDistance = -0.85
+      const sideOffset = -0.12
+      const downOffset = -0.05
+      const cameraDirection = new THREE.Vector3()
+      camera.getWorldDirection(cameraDirection)
+
+      // LHand left offset
+      const leftDirection = new THREE.Vector3()
+        .crossVectors(cameraDirection, camera.up)
+        .normalize()
+
+      // RHand right offset
+      const rightDirection = new THREE.Vector3()
+        .crossVectors(cameraDirection, camera.up)
+        .normalize()
+        .negate()
+
+      // Calculate left hand position + direction
+      const leftHandPosition = new THREE.Vector3()
+        .copy(cameraDirection)
+        .normalize()
+        .add(camera.position)
+        .add(leftDirection.multiplyScalar(sideOffset))
+        .add(new THREE.Vector3().copy(camera.up).multiplyScalar(downOffset))
+        .add(new THREE.Vector3().copy(cameraDirection).multiplyScalar(handsDistance))
+      lHandRef.current.position.copy(leftHandPosition)
+      lHandRef.current.lookAt(lookAtPosition)
+
+      // Calculate right hand position + direction
+      const rightHandPosition = new THREE.Vector3()
+        .copy(cameraDirection)
+        .normalize()
+        .add(camera.position)
+        .add(rightDirection.multiplyScalar(sideOffset))
+        .add(new THREE.Vector3().copy(camera.up).multiplyScalar(downOffset))
+        .add(new THREE.Vector3().copy(cameraDirection).multiplyScalar(handsDistance))
+      rHandRef.current.position.copy(rightHandPosition)
+      rHandRef.current.lookAt(lookAtPosition)
+    }
 
     // Calculate the horizontal look at position
     const horizontalLookAtPosition = new THREE.Vector3()
@@ -129,46 +169,6 @@ const BaseCharacter = (props: SphereProps & BaseCharacterProps) => {
     } else {
       setObjectAsHovered(null)
     }
-
-    // Hands position
-    const handsDistance = -0.85
-    const sideOffset = -0.12
-    const downOffset = -0.05
-    const cameraDirection = new THREE.Vector3()
-    camera.getWorldDirection(cameraDirection)
-
-    // LHand left offset
-    const leftDirection = new THREE.Vector3()
-      .crossVectors(cameraDirection, camera.up)
-      .normalize()
-
-    // RHand right offset
-    const rightDirection = new THREE.Vector3()
-      .crossVectors(cameraDirection, camera.up)
-      .normalize()
-      .negate()
-
-    // Calculate left hand position + direction
-    const leftHandPosition = new THREE.Vector3()
-      .copy(cameraDirection)
-      .normalize()
-      .add(camera.position)
-      .add(leftDirection.multiplyScalar(sideOffset))
-      .add(new THREE.Vector3().copy(camera.up).multiplyScalar(downOffset))
-      .add(new THREE.Vector3().copy(cameraDirection).multiplyScalar(handsDistance))
-    lHandRef.current.position.copy(leftHandPosition)
-    lHandRef.current.lookAt(lookAtPosition)
-
-    // Calculate right hand position + direction
-    const rightHandPosition = new THREE.Vector3()
-      .copy(cameraDirection)
-      .normalize()
-      .add(camera.position)
-      .add(rightDirection.multiplyScalar(sideOffset))
-      .add(new THREE.Vector3().copy(camera.up).multiplyScalar(downOffset))
-      .add(new THREE.Vector3().copy(cameraDirection).multiplyScalar(handsDistance))
-    rHandRef.current.position.copy(rightHandPosition)
-    rHandRef.current.lookAt(lookAtPosition)
   })
 
   return (
