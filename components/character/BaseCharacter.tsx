@@ -95,6 +95,12 @@ const BaseCharacter = (props: SphereProps & BaseCharacterProps) => {
       }
     }
 
+    // Calculate the look at position
+    const lookAtPosition = new THREE.Vector3()
+    camera.getWorldDirection(lookAtDirection)
+    lookAtDirection.normalize()
+    lookAtPosition.copy(camera.position).add(lookAtDirection.multiplyScalar(10))
+
     // Calculate the horizontal look at position
     const horizontalLookAtPosition = new THREE.Vector3()
     camera.getWorldDirection(lookAtDirection)
@@ -126,10 +132,10 @@ const BaseCharacter = (props: SphereProps & BaseCharacterProps) => {
 
     // Hands position
     const handsDistance = -0.85
-    const cameraDirection = new THREE.Vector3()
-    camera.getWorldDirection(cameraDirection)
     const sideOffset = -0.12
     const downOffset = -0.05
+    const cameraDirection = new THREE.Vector3()
+    camera.getWorldDirection(cameraDirection)
 
     // LHand left offset
     const leftDirection = new THREE.Vector3()
@@ -151,7 +157,7 @@ const BaseCharacter = (props: SphereProps & BaseCharacterProps) => {
       .add(new THREE.Vector3().copy(camera.up).multiplyScalar(downOffset))
       .add(new THREE.Vector3().copy(cameraDirection).multiplyScalar(handsDistance))
     lHandRef.current.position.copy(leftHandPosition)
-    lHandRef.current.lookAt(horizontalLookAtPosition)
+    lHandRef.current.lookAt(lookAtPosition)
 
     // Calculate right hand position + direction
     const rightHandPosition = new THREE.Vector3()
@@ -162,7 +168,7 @@ const BaseCharacter = (props: SphereProps & BaseCharacterProps) => {
       .add(new THREE.Vector3().copy(camera.up).multiplyScalar(downOffset))
       .add(new THREE.Vector3().copy(cameraDirection).multiplyScalar(handsDistance))
     rHandRef.current.position.copy(rightHandPosition)
-    rHandRef.current.lookAt(horizontalLookAtPosition)
+    rHandRef.current.lookAt(lookAtPosition)
   })
 
   return (
