@@ -54,11 +54,10 @@ const PlayingLights = () => {
   return (
     <>
       {/* Ambient light and fog */}
-      <ambientLight intensity={0.5} />
-      <fog attach="fog" args={['black', 0, 7]} />
-      <ContactShadows blur={2}/>
+      <ambientLight intensity={0.1} />
+      <fog attach="fog" args={['black', 0, 4]} />
       {/* Main light following character */}
-      <Spot position={lightsPosition.position} castShadow={false} target={[position['x'], 0, position['z']]} color={lightColor[0]} penumbra={1} distance={2} angle={2} attenuation={1} anglePower={0.5} intensity={1} />
+      <Spot position={lightsPosition.position} castShadow={true} target={[position['x'], 0, position['z']]} color={lightColor[0]} penumbra={1} distance={2} angle={2} attenuation={1} anglePower={0.5} intensity={1} />
       {/* Ship alert light */}
       <Spot position={lightsPosition.lightShip} castShadow={true} target={[0.5, 0, 24.6]} color={lightShip[0]} penumbra={1} distance={1} angle={1} attenuation={1} anglePower={0.5} intensity={2} />
     </>
