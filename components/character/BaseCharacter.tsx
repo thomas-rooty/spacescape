@@ -16,7 +16,6 @@ interface BaseCharacterProps {
 }
 
 const BaseCharacter = (props: SphereProps & BaseCharacterProps) => {
-  // Astronauts list
   const socket = createSocketSlice((state) => state.socket)
 
   // Base variables
