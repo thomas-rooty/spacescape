@@ -7,7 +7,6 @@ import IntroLights from '@/components/scenes/intro/lights/IntroLights'
 import Effects from '@/components/fx/Effects'
 import ShipFloor from '@/components/models/ship/ShipFloor'
 import CharacterController from '@/components/character/CharacterController'
-import ShipCollision from '@/components/models/ship/ShipCollision'
 import SpaceshipLanded from '@/components/scenes/playing/assets/spaceship/SpaceshipLanded'
 
 const IntroScene = () => {

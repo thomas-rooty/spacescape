@@ -12,7 +12,7 @@ const RenderAstronauts = () => {
           position={
             new THREE.Vector3(
               player.position[0],
-              player.position[1] - 0.15,
+              player.position[1] - 0.19,
               player.position[2]
             )
           }

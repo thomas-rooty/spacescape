@@ -1,16 +1,17 @@
 import * as THREE from 'three'
-import { useMemo, useRef } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { useControls } from '@/utils/useControls'
-import { useFrame, useThree } from '@react-three/fiber'
+import { useFrame } from '@react-three/fiber'
 import { CuboidCollider, RigidBody } from '@react-three/rapier'
 import { createSocketSlice } from '@/utils/stores/socket.store'
 import { createCinematicSlice } from '@/utils/stores/intro.store'
 import { createCharacterSlice } from '@/utils/stores/character.store'
 import { RecMovements } from '@/components/character/movements/recMovements'
 
-const MOVEMENT_SPEED = 0.1
-const MAX_SPEED = 3
-const RUN_VEL = 1.5
+const MOVEMENT_SPEED = 0.006
+const MAX_SPEED = 0.5
+const MAX_SPEED_SPRINT = 0.8
+const RUN_VEL = 0.02
 
 interface CharacterControllerProps {
   position: [number, number, number]
@@ -20,9 +21,12 @@ interface CharacterControllerProps {
 const CharacterController = ({ position, canMove }: CharacterControllerProps) => {
   const rigidbody = useRef<any>()
   const character = useRef<any>()
+  const prevMovementRef = useRef<boolean>(false)
   const socket = createSocketSlice((state) => state.socket)
   const raycaster = useMemo(() => new THREE.Raycaster(), [])
+  const lookAtDirection = new THREE.Vector3()
   const worldDirection = useMemo(() => new THREE.Vector3(), [])
+  const [jumpStartTime, setJumpStartTime] = useState<number | null>(null)
 
   // Store values
   const shaking = createCharacterSlice((state) => state.shaking) // Does the character shake?
@@ -30,7 +34,7 @@ const CharacterController = ({ position, canMove }: CharacterControllerProps) =>
   const setObjectAsHovered = createCinematicSlice((state) => state.setObjectAsHovered) // Add an object into hoverableObjects
 
   // Controls
-  const { forward, backward, left, right, jump } = useControls()
+  const { forward, backward, left, right, jump, sprint } = useControls()
 
   // Character logic
   useFrame(({ camera, clock }) => {
@@ -51,7 +55,7 @@ const CharacterController = ({ position, canMove }: CharacterControllerProps) =>
 
     // Camera follow
     const characterWorldPosition = character.current.getWorldPosition(new THREE.Vector3())
-    camera.position.set(characterWorldPosition.x, characterWorldPosition.y, characterWorldPosition.z)
+    camera.position.set(characterWorldPosition.x, characterWorldPosition.y + 0.1, characterWorldPosition.z)
 
     // Movement
     if (canMove) {
@@ -67,13 +71,16 @@ const CharacterController = ({ position, canMove }: CharacterControllerProps) =>
       if (backward && speedInXZ < MAX_SPEED) {
         impulse.sub(forwardVector.multiplyScalar(MOVEMENT_SPEED))
       }
+      if (forward && sprint && speedInXZ < MAX_SPEED_SPRINT) {
+        impulse.add(forwardVector.multiplyScalar(RUN_VEL))
+      }
 
       // View bobbing effect
       if (forward || backward || left || right) {
         const freq = 15
-        const amp = 30
+        const amp = 200
         const bobbing = Math.sin(clock.elapsedTime * freq) / amp
-        camera.position.y = characterWorldPosition.y + bobbing
+        camera.position.y = characterWorldPosition.y + bobbing + 0.1
       }
     }
 
@@ -98,6 +105,19 @@ const CharacterController = ({ position, canMove }: CharacterControllerProps) =>
       setObjectAsHovered(intersects[0].object.userData.id)
     } else {
       setObjectAsHovered(null)
+    }
+
+    // Calculate the horizontal look at position
+    const horizontalLookAtPosition = new THREE.Vector3()
+    camera.getWorldDirection(lookAtDirection)
+    lookAtDirection.y = 0
+    lookAtDirection.normalize()
+    horizontalLookAtPosition.copy(camera.position).add(lookAtDirection.multiplyScalar(10))
+
+    // Stream movements to server
+    const isCurrentlyMoving = forward || backward || left || right || jump
+    if (socket !== null) {
+      RecMovements(isCurrentlyMoving, camera, socket, horizontalLookAtPosition, prevMovementRef, jump, elapsedTime, jumpStartTime, setJumpStartTime)
     }
   })
 
