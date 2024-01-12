@@ -1,15 +1,22 @@
-import { useBox } from '@react-three/cannon'
+import { CuboidCollider, RigidBody } from '@react-three/rapier'
 
 interface FloorProps {
-  rotation: [number, number, number]
-  color: string
+  color?: string
   position: [number, number, number]
+  size: number
+  visible?: boolean
 }
 
-const ShipFloor = (props: FloorProps) => {
-  const [ref] = useBox(() => ({ type: 'Static', mass: 0, args: [2.5, 0.5, 0.02], ...props })) as any
-
-  return <mesh receiveShadow={true} rotation={props.rotation} position={props.position} ref={ref}></mesh>
+const ShipFloor = ({ color = 'green', position, size, visible = false }: FloorProps) => {
+  return (
+    <RigidBody type="fixed" colliders={false} friction={2} name="ground">
+      <mesh receiveShadow position={position} rotation-x={-Math.PI / 2}>
+        <planeGeometry args={[size, size]} />
+        <meshStandardMaterial color={color} visible={visible} />
+      </mesh>
+      <CuboidCollider args={[size, 1, size]} position={position} />
+    </RigidBody>
+  )
 }
 
 export default ShipFloor
