@@ -27,7 +27,7 @@ interface SpaceshipProps {
   scale: number
 }
 
-const SpaceshipInteriors = ({ position, rotation, scale }: SpaceshipProps) => {
+const SpaceshipLanded = ({ position, rotation, scale }: SpaceshipProps) => {
   const shipRef = useRef<any>()
   const { nodes, materials } = useGLTF('/models/spaceship/spaceship_compressed.gltf') as unknown as GLTFResult
 
@@ -56,4 +56,4 @@ const SpaceshipInteriors = ({ position, rotation, scale }: SpaceshipProps) => {
 
 useGLTF.preload('/models/spaceship/spaceship_compressed.gltf')
 
-export default SpaceshipInteriors
+export default SpaceshipLanded

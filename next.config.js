@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: false
+  reactStrictMode: true
 }
 
 const withTM = require('next-transpile-modules')(['three'])

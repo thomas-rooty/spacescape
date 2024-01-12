@@ -8,7 +8,7 @@ import Effects from '@/components/fx/Effects'
 import ShipFloor from '@/components/models/ship/ShipFloor'
 import BaseCharacter from '@/components/character/BaseCharacter'
 import ShipCollision from '@/components/models/ship/ShipCollision'
-import SpaceshipInteriors from '@/components/models/ship/SpaceshipInteriors'
+import SpaceshipLanded from '@/components/scenes/playing/assets/spaceship/SpaceshipLanded'
 
 const IntroScene = () => {
   // Base values
@@ -30,7 +30,7 @@ const IntroScene = () => {
       {animationDone && <PointerLockControls />}
       {!endCryo && <DyingEarth position={[0, -9.8, 8]} rotation={[0, 0, 0]} scale={9.33} />}
       <Stars radius={1} depth={25} count={10000} factor={0.5} saturation={1} fade />
-      <SpaceshipInteriors position={[0, -3.83, 26]} rotation={[0, 0, 0]} scale={0.006} />
+      <SpaceshipLanded position={[0, -3.83, 26]} rotation={[0, 0, 0]} scale={0.006} />
     </Canvas>
   )
 }
