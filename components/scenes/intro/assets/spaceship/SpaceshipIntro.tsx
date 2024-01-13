@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import React, { useRef } from 'react'
-import ShipButtons from '@/components/scenes/common/models/ship/buttons/ShipButtons'
+import ShipButtons from '@/components/scenes/intro/assets/spaceship/buttons/ShipButtons'
 import { useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
 import { createCinematicSlice } from '@/utils/stores/intro.store'

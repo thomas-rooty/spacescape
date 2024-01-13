@@ -2,7 +2,7 @@ import styles from '@/styles/Intro.module.css'
 import { useEffect } from 'react'
 import { createCharacterSlice } from '@/utils/stores/character.store'
 import { createCinematicSlice } from '@/utils/stores/intro.store'
-import StartingCounter from '@/components/hud/dialogs/intro/StartingCounter'
+import StartingCounter from '@/components/dom/hud/dialogs/intro/StartingCounter'
 
 const LandingMessage = () => {
   // Get variables and functions from the store

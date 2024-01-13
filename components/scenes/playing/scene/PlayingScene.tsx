@@ -2,14 +2,14 @@ import { Stars, PointerLockControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { Physics } from '@react-three/rapier'
 import { createCinematicSlice } from '@/utils/stores/intro.store'
-import Effects from '@/components/fx/Effects'
+import Effects from '@/components/scenes/common/fx/Effects'
 import FloorMesh from '@/components/scenes/playing/scene/planet/floor/FloorMesh'
 import PlayingLights from '@/components/scenes/playing/lights/PlayingLights'
 import SpaceshipOuters from '@/components/scenes/playing/assets/spaceship/ShipshipOuters'
 import ShipHitbox from '@/components/scenes/intro/assets/spaceship/ShipHitbox'
 import RenderAstronauts from '@/components/scenes/playing/multiplayer/RenderAstronauts'
 import CharacterController from '@/components/character/CharacterController'
-import Floor from '@/components/scenes/common/physics/Floor'
+import Floor from '@/components/scenes/common/utils/Floor'
 
 const PlayingScene = () => {
   // Base values

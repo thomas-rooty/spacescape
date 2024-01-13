@@ -1,8 +1,8 @@
 import styles from '@/styles/Hud.module.css'
-import { Crosshair } from '@/components/hud/Crosshair'
-import { InteractPrompt } from '@/components/hud/InteractPrompt'
-import EyesView from '@/components/hud/effects/intro/EyesView'
-import Vitals from '@/components/hud/vitals/Vitals'
+import { Crosshair } from '@/components/dom/hud/Crosshair'
+import { InteractPrompt } from '@/components/dom/hud/InteractPrompt'
+import EyesView from '@/components/dom/hud/effects/intro/EyesView'
+import Vitals from '@/components/dom/hud/vitals/Vitals'
 import { createCinematicSlice } from '@/utils/stores/intro.store'
 
 const Hud = () => {
