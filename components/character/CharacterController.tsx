@@ -21,7 +21,9 @@ interface CharacterControllerProps {
 const CharacterController = ({ position, canMove }: CharacterControllerProps) => {
   const rigidbody = useRef<any>()
   const character = useRef<any>()
+  const lastPositionRef = useRef({ x: 0, y: 0, z: 0 })
   const prevMovementRef = useRef<boolean>(false)
+  const isDoneMoving = useRef(false)
   const socket = createSocketSlice((state) => state.socket)
   const raycaster = useMemo(() => new THREE.Raycaster(), [])
   const lookAtDirection = new THREE.Vector3()
@@ -35,15 +37,15 @@ const CharacterController = ({ position, canMove }: CharacterControllerProps) =>
 
   // Controls
   const { forward, backward, left, right, jump, sprint } = useControls()
+  const isKeyPressed = forward || backward || left || right
 
   // Character logic
   useFrame(({ camera, clock }) => {
-    let changeRotation = false
+    const elapsedTime = clock.getElapsedTime()
     const cameraDirection = new THREE.Vector3()
     const impulse = new THREE.Vector3()
     const linvel = rigidbody.current?.linvel()
     camera.getWorldDirection(cameraDirection)
-    const elapsedTime = clock.getElapsedTime()
 
     if (!linvel) return
     // Calculate forward and right vectors from camera direction
@@ -84,11 +86,8 @@ const CharacterController = ({ position, canMove }: CharacterControllerProps) =>
       }
     }
 
-    // Apply impulse to the rigidbody
+    // Apply final impulse to the rigidbody
     rigidbody.current?.applyImpulse(impulse, true)
-    if (changeRotation) {
-      character.current.rotation.y = Math.atan2(linvel.x, linvel.z)
-    }
 
     // Shaking effect
     if (shaking) {
@@ -115,9 +114,8 @@ const CharacterController = ({ position, canMove }: CharacterControllerProps) =>
     horizontalLookAtPosition.copy(camera.position).add(lookAtDirection.multiplyScalar(10))
 
     // Stream movements to server
-    const isCurrentlyMoving = forward || backward || left || right || jump
     if (socket !== null) {
-      RecMovements(isCurrentlyMoving, camera, socket, horizontalLookAtPosition, prevMovementRef, jump, elapsedTime, jumpStartTime, setJumpStartTime)
+      RecMovements(lastPositionRef, isDoneMoving, isKeyPressed, camera, socket, horizontalLookAtPosition, prevMovementRef, jump, elapsedTime, jumpStartTime, setJumpStartTime)
     }
   })
 
@@ -126,8 +124,8 @@ const CharacterController = ({ position, canMove }: CharacterControllerProps) =>
       <RigidBody ref={rigidbody} colliders={false} scale={[0.5, 0.5, 0.5]} enabledRotations={[false, false, false]}>
         <CuboidCollider args={[1.2, 1.2, 1.2]} position={[0, 1.2, 25]} mass={0.1} />
         <group ref={character}>
-          <mesh position={[0, 0.6, 0]}>
-            <boxGeometry args={[1.2, 1.2, 1.2]} />
+          <mesh>
+            <boxGeometry args={[1, 1, 1]} />
             <meshStandardMaterial color={'orange'} visible={false} />
           </mesh>
         </group>
