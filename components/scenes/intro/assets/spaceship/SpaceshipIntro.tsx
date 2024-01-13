@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import React, { useRef } from 'react'
-import ShipButtons from '@/components/models/ship/buttons/ShipButtons'
+import ShipButtons from '@/components/scenes/common/models/ship/buttons/ShipButtons'
 import { useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
 import { createCinematicSlice } from '@/utils/stores/intro.store'
@@ -27,7 +27,7 @@ interface SpaceshipProps {
   scale: number
 }
 
-const SpaceshipLanded = ({ position, rotation, scale }: SpaceshipProps) => {
+const SpaceshipIntro = ({ position, rotation, scale }: SpaceshipProps) => {
   const shipRef = useRef<any>()
   const { nodes, materials } = useGLTF('/models/spaceship/spaceship_compressed.gltf') as unknown as GLTFResult
 
@@ -56,4 +56,4 @@ const SpaceshipLanded = ({ position, rotation, scale }: SpaceshipProps) => {
 
 useGLTF.preload('/models/spaceship/spaceship_compressed.gltf')
 
-export default SpaceshipLanded
+export default SpaceshipIntro
