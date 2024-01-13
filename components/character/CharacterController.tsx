@@ -27,9 +27,14 @@ const CharacterController = ({ position, canMove }: CharacterControllerProps) =>
   const isDoneMoving = useRef<boolean>(false)
   const lastPositionRef = useRef({ x: 0, y: 0, z: 0 })
   const prevMovementRef = useRef<boolean>(false)
-  const lookAtDirection = new THREE.Vector3()
-  const raycaster = useMemo(() => new THREE.Raycaster(), [])
+  const cameraDirection = useMemo(() => new THREE.Vector3(), [])
+  const forwardVector = useMemo(() => new THREE.Vector3(), [])
+  const rightVector = useMemo(() => new THREE.Vector3(), [])
+  const lookAtPosition = useMemo(() => new THREE.Vector3(), [])
+  const lookAtDirection = useMemo(() => new THREE.Vector3(), [])
+  const horizontalLookAtPosition = useMemo(() => new THREE.Vector3(), [])
   const worldDirection = useMemo(() => new THREE.Vector3(), [])
+  const raycaster = useMemo(() => new THREE.Raycaster(), [])
   const [jumpStartTime, setJumpStartTime] = useState<number | null>(null)
 
   // Store values
@@ -44,18 +49,13 @@ const CharacterController = ({ position, canMove }: CharacterControllerProps) =>
 
   // Character logic
   useFrame(({ camera, clock }) => {
-    const elapsedTime = clock.getElapsedTime()
-    const cameraDirection = new THREE.Vector3()
     const impulse = new THREE.Vector3()
+    const elapsedTime = clock.getElapsedTime()
     const linvel = rigidbody.current?.linvel()
     camera.getWorldDirection(cameraDirection)
 
-    if (!linvel) return
-    // Forward and right vectors from camera direction
-    const forwardVector = new THREE.Vector3(cameraDirection.x, 0, cameraDirection.z)
-    const rightVector = new THREE.Vector3(cameraDirection.z, 0, -cameraDirection.x)
-
     // Magnitude of velocity in xz-plane
+    if (!linvel) return
     const speedInXZ = Math.sqrt(linvel.x ** 2 + linvel.z ** 2)
 
     // First person camera
@@ -63,14 +63,12 @@ const CharacterController = ({ position, canMove }: CharacterControllerProps) =>
     camera.position.set(characterWorldPosition.x, characterWorldPosition.y + 0.1, characterWorldPosition.z)
 
     // Horizontal look at position
-    const horizontalLookAtPosition = new THREE.Vector3()
     camera.getWorldDirection(lookAtDirection)
     lookAtDirection.y = 0
     lookAtDirection.normalize()
     horizontalLookAtPosition.copy(camera.position).add(lookAtDirection.multiplyScalar(10))
 
     // All-directions look at position
-    const lookAtPosition = new THREE.Vector3()
     camera.getWorldDirection(lookAtDirection)
     lookAtDirection.normalize()
     lookAtPosition.copy(camera.position).add(lookAtDirection.multiplyScalar(10))
@@ -78,8 +76,9 @@ const CharacterController = ({ position, canMove }: CharacterControllerProps) =>
 
     // Movement
     if (canMove) {
-      applyMovements(controls, speedInXZ, impulse, rightVector, forwardVector, rigidbody)
+      applyMovements(controls, cameraDirection, speedInXZ, impulse, rightVector, forwardVector, rigidbody)
       viewBobbing(isKeyPressed, clock, camera, characterWorldPosition)
+      bindHands(cameraDirection, camera, lHandRef, lookAtPosition, rHandRef, elapsedTime, isKeyPressed, controls)
     }
 
     // Camera shaking
@@ -93,8 +92,6 @@ const CharacterController = ({ position, canMove }: CharacterControllerProps) =>
       RecMovements(lastPositionRef, isDoneMoving, isKeyPressed, camera, socket, horizontalLookAtPosition, prevMovementRef, controls.jump, elapsedTime, jumpStartTime, setJumpStartTime)
     }
 
-    // Hands
-    bindHands(cameraDirection, camera, lHandRef, lookAtPosition, rHandRef, elapsedTime, isKeyPressed, controls)
   })
 
   return (
