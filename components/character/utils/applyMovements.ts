@@ -1,9 +1,9 @@
 import { Vector3 } from 'three'
 
-const MOVEMENT_SPEED = 0.006
+const MOVEMENT_SPEED = 0.0009
 const MAX_SPEED = 0.5
 const MAX_SPEED_SPRINT = 0.8
-const RUN_VEL = 0.02
+const RUN_VEL = 0.001
 
 export function applyMovements(
   controls: any,

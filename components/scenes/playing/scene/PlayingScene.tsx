@@ -9,7 +9,7 @@ import SpaceshipOuters from '@/components/models/ship/ShipshipOuters'
 import ShipHitbox from '@/components/models/ship/ShipHitbox'
 import RenderAstronauts from '@/components/scenes/playing/multiplayer/RenderAstronauts'
 import CharacterController from '@/components/character/CharacterController'
-import ShipFloor from '@/components/models/ship/ShipFloor'
+import Floor from '@/components/models/ship/Floor'
 
 const PlayingScene = () => {
   // Base values
@@ -19,17 +19,18 @@ const PlayingScene = () => {
   const animationDone = createCinematicSlice((state) => state.animationDone)
 
   return (
-    <Canvas shadows={true} camera={{ position: [0, 0, distanceFromCenter], fov: 40 }}>
+    <Canvas shadows={true} camera={{ position: [0, 0, distanceFromCenter], fov: 60 }}>
+      <Stars radius={150} depth={25} count={10000} factor={2} saturation={10} fade />
       <RenderAstronauts />
       <PlayingLights />
       <Effects />
       {animationDone && <PointerLockControls />}
       <Stars radius={1} depth={250} count={10000} factor={0.5} saturation={1} fade />
-      <Physics gravity={[0, -1.5, 0]}>
+      <Physics debug gravity={[0, -1.5, 0]}>
         <CharacterController position={[0, 0.3, distanceFromCenter]} canMove={true} />
-        <ShipFloor position={[0, -1, distanceFromCenter]} size={2000} />
+        <SpaceshipOuters position={[4, 0.85, 26]} scale={0.4} rotation={[0, -2, 0]} />
+        <Floor position={[0, -1, distanceFromCenter]} size={2000} />
       </Physics>
-      <SpaceshipOuters position={[4, 0.85, 26]} scale={0.4} rotation={[0, -2, 0]} />
       <FloorMesh />
     </Canvas>
   )

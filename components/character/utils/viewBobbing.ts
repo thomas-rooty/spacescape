@@ -16,9 +16,9 @@ export function viewBobbing(
 ) {
   if (isKeyPressed) {
     const bobbing = Math.sin(clock.elapsedTime * (BREATH_FREQ * 6)) / (BREATH_AMP / 1.5)
-    camera.position.y = characterWorldPosition.y + 0.1 + bobbing
+    camera.position.y = characterWorldPosition.y + 0.15 + bobbing
   } else {
     const bobbing = Math.sin(clock.elapsedTime * BREATH_FREQ) / BREATH_AMP
-    camera.position.y = characterWorldPosition.y + 0.1 + bobbing
+    camera.position.y = characterWorldPosition.y + 0.15 + bobbing
   }
 }

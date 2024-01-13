@@ -30,7 +30,7 @@ const PlayingLights = () => {
     <>
       {/* Ambient light and fog */}
       <ambientLight intensity={0.1} />
-      <fog attach="fog" args={['black', 0, 5]} />
+      <fog attach="fog" args={['black', 0, 12]} />
       {/* Sun */}
       <Spot position={[0, 10, 25]} castShadow={true} target={[0, 0, 25]} color={'#cceaff'} penumbra={1} distance={100} angle={360} attenuation={0} anglePower={0} intensity={2} />
     </>

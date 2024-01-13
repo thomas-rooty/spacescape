@@ -2,11 +2,11 @@ import * as THREE from 'three'
 import { useMemo, useRef, useState } from 'react'
 import { useControls } from '@/utils/useControls'
 import { useFrame } from '@react-three/fiber'
-import { CuboidCollider, RigidBody } from '@react-three/rapier'
+import { BallCollider, RigidBody } from '@react-three/rapier'
 import { createSocketSlice } from '@/utils/stores/socket.store'
 import { createCinematicSlice } from '@/utils/stores/intro.store'
 import { createCharacterSlice } from '@/utils/stores/character.store'
-import { RecMovements } from '@/components/character/movements/recMovements'
+import { RecMovements } from '@/components/character/utils/recMovements'
 import { LHand, RHand } from '@/components/character/hands/InHands'
 import { viewBobbing } from '@/components/character/utils/viewBobbing'
 import { applyMovements } from '@/components/character/utils/applyMovements'
@@ -60,7 +60,7 @@ const CharacterController = ({ position, canMove }: CharacterControllerProps) =>
 
     // First person camera
     const characterWorldPosition = character.current.getWorldPosition(new THREE.Vector3())
-    camera.position.set(characterWorldPosition.x, characterWorldPosition.y + 0.1, characterWorldPosition.z)
+    camera.position.set(characterWorldPosition.x, characterWorldPosition.y, characterWorldPosition.z)
 
     // Horizontal look at position
     camera.getWorldDirection(lookAtDirection)
@@ -91,22 +91,19 @@ const CharacterController = ({ position, canMove }: CharacterControllerProps) =>
     if (socket !== null) {
       RecMovements(lastPositionRef, isDoneMoving, isKeyPressed, camera, socket, horizontalLookAtPosition, prevMovementRef, controls.jump, elapsedTime, jumpStartTime, setJumpStartTime)
     }
-
   })
 
   return (
     <>
-      <group position={position}>
-        <RigidBody ref={rigidbody} colliders={false} scale={[0.5, 0.5, 0.5]} enabledRotations={[false, false, false]}>
-          <CuboidCollider args={[1.2, 1.2, 1.2]} position={[0, 1.2, 25]} mass={0.1} />
-          <group ref={character}>
-            <mesh>
-              <boxGeometry args={[1, 1, 1]} />
-              <meshStandardMaterial color={'orange'} visible={false} />
-            </mesh>
-          </group>
-        </RigidBody>
-      </group>
+      <RigidBody ref={rigidbody} colliders={false} scale={[0.5, 0.5, 0.5]} position={position} enabledRotations={[false, false, false]}>
+        <BallCollider args={[0.2]} position={[0, 0, 0]} />
+        <group ref={character}>
+          <mesh>
+            <boxGeometry args={[0.1, 0.15, 0.1]} />
+            <meshStandardMaterial color={'orange'} visible={false} side={THREE.DoubleSide} />
+          </mesh>
+        </group>
+      </RigidBody>
       <group ref={lHandRef}>
         <LHand />
       </group>

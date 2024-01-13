@@ -5,7 +5,7 @@ import { createCinematicSlice } from '@/utils/stores/intro.store'
 import DyingEarth from '@/components/scenes/intro/scene/earth/DyingEarth'
 import IntroLights from '@/components/scenes/intro/lights/IntroLights'
 import Effects from '@/components/fx/Effects'
-import ShipFloor from '@/components/models/ship/ShipFloor'
+import Floor from '@/components/models/ship/Floor'
 import CharacterController from '@/components/character/CharacterController'
 import SpaceshipLanded from '@/components/scenes/playing/assets/spaceship/SpaceshipLanded'
 
@@ -23,7 +23,7 @@ const IntroScene = () => {
       <Effects />
       <Physics gravity={[0, -9.8, 0]}>
         <CharacterController position={[0, 1.5, distanceFromCenter]} canMove={false} />
-        <ShipFloor position={[0, -1, distanceFromCenter]} size={15} />
+        <Floor position={[0, -1, distanceFromCenter]} size={15} />
       </Physics>
       {animationDone && <PointerLockControls />}
       {!endCryo && <DyingEarth position={[0, -9.8, 8]} rotation={[0, 0, 0]} scale={9.33} />}

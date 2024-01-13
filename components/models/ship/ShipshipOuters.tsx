@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import React from 'react'
+import { RigidBody } from '@react-three/rapier'
 import { useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
 
@@ -25,10 +26,16 @@ type GLTFResult = GLTF & {
   }
 }
 
-const SpaceshipOuters = (props: JSX.IntrinsicElements['group']) => {
+interface SpaceshipOutersProps {
+  position: [number, number, number]
+  rotation: [number, number, number]
+  scale: number
+}
+
+const SpaceshipOuters = ({ position, rotation, scale }: SpaceshipOutersProps) => {
   const { nodes, materials } = useGLTF('/models/spaceship/spaceship.gltf') as unknown as GLTFResult
   return (
-    <group {...props} dispose={null}>
+    <RigidBody type="fixed" colliders={'trimesh'} name="ship" position={position} rotation={rotation} scale={scale}>
       <mesh castShadow receiveShadow geometry={nodes.l_low.geometry} material={materials.turbine} rotation={[Math.PI / 2, 0, 0]} scale={8.766} />
       <mesh castShadow receiveShadow geometry={nodes.e_low.geometry} material={materials.base} rotation={[Math.PI / 2, 0, 0]} scale={8.766} />
       <mesh castShadow receiveShadow geometry={nodes.f_low.geometry} material={materials.gun} rotation={[Math.PI / 2, 0, 0]} scale={8.766} />
@@ -41,7 +48,7 @@ const SpaceshipOuters = (props: JSX.IntrinsicElements['group']) => {
       <mesh castShadow receiveShadow geometry={nodes.a_low.geometry} material={materials.turbine} rotation={[Math.PI / 2, 0, 0]} scale={8.766} />
       <mesh castShadow receiveShadow geometry={nodes.c_low.geometry} material={materials.turbine} rotation={[Math.PI / 2, 0, 0]} scale={8.766} />
       <mesh castShadow receiveShadow geometry={nodes.k_low.geometry} material={materials.gun} rotation={[Math.PI / 2, 0, 0]} scale={8.766} />
-    </group>
+    </RigidBody>
   )
 }
 

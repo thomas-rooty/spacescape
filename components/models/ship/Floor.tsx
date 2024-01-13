@@ -7,7 +7,7 @@ interface FloorProps {
   visible?: boolean
 }
 
-const ShipFloor = ({ color = 'green', position, size, visible = false }: FloorProps) => {
+const Floor = ({ color = 'green', position, size, visible = false }: FloorProps) => {
   return (
     <RigidBody type="fixed" colliders={false} friction={2} name="ground">
       <mesh receiveShadow position={position} rotation-x={-Math.PI / 2}>
@@ -19,4 +19,4 @@ const ShipFloor = ({ color = 'green', position, size, visible = false }: FloorPr
   )
 }
 
-export default ShipFloor
+export default Floor

@@ -3,9 +3,9 @@ import { OrthographicCamera, PerspectiveCamera, Vector3 } from 'three'
 
 const SWAY_FREQ = 2
 const SWAY_AMP = 0.005
-const HANDS_DISTANCE = -0.85
-const HANDS_SIDE_OFFSET = -0.1
-const HANDS_DOWN_OFFSET = -0.05
+const HANDS_DISTANCE = -0.87
+const HANDS_SIDE_OFFSET = -0.13
+const HANDS_DOWN_OFFSET = -0.09
 
 export function bindHands(
   cameraDirection: Vector3,

@@ -74,7 +74,7 @@ export function Astronaut({ headColor = '#f5f5f5', animationName, ...props }: As
   })
 
   return (
-    <group ref={group} {...props} dispose={null} scale={0.1} position={position}>
+    <group ref={group} {...props} dispose={null} scale={0.15} position={position}>
       <group name="Root_Scene">
         <group name="RootNode">
           <group name="CharacterArmature" rotation={[-Math.PI / 2, 0, 0]} scale={100}>
