@@ -42,6 +42,8 @@ const CharacterController = ({ position, canMove }: CharacterControllerProps) =>
   const shaking = createCharacterSlice((state) => state.shaking)
   const hoverableObjects = createCinematicSlice((state) => state.hoverableObjects)
   const setObjectAsHovered = createCinematicSlice((state) => state.setObjectAsHovered)
+  const isGrounded = createCharacterSlice((state) => state.isGrounded)
+  const setGrounded = createCharacterSlice((state) => state.setIsGrounded)
 
   // Controls
   const controls = useControls()
@@ -76,7 +78,7 @@ const CharacterController = ({ position, canMove }: CharacterControllerProps) =>
 
     // Movement
     if (canMove) {
-      applyMovements(controls, cameraDirection, speedInXZ, impulse, rightVector, forwardVector, rigidbody)
+      applyMovements(controls, cameraDirection, speedInXZ, impulse, rightVector, forwardVector, rigidbody, isGrounded)
       viewBobbing(isKeyPressed, clock, camera, characterWorldPosition)
       bindHands(cameraDirection, camera, lHandRef, lookAtPosition, rHandRef, elapsedTime, isKeyPressed, controls)
     }
@@ -95,7 +97,23 @@ const CharacterController = ({ position, canMove }: CharacterControllerProps) =>
 
   return (
     <>
-      <RigidBody ref={rigidbody} colliders={false} scale={[0.5, 0.5, 0.5]} position={position} enabledRotations={[false, false, false]}>
+      <RigidBody
+        ref={rigidbody}
+        colliders={false}
+        scale={[0.5, 0.5, 0.5]}
+        position={position}
+        enabledRotations={[false, false, false]}
+        onCollisionEnter={({ other }) => {
+          if (other.rigidBodyObject?.name === 'ground') {
+            setGrounded(true)
+          }
+        }}
+        onCollisionExit={({ other }) => {
+          if (other.rigidBodyObject?.name === 'ground') {
+            setGrounded(false)
+          }
+        }}
+      >
         <BallCollider args={[0.2]} position={[0, 0, 0]} />
         <group ref={character}>
           <mesh>

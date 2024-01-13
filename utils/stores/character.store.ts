@@ -13,6 +13,8 @@ interface ICharacterStore {
   setEyesClosed: (eyesClosed: boolean) => void
   isMoving: boolean
   setIsMoving: (isMoving: boolean) => void
+  isGrounded: boolean
+  setIsGrounded: (isGrounded: boolean) => void
 }
 
 export const createCharacterSlice = create<ICharacterStore>((set) => ({
@@ -28,4 +30,6 @@ export const createCharacterSlice = create<ICharacterStore>((set) => ({
   setEyesClosed: (eyesClosed: boolean) => set({ eyesClosed }),
   isMoving: false,
   setIsMoving: (isMoving: boolean) => set({ isMoving }),
+  isGrounded: false,
+  setIsGrounded: (isGrounded: boolean) => set({ isGrounded }),
 }))

@@ -28,7 +28,7 @@ const PlayingScene = () => {
       <Stars radius={1} depth={250} count={10000} factor={0.5} saturation={1} fade />
       <Physics debug gravity={[0, -1.5, 0]}>
         <CharacterController position={[0, 0.3, distanceFromCenter]} canMove={true} />
-        <SpaceshipOuters position={[4, 0.85, 26]} scale={0.4} rotation={[0, -2, 0]} />
+        <SpaceshipOuters position={[4, 1, 26]} scale={0.4} rotation={[0, -2, 0]} />
         <Floor position={[0, -1, distanceFromCenter]} size={2000} />
       </Physics>
       <FloorMesh />
