@@ -3,7 +3,7 @@ import { Crosshair } from '@/components/dom/hud/Crosshair'
 import { InteractPrompt } from '@/components/dom/hud/InteractPrompt'
 import EyesView from '@/components/dom/hud/effects/intro/EyesView'
 import Vitals from '@/components/dom/hud/vitals/Vitals'
-import { createCinematicSlice } from '@/utils/stores/intro.store'
+import { createCinematicSlice } from '@/stores/intro.store'
 
 const Hud = () => {
   // Crosshair is for the crosshair, duh

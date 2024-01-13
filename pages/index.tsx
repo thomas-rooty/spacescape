@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { Suspense } from 'react'
-import { createCinematicSlice } from '@/utils/stores/intro.store'
+import { createCinematicSlice } from '@/stores/intro.store'
 import styles from '@/styles/Home.module.css'
 import Loader from '@/components/dom/loader/Loader'
 import Hud from '@/components/dom/hud/Hud'

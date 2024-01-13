@@ -1,7 +1,7 @@
 import styles from '@/styles/Home.module.css'
 import IntroScene from '@/components/scenes/intro/scene/IntroScene'
 import DateTimelapse from '@/components/scenes/intro/scene/datetimelapse/DateTimelapse'
-import { createCinematicSlice } from '@/utils/stores/intro.store'
+import { createCinematicSlice } from '@/stores/intro.store'
 import { useEffect, useState } from 'react'
 import Sidebar from '@/components/scenes/intro/sidebar/Sidebar'
 

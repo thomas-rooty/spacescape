@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import styles from '@/styles/Hud.module.css'
-import { createCinematicSlice } from '@/utils/stores/intro.store'
-import { createCharacterSlice } from '@/utils/stores/character.store'
+import { createCinematicSlice } from '@/stores/intro.store'
+import { createCharacterSlice } from '@/stores/character.store'
 
 export const EyesView = () => {
   const checkInitiated = createCinematicSlice((state) => state.checkInitiated)

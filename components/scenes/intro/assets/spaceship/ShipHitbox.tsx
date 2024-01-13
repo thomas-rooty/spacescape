@@ -1,6 +1,6 @@
 import { useControls } from '@/utils/useControls'
 import { useFrame } from '@react-three/fiber'
-import { createCinematicSlice } from '@/utils/stores/intro.store'
+import { createCinematicSlice } from '@/stores/intro.store'
 
 interface ShipButtonProps {
   refProp: any

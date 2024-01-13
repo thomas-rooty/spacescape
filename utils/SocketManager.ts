@@ -1,8 +1,8 @@
 import io from 'socket.io-client'
 import { useEffect } from 'react'
-import { createAstronautSlice } from '@/utils/stores/astronauts.store'
-import { createSocketSlice } from '@/utils/stores/socket.store'
-import { createCharacterSlice } from '@/utils/stores/character.store'
+import { createAstronautSlice } from '@/stores/astronauts.store'
+import { createSocketSlice } from '@/stores/socket.store'
+import { createCharacterSlice } from '@/stores/character.store'
 
 export const SocketManager = () => {
   const url = process.env.NODE_ENV === 'production' ? 'https://spacescape.eu-4.evennode.com' : 'localhost:3001'

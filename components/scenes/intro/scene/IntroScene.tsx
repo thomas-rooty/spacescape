@@ -1,7 +1,7 @@
 import { Stars, PointerLockControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { Physics } from '@react-three/rapier'
-import { createCinematicSlice } from '@/utils/stores/intro.store'
+import { createCinematicSlice } from '@/stores/intro.store'
 import DyingEarth from '@/components/scenes/intro/scene/earth/DyingEarth'
 import IntroLights from '@/components/scenes/intro/lights/IntroLights'
 import Effects from '@/components/scenes/common/fx/Effects'

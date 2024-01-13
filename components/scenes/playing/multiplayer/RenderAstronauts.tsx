@@ -1,4 +1,4 @@
-import { createAstronautSlice } from '@/utils/stores/astronauts.store'
+import { createAstronautSlice } from '@/stores/astronauts.store'
 import { Astronaut } from '@/components/character/Astronaut'
 import * as THREE from 'three'
 

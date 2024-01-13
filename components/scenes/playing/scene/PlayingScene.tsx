@@ -1,7 +1,7 @@
 import { Stars, PointerLockControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { Physics } from '@react-three/rapier'
-import { createCinematicSlice } from '@/utils/stores/intro.store'
+import { createCinematicSlice } from '@/stores/intro.store'
 import Effects from '@/components/scenes/common/fx/Effects'
 import FloorMesh from '@/components/scenes/playing/scene/planet/floor/FloorMesh'
 import PlayingLights from '@/components/scenes/playing/lights/PlayingLights'

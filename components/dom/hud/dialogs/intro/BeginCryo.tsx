@@ -1,5 +1,5 @@
 import styles from '@/styles/Intro.module.css'
-import { createCinematicSlice } from '@/utils/stores/intro.store'
+import { createCinematicSlice } from '@/stores/intro.store'
 import { useEffect } from 'react'
 
 const BeginCryo = () => {

@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { createCinematicSlice } from '@/utils/stores/intro.store'
+import { createCinematicSlice } from '@/stores/intro.store'
 
 const Audios = () => {
   // Variables and functions from the store

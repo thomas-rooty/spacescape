@@ -1,6 +1,6 @@
 import styles from '@/styles/Hud.module.css'
 import React from 'react'
-import { createCinematicSlice } from '@/utils/stores/intro.store'
+import { createCinematicSlice } from '@/stores/intro.store'
 
 interface CrosshairProps {
   size: number

@@ -1,6 +1,6 @@
 import styles from '@/styles/Dialogs.module.css'
-import { createCinematicSlice } from '@/utils/stores/intro.store'
-import { createCharacterSlice } from '@/utils/stores/character.store'
+import { createCinematicSlice } from '@/stores/intro.store'
+import { createCharacterSlice } from '@/stores/character.store'
 
 export const CheckDone = () => {
   const endCryo = createCinematicSlice((state) => state.endCryo)

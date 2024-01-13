@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { SpotLight } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
-import { createCinematicSlice } from '@/utils/stores/intro.store'
+import { createCinematicSlice } from '@/stores/intro.store'
 
 // Summary:
 // 1. The first light is a spotlight that is used to light up the planet
