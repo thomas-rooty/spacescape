@@ -11,7 +11,6 @@ interface PrivateQuartersProps {
 
 const PrivateQuarters = ({ position, rotation, scale }: PrivateQuartersProps) => {
   const { nodes, materials } = useGLTF('/models/interiors/spaceship_interiors/ShipInteriors.glb') as unknown as GLTFResult
-  // Set all transparency, opacity alpha etc to false or 1, I want everything opaque
   for (const material of Object.values(materials)) {
     material.alphaTest = 1
     material.depthWrite = true

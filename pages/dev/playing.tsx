@@ -1,19 +1,16 @@
 import Head from 'next/head'
 import { Suspense } from 'react'
 import { createCinematicSlice } from '@/stores/intro.store'
-import { createInteractionSlice } from '@/stores/interactions.store'
 import styles from '@/styles/Home.module.css'
 import Loader from '@/components/dom/loader/Loader'
 import Hud from '@/components/dom/hud/Hud'
 import Dialogs from '@/components/dom/hud/dialogs/Dialogs'
 import Audios from '@/components/dom/audios/Audios'
-import IntroExperience from '@/components/scenes/intro/IntroExperience'
 import PlayingExperience from '@/components/scenes/playing/PlayingExperience'
-import PrivateQExperience from '@/components/scenes/privatequarters/PrivateQExperience'
 
-const Home = () => {
-  const adventureStarted = createCinematicSlice((state) => state.adventureStarted)
-  const inPrivateQuarters = createInteractionSlice((state) => state.inPrivateQuarters)
+const PrivateQ = () => {
+  const setAnimationDone = createCinematicSlice((state) => state.setAnimationDone)
+  setAnimationDone(true)
   return (
     <>
       <Head>
@@ -31,10 +28,10 @@ const Home = () => {
         <Hud />
         <Dialogs />
         <Audios />
-        <div className={styles.scenes}>{inPrivateQuarters ? <PrivateQExperience /> : !adventureStarted ? <IntroExperience /> : <PlayingExperience />}</div>
+        <div className={styles.scenes}><PlayingExperience /></div>
       </Suspense>
     </>
   )
 }
 
-export default Home
+export default PrivateQ

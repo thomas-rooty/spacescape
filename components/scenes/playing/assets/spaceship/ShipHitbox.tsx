@@ -1,6 +1,7 @@
 import { useControls } from '@/utils/useControls'
 import { useFrame } from '@react-three/fiber'
 import { createCinematicSlice } from '@/stores/intro.store'
+import { createInteractionSlice } from '@/stores/interactions.store'
 
 interface ShipButtonProps {
   refProp: any
@@ -13,6 +14,7 @@ interface ShipButtonProps {
 const useShipButtonInteractions = (refProp: React.MutableRefObject<any>, id: string, interact: boolean) => {
   const addObjectAsHoverable = createCinematicSlice((state) => state.addObjectAsHoverable)
   const hoveredObject = createCinematicSlice((state) => state.hoveredObject)
+  const setInPrivateQuarters = createInteractionSlice((state) => state.setInPrivateQuarters)
 
   // Ship button interactions
   useFrame(() => {
@@ -24,7 +26,7 @@ const useShipButtonInteractions = (refProp: React.MutableRefObject<any>, id: str
       refProp.current.material.color.set('orange')
 
       if (id === 'SHIP_HITBOX') {
-        console.log('Ship hitbox clicked')
+        setInPrivateQuarters(true)
       }
     } else {
       refProp.current.material.color.set('#FFD580')
@@ -40,7 +42,7 @@ const ShipButton = ({ refProp, id, position, rotation, geometryArgs }: ShipButto
   return (
     <mesh ref={refProp} userData={{ id }} position={position} rotation={rotation}>
       <boxGeometry args={geometryArgs} />
-      <meshLambertMaterial visible={false} />
+      <meshLambertMaterial visible={false} color="red" />
     </mesh>
   )
 }
