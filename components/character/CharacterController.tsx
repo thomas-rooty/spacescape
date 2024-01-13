@@ -8,10 +8,10 @@ import { createCinematicSlice } from '@/utils/stores/intro.store'
 import { createCharacterSlice } from '@/utils/stores/character.store'
 import { RecMovements } from '@/components/character/movements/recMovements'
 import { LHand, RHand } from '@/components/character/hands/InHands'
-import { useViewBobbing } from '@/components/character/utils/useViewBobbing'
-import { useMovements } from '@/components/character/utils/useMovements'
+import { viewBobbing } from '@/components/character/utils/viewBobbing'
+import { applyMovements } from '@/components/character/utils/applyMovements'
 import { shakeCamera } from '@/components/character/utils/shakeCamera'
-import { useRaycastDetection } from '@/components/character/utils/useRaycastDetection'
+import { raycastDetection } from '@/components/character/utils/raycastDetection'
 import { bindHands } from '@/components/character/utils/bindHands'
 
 interface CharacterControllerProps {
@@ -78,15 +78,15 @@ const CharacterController = ({ position, canMove }: CharacterControllerProps) =>
 
     // Movement
     if (canMove) {
-      useMovements(controls, speedInXZ, impulse, rightVector, forwardVector, rigidbody)
-      useViewBobbing(isKeyPressed, clock, camera, characterWorldPosition)
+      applyMovements(controls, speedInXZ, impulse, rightVector, forwardVector, rigidbody)
+      viewBobbing(isKeyPressed, clock, camera, characterWorldPosition)
     }
 
     // Camera shaking
     shakeCamera(shaking, camera, elapsedTime)
 
     // Raycast detection system
-    useRaycastDetection(socket, raycaster, camera, worldDirection, hoverableObjects, setObjectAsHovered)
+    raycastDetection(socket, raycaster, camera, worldDirection, hoverableObjects, setObjectAsHovered)
 
     // Stream movements to server
     if (socket !== null) {

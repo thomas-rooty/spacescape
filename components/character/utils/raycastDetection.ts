@@ -1,7 +1,7 @@
 import { OrthographicCamera, PerspectiveCamera, Raycaster, Vector3 } from 'three'
 
 
-export function useRaycastDetection(
+export function raycastDetection(
   socket: any,
   raycaster: Raycaster,
   camera:

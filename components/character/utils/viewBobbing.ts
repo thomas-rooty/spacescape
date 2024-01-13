@@ -4,7 +4,7 @@ const BREATH_FREQ = 3
 const BREATH_AMP = 300
 
 // View bobbing effect
-export function useViewBobbing(
+export function viewBobbing(
   isKeyPressed: boolean,
   clock: Clock,
   camera:

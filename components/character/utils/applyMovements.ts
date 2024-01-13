@@ -5,7 +5,7 @@ const MAX_SPEED = 0.5
 const MAX_SPEED_SPRINT = 0.8
 const RUN_VEL = 0.02
 
-export function useMovements(controls: any, speedInXZ: number, impulse: Vector3, rightVector: Vector3, forwardVector: Vector3, rigidbody: React.MutableRefObject<any>) {
+export function applyMovements(controls: any, speedInXZ: number, impulse: Vector3, rightVector: Vector3, forwardVector: Vector3, rigidbody: React.MutableRefObject<any>) {
   const { left, right, forward, backward, sprint } = controls
   if (right && speedInXZ < MAX_SPEED) {
     impulse.sub(rightVector.multiplyScalar(MOVEMENT_SPEED))
