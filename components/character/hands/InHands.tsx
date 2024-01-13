@@ -6,7 +6,7 @@ export const LHand = () => {
     <group>
       <mesh castShadow={false}>
         <boxGeometry args={[0.05, 0.05, 0.05]} />
-        <meshStandardMaterial color="red" side={THREE.DoubleSide} opacity={0} transparent={true} />
+        <meshStandardMaterial color="red" side={THREE.DoubleSide} opacity={0} transparent={true} visible={false} />
       </mesh>
     </group>
   )
@@ -18,7 +18,7 @@ export const RHand = () => {
       <Knife scale={0.07} rotation={[0, Math.PI / 2, 0]}/>
       <mesh castShadow={false}>
         <boxGeometry args={[0.05, 0.05, 0.05]} />
-        <meshStandardMaterial color="blue" side={THREE.DoubleSide} opacity={0} transparent={true} />
+        <meshStandardMaterial color="blue" side={THREE.DoubleSide} opacity={0} transparent={true} visible={false} />
       </mesh>
     </group>
   )

@@ -23,7 +23,7 @@ const IntroScene = () => {
       <Effects />
       <Physics gravity={[0, -9.8, 0]}>
         <CharacterController position={[0, 1.5, distanceFromCenter]} canMove={false} />
-        <Floor position={[0, -1, distanceFromCenter]} size={15} />
+        <Floor position={[0, 0, distanceFromCenter]} size={15} />
       </Physics>
       {animationDone && <PointerLockControls />}
       {!endCryo && <DyingEarth position={[0, -9.8, 8]} rotation={[0, 0, 0]} scale={9.33} />}

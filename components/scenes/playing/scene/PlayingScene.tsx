@@ -7,7 +7,7 @@ import FloorMesh from '@/components/scenes/playing/scene/planet/floor/FloorMesh'
 import PlayingLights from '@/components/scenes/playing/lights/PlayingLights'
 import SpaceshipOuters from '@/components/scenes/playing/assets/spaceship/ShipshipOuters'
 import ShipHitbox from '@/components/scenes/intro/assets/spaceship/ShipHitbox'
-import RenderAstronauts from '@/components/scenes/playing/multiplayer/RenderAstronauts'
+import RenderAstronauts from '@/components/scenes/common/multiplayer/RenderAstronauts'
 import CharacterController from '@/components/character/CharacterController'
 import Floor from '@/components/scenes/common/utils/Floor'
 
@@ -29,7 +29,7 @@ const PlayingScene = () => {
       <Physics debug gravity={[0, -1.5, 0]}>
         <CharacterController position={[0, 0.3, distanceFromCenter]} canMove={true} />
         <SpaceshipOuters position={[4, 1, 26]} scale={0.4} rotation={[0, -2, 0]} />
-        <Floor position={[0, -1, distanceFromCenter]} size={2000} />
+        <Floor position={[0, 0, distanceFromCenter]} size={2000} />
       </Physics>
       <FloorMesh />
     </Canvas>

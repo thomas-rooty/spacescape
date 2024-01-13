@@ -14,7 +14,7 @@ const Floor = ({ color = 'green', position, size, visible = false }: FloorProps)
         <planeGeometry args={[size, size]} />
         <meshStandardMaterial color={color} visible={visible} />
       </mesh>
-      <CuboidCollider args={[size, 1, size]} position={position} />
+      <CuboidCollider args={[size, 0.1, size]} position={position} />
     </RigidBody>
   )
 }
