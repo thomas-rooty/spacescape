@@ -9,10 +9,11 @@ interface SpotLightProps {
   intensity: number
   penumbra: number
   distance?: number
+  bias?: number
 }
 
 
-export const SpotLight = ({ position, target, angle, intensity, penumbra, distance = 0 }: SpotLightProps) => {
+export const SpotLight = ({ position, target, angle, intensity, penumbra, distance = 0, bias = -0.1 }: SpotLightProps) => {
   const lightRef = useRef<THREE.SpotLight>(null!)
   const targetRef = useRef<THREE.Object3D>(new THREE.Object3D())
 
@@ -32,7 +33,7 @@ export const SpotLight = ({ position, target, angle, intensity, penumbra, distan
       lightRef.current.shadow.mapSize.height = 2048
 
       // Adjust bias
-      lightRef.current.shadow.bias = -0.1
+      lightRef.current.shadow.bias = bias
     }
   })
 

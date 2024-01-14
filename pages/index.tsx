@@ -4,6 +4,7 @@ import { Canvas } from '@react-three/fiber'
 import { Suspense } from 'react'
 import { SocketManager } from '@/utils/SocketManager'
 import { createCinematicSlice } from '@/stores/intro.store'
+import { createDebugStore } from '@/stores/debug.store'
 import Experience from '@/components/scenes/common/Experience'
 import Loader from '@/components/dom/loader/Loader'
 import Hud from '@/components/dom/hud/Hud'
@@ -12,6 +13,7 @@ import Audios from '@/components/dom/audios/Audios'
 
 const Home = () => {
   const adventureStarted = createCinematicSlice((state) => state.adventureStarted)
+  const debug = createDebugStore((state) => state.debug)
   return (
     <>
       <Head>
@@ -25,7 +27,7 @@ const Home = () => {
         <meta name="twitter:image" content="/img/spacescape_banner.png" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {process.env.NODE_ENV !== 'production' && (
+      {debug && (
         <div style={{ position: 'absolute', top: '1rem', left: '1rem', zIndex: 1000, width: '500px' }}>
           <Canvas color={'#fff'} camera={{ position: [0, 0, 0], fov: 75 }}>
             <Debug debug={true} />
