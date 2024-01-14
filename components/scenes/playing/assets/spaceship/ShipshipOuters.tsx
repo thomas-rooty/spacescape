@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { RigidBody } from '@react-three/rapier'
 import { useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
@@ -34,8 +34,15 @@ interface SpaceshipOutersProps {
 
 const SpaceshipOuters = ({ position, rotation, scale }: SpaceshipOutersProps) => {
   const { nodes, materials } = useGLTF('/models/spaceship/spaceship.gltf') as unknown as GLTFResult
+  const ship = useRef<any>(null)
+
+  useEffect(() => {
+    if (ship.current) {
+      ship.current.isWalkable = true
+    }
+  }, [])
   return (
-    <RigidBody type="fixed" colliders={'trimesh'} name="ship" position={position} rotation={rotation} scale={scale}>
+    <RigidBody ref={ship} type="fixed" colliders={'trimesh'} name="ship" position={position} rotation={rotation} scale={scale}>
       <mesh castShadow receiveShadow geometry={nodes.l_low.geometry} material={materials.turbine} rotation={[Math.PI / 2, 0, 0]} scale={8.766} />
       <mesh castShadow receiveShadow geometry={nodes.e_low.geometry} material={materials.base} rotation={[Math.PI / 2, 0, 0]} scale={8.766} />
       <mesh castShadow receiveShadow geometry={nodes.f_low.geometry} material={materials.gun} rotation={[Math.PI / 2, 0, 0]} scale={8.766} />

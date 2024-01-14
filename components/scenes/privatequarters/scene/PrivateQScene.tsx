@@ -4,7 +4,6 @@ import { Physics } from '@react-three/rapier'
 import Effects from '@/components/scenes/common/fx/Effects'
 import RenderAstronauts from '@/components/scenes/common/multiplayer/RenderAstronauts'
 import CharacterController from '@/components/character/CharacterController'
-import Floor from '@/components/scenes/common/utils/Floor'
 import PrivateQLights from '@/components/scenes/privatequarters/lights/PrivateQLights'
 import PrivateQuarters from '@/components/scenes/privatequarters/assets/spaceship/interiors/PrivateQuarters'
 
@@ -20,7 +19,6 @@ const PrivateQScene = () => {
       <PointerLockControls />
       <Physics gravity={[0, -1.5, 0]}>
         <CharacterController position={[0, 0.3, distanceFromCenter]} canMove={true} />
-        <Floor position={[0, -0.2, distanceFromCenter]} size={2000} />
         <PrivateQuarters position={[1.3, 0, distanceFromCenter]} rotation={[0, 0, 0]} scale={0.18}/>
       </Physics>
     </Canvas>

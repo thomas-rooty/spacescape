@@ -86,7 +86,7 @@ const CharacterController = ({ position, canMove }: CharacterControllerProps) =>
     // Camera shaking
     shakeCamera(shaking, camera, elapsedTime)
 
-    // Raycast detection system
+    // Raycast on hoverable objects
     raycastDetection(socket, raycaster, camera, worldDirection, hoverableObjects, setObjectAsHovered)
 
     // Stream movements to server
@@ -103,14 +103,14 @@ const CharacterController = ({ position, canMove }: CharacterControllerProps) =>
         scale={[0.5, 0.5, 0.5]}
         position={position}
         enabledRotations={[false, false, false]}
-        onCollisionEnter={({ other }) => {
-          if (other.rigidBodyObject?.name === 'ground') {
-            setGrounded(true)
+        onCollisionEnter={({ other }: any) => {
+          if (other.rigidBody?.isWalkable) {
+            setGrounded(true);
           }
         }}
-        onCollisionExit={({ other }) => {
-          if (other.rigidBodyObject?.name === 'ground') {
-            setGrounded(false)
+        onCollisionExit={({ other }: any) => {
+          if (other.rigidBody?.isWalkable) {
+            setGrounded(false);
           }
         }}
       >

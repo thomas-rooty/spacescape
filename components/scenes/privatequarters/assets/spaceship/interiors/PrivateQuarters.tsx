@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { GLTFResult } from '@/utils/types/shipinteriors.types'
 import { RigidBody } from '@react-three/rapier'
@@ -15,6 +15,7 @@ const PrivateQuarters = ({ position, rotation, scale }: PrivateQuartersProps) =>
     material.alphaTest = 1
     material.depthWrite = true
   }
+
   return (
     <RigidBody type="fixed" colliders={'trimesh'} name="privateq" position={position} rotation={rotation} scale={scale} friction={2}>
       <group name="Scene">

@@ -1,4 +1,5 @@
 import { CuboidCollider, RigidBody } from '@react-three/rapier'
+import { useEffect, useRef } from 'react'
 
 interface FloorProps {
   color?: string
@@ -9,8 +10,16 @@ interface FloorProps {
 }
 
 const Floor = ({ color = 'green', position, size, visible = false, friction = 1 }: FloorProps) => {
+  const floor = useRef<any>(null)
+
+  useEffect(() => {
+    if (floor.current) {
+      floor.current.isWalkable = true
+    }
+  }, [])
+
   return (
-    <RigidBody type="fixed" colliders={false} friction={friction} name="ground">
+    <RigidBody ref={floor} type="fixed" colliders={false} friction={friction} name="ground">
       <mesh receiveShadow position={position} rotation-x={-Math.PI / 2}>
         <planeGeometry args={[size, size]} />
         <meshStandardMaterial color={color} visible={visible} />
