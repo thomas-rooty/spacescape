@@ -38,7 +38,7 @@ const PlayingScene = () => {
       </Physics>
       <ShipHitbox refProp={SHIP_HITBOX} id="SHIP_HITBOX" position={[5.5, 0.3, 26.6]} rotation={[0, -2, 0]} geometryArgs={[2, 0.5, 1.2]} />
       <FloorMesh />
-      <Rocks count={300} />
+      <Rocks />
     </Canvas>
   )
 }

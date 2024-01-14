@@ -1,34 +1,45 @@
 import * as THREE from 'three'
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
+import { Instances, Instance, useGLTF } from '@react-three/drei'
+import { GLTF } from 'three-stdlib'
+import { randomizer } from '@/components/scenes/common/utils/randomizer'
 
 interface RocksProps {
   count?: number
 }
 
-const Rocks = ({ count = 10 }: RocksProps) => {
-  const temp = new THREE.Object3D()
-  const rocks = useRef<THREE.InstancedMesh>(null)
+type GLTFResult = GLTF & {
+  nodes: {
+    Rock_3: THREE.Mesh
+  }
+  materials: {
+    Stone_Dark: THREE.MeshStandardMaterial
+  }
+}
 
-  useEffect(() => {
-    // Set position
-    if (!rocks.current) return
-    for (let i = 0; i < count; i++) {
-      // Area of 100x100 around the spaceship which is located at 0, 0, 25
-      temp.position.set(Math.random() * 100 - 50, 0.5, Math.random() * 100 - 50)
-      temp.updateMatrix()
-      rocks.current.setMatrixAt(i, temp.matrix)
-    }
-    // Update instance
-    rocks.current.instanceMatrix.needsUpdate = true
-    console.log(rocks)
-  }, [])
-
+const Rocks = ({ count = 1000 }: RocksProps) => {
+  const { nodes, materials } = useGLTF('/models/rocks/rocks1.glb') as unknown as GLTFResult
+  console.log(randomizer)
   return (
-    <instancedMesh ref={rocks} args={[undefined, undefined, count]}>
-      <boxGeometry args={[0.5, 0.5, 0.5]} />
-      <meshStandardMaterial color={'red'} />
-    </instancedMesh>
+    <Instances range={count} material={materials.Stone_Dark} geometry={nodes.Rock_3.geometry}>
+      <group>
+        {randomizer.map((props, i) => (
+          <Rock1 key={i} {...props} scale={100} castShadow receiveShadow />
+          ))}
+      </group>
+    </Instances>
   )
 }
+
+const Rock1 = ({ ...props }) => {
+  const ref = useRef()
+  return (
+    <group {...props}>
+      <Instance ref={ref} />
+    </group>
+  )
+}
+
+useGLTF.preload('/models/rocks/rocks1.glb')
 
 export default Rocks
