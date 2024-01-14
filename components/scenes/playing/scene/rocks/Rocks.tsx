@@ -24,8 +24,8 @@ const Rocks = ({ count = 1000 }: RocksProps) => {
     <Instances range={count} material={materials.Stone_Dark} geometry={nodes.Rock_3.geometry}>
       <group>
         {randomizer.map((props, i) => (
-          <Rock1 key={i} {...props} scale={100} castShadow receiveShadow />
-          ))}
+          <Rock1 key={i} {...props} scale={100} />
+        ))}
       </group>
     </Instances>
   )
