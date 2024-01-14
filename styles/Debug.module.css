@@ -32,6 +32,7 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
+    margin-bottom: 0.25rem;
 }
 
 .debug__item > h4 {
@@ -44,5 +45,8 @@
 .debug__item > span {
     padding-right: 0.5rem;
     padding-left: 0.5rem;
+}
+
+.separator {
     border-right: 1px solid rgba(255, 255, 255, 1);
 }
