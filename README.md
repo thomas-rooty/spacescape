@@ -5,18 +5,16 @@
     <img src="https://img.shields.io/badge/MADE%20WITH-TYPESCRIPT-blue?style=for-the-badge" alt="Made with TypeScript">
     <img src="https://img.shields.io/badge/CHALLENGED%20and%20limited%20BY-WebGL-red?style=for-the-badge" alt="Powered by WebGL">
     <img src="https://img.shields.io/badge/FLOODING%20SERVERS%20WITH-Socket.io-%2325c2a0?style=for-the-badge" alt="Flooded with Socket.io">
-    <img src="https://img.shields.io/badge/BUILT%20FOR-FUN-pink?style=for-the-badge" alt="Built for fun">
     <h4>Spacescape is a browser based multiplayer space survival game</h4>
-    <a href="https://spacescape.vercel.app" target="_blank" style="text-decoration: none;">
-        <img src="https://img.shields.io/badge/TRY%20IT-YOURSELF-black?style=for-the-badge" alt="Play now">
-    </a>
     <hr/>
 </div>
 
 ## Hello there !
 I'm [**@thomas-rooty**](https://github.com/thomas-rooty), and I'm the lead developer of Spacescape. I'm a French student in computer science, and I'm passionate about video games, web development and AI. I'm also a huge fan of space exploration, and I'm always looking for new ways to combine my passions.
 
-Click [here](https://www.youtube.com/watch?v=xRtPwq5lGvc) to find out more about the Spacescape project on YouTube !
+* [Try it out !](https://spacescape.vercel.app) 
+
+And click [here](https://www.youtube.com/watch?v=xRtPwq5lGvc) to find out more about the Spacescape project on YouTube !
 
 ## Synopsis
 
