@@ -23,7 +23,7 @@ const PlayingScene = () => {
   const SHIP_HITBOX = useRef<any>()
 
   return (
-    <Canvas shadows={true} camera={{ position: [0, 0, distanceFromCenter], fov: 60 }} frameloop={'demand'}>
+    <Canvas shadows={true} camera={{ position: [0, 0, distanceFromCenter], fov: 60 }}>
       <Stars radius={150} depth={25} count={10000} factor={2} saturation={10} fade />
       <RenderAstronauts />
       <PlayingLights />

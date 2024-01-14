@@ -1,20 +1,15 @@
 import Head from 'next/head'
 import { Suspense } from 'react'
+import { SocketManager } from '@/utils/SocketManager'
 import { createCinematicSlice } from '@/stores/intro.store'
-import { createInteractionSlice } from '@/stores/interactions.store'
-import styles from '@/styles/Home.module.css'
+import Experience from '@/components/scenes/common/Experience'
 import Loader from '@/components/dom/loader/Loader'
 import Hud from '@/components/dom/hud/Hud'
 import Dialogs from '@/components/dom/hud/dialogs/Dialogs'
 import Audios from '@/components/dom/audios/Audios'
-import IntroExperience from '@/components/scenes/intro/IntroExperience'
-import PlayingExperience from '@/components/scenes/playing/PlayingExperience'
-import PrivateQExperience from '@/components/scenes/privatequarters/PrivateQExperience'
-import { SocketManager } from '@/utils/SocketManager'
 
 const Home = () => {
   const adventureStarted = createCinematicSlice((state) => state.adventureStarted)
-  const inPrivateQuarters = createInteractionSlice((state) => state.inPrivateQuarters)
   return (
     <>
       <Head>
@@ -28,12 +23,12 @@ const Home = () => {
         <meta name="twitter:image" content="/img/spacescape_banner.png" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      {adventureStarted && <SocketManager />}
       <Suspense fallback={<Loader />}>
         <Hud />
         <Dialogs />
         <Audios />
-        {adventureStarted && <SocketManager />}
-        <div className={styles.scenes}>{inPrivateQuarters ? <PrivateQExperience /> : !adventureStarted ? <IntroExperience /> : <PlayingExperience />}</div>
+        <Experience />
       </Suspense>
     </>
   )
