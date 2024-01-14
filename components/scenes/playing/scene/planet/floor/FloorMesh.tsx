@@ -18,7 +18,7 @@ const FloorMesh = ({ size = [100, 100], subdivisions = [1000, 1000] }) => {
   })
 
   return (
-    <mesh rotation={[Math.PI / -2, 0, 0]} position={[0, 0, 0]} receiveShadow={true}>
+    <mesh rotation={[Math.PI / -2, 0, 0]} position={[0, 0.05, 0]} receiveShadow={true}>
       <planeGeometry attach="geometry" args={[size[0], size[1], subdivisions[0], subdivisions[1]]} />
       <meshLambertMaterial attach="material" map={colorMap} displacementMap={displacementMap} displacementScale={0.1} normalMap={normalMap} aoMap={aoMap} />
     </mesh>
