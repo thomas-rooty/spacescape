@@ -18,7 +18,7 @@ const PrivateQuarters = ({ position, rotation, scale }: PrivateQuartersProps) =>
 
   return (
     <RigidBody type="fixed" colliders={'trimesh'} name="privateq" position={position} rotation={rotation} scale={scale} friction={2}>
-      <group name="Scene">
+      <group name="Scene" visible={true}>
         <group name="Scene_1" rotation={[Math.PI / 2, 0, 0]} scale={0.007}>
           <mesh
             name="Argent2"
