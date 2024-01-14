@@ -11,6 +11,7 @@ import ShipHitbox from '@/components/scenes/playing/assets/spaceship/ShipHitbox'
 import RenderAstronauts from '@/components/scenes/common/multiplayer/RenderAstronauts'
 import CharacterController from '@/components/character/CharacterController'
 import Floor from '@/components/scenes/common/utils/Floor'
+import Rocks from '@/components/scenes/playing/scene/rocks/Rocks'
 
 const PlayingScene = () => {
   // Base values
@@ -37,6 +38,7 @@ const PlayingScene = () => {
       </Physics>
       <ShipHitbox refProp={SHIP_HITBOX} id="SHIP_HITBOX" position={[5.5, 0.3, 26.6]} rotation={[0, -2, 0]} geometryArgs={[2, 0.5, 1.2]} />
       <FloorMesh />
+      <Rocks count={300} />
     </Canvas>
   )
 }
