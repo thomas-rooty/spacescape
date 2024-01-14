@@ -1,0 +1,48 @@
+.debug {
+    position: absolute;
+    width: fit-content;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    font-size: 0.75rem;
+    font-family: monospace;
+    line-height: 1rem;
+    text-align: left;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(0.5rem);
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+    user-select: none;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.debug > h2 {
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0 0 0.5rem;
+    text-transform: uppercase;
+}
+
+.debug__item {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.debug__item > h4 {
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.debug__item > span {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    border-right: 1px solid rgba(255, 255, 255, 1);
+}

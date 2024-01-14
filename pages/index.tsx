@@ -1,4 +1,6 @@
 import Head from 'next/head'
+import { Debug } from '@/components/dom/debug/Debug'
+import { Canvas } from '@react-three/fiber'
 import { Suspense } from 'react'
 import { SocketManager } from '@/utils/SocketManager'
 import { createCinematicSlice } from '@/stores/intro.store'
@@ -23,6 +25,13 @@ const Home = () => {
         <meta name="twitter:image" content="/img/spacescape_banner.png" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      {process.env.NODE_ENV !== 'production' && (
+        <div style={{ position: 'absolute', top: '1rem', left: '1rem', zIndex: 1000, width: '500px' }}>
+          <Canvas color={'#fff'} camera={{ position: [0, 0, 0], fov: 75 }}>
+            <Debug debug={true} />
+          </Canvas>
+        </div>
+      )}
       {adventureStarted && <SocketManager />}
       <Suspense fallback={<Loader />}>
         <Hud />

@@ -2,7 +2,6 @@ import { PointerLockControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { Physics } from '@react-three/rapier'
 import Effects from '@/components/scenes/common/fx/Effects'
-import RenderAstronauts from '@/components/scenes/common/multiplayer/RenderAstronauts'
 import CharacterController from '@/components/character/CharacterController'
 import PrivateQLights from '@/components/scenes/privatequarters/lights/PrivateQLights'
 import PrivateQuarters from '@/components/scenes/privatequarters/assets/spaceship/interiors/PrivateQuarters'
@@ -16,7 +15,6 @@ const PrivateQScene = () => {
 
   return (
     <Canvas shadows={true} camera={{ position: [0, 0, distanceFromCenter], fov: 60 }}>
-      <RenderAstronauts />
       <PrivateQLights />
       <Effects />
       <PointerLockControls />

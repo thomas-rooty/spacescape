@@ -13,6 +13,7 @@ import { applyMovements } from '@/components/character/utils/applyMovements'
 import { shakeCamera } from '@/components/character/utils/shakeCamera'
 import { raycastDetection } from '@/components/character/utils/raycastDetection'
 import { bindHands } from '@/components/character/utils/bindHands'
+import { createDebugStore } from '@/stores/debug.store'
 
 interface CharacterControllerProps {
   position: [number, number, number]
@@ -20,6 +21,11 @@ interface CharacterControllerProps {
 }
 
 const CharacterController = ({ position, canMove }: CharacterControllerProps) => {
+  // Debug
+  const debug = createDebugStore((state) => state.debug)
+  const setPosition = createDebugStore((state) => state.setPosition)
+
+  // Refs
   const rigidbody = useRef<any>()
   const character = useRef<any>()
   const lHandRef = useRef<any>()
@@ -92,6 +98,11 @@ const CharacterController = ({ position, canMove }: CharacterControllerProps) =>
     // Stream movements to server
     if (socket !== null) {
       RecMovements(lastPositionRef, isDoneMoving, isKeyPressed, camera, socket, horizontalLookAtPosition, prevMovementRef, controls.jump, elapsedTime, jumpStartTime, setJumpStartTime)
+    }
+
+    // DEBUG : Display camera position
+    if (debug) {
+      setPosition({ x: camera.position.x, y: camera.position.y, z: camera.position.z })
     }
   })
 
