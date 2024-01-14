@@ -10,6 +10,7 @@ import Audios from '@/components/dom/audios/Audios'
 import IntroExperience from '@/components/scenes/intro/IntroExperience'
 import PlayingExperience from '@/components/scenes/playing/PlayingExperience'
 import PrivateQExperience from '@/components/scenes/privatequarters/PrivateQExperience'
+import { SocketManager } from '@/utils/SocketManager'
 
 const Home = () => {
   const adventureStarted = createCinematicSlice((state) => state.adventureStarted)
@@ -31,6 +32,7 @@ const Home = () => {
         <Hud />
         <Dialogs />
         <Audios />
+        {adventureStarted && <SocketManager />}
         <div className={styles.scenes}>{inPrivateQuarters ? <PrivateQExperience /> : !adventureStarted ? <IntroExperience /> : <PlayingExperience />}</div>
       </Suspense>
     </>

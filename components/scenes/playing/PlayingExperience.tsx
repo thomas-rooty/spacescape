@@ -4,7 +4,6 @@ import { SocketManager } from '@/utils/SocketManager'
 const PlayingExperience = () => {
   return (
     <>
-      <SocketManager />
       <PlayingScene />
     </>
   )

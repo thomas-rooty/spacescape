@@ -4,7 +4,6 @@ import { SocketManager } from '@/utils/SocketManager'
 const PrivateQExperience = () => {
   return (
     <>
-      <SocketManager />
       <PrivateQScene />
     </>
   )
