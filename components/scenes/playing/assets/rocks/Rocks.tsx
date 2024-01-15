@@ -2,37 +2,74 @@ import * as THREE from 'three'
 import { useRef } from 'react'
 import { Instances, Instance, useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
-import { randomizer } from '@/components/scenes/common/utils/randomizer'
+import { rocksRandomizer, goldRandomizer } from '@/components/scenes/common/utils/randomizer'
 
-interface RocksProps {
+interface StoneCountProps {
   count?: number
 }
 
-type GLTFResult = GLTF & {
+type StonesData = GLTF & {
   nodes: {
     Rock_3: THREE.Mesh
+    Resource_Gold_1_1: THREE.Mesh
+    Resource_Gold_1_2: THREE.Mesh
   }
   materials: {
     Stone_Dark: THREE.MeshStandardMaterial
+    Stone: THREE.MeshStandardMaterial
+    Gold: THREE.MeshStandardMaterial
   }
 }
 
-const Rocks = ({ count = 1000 }: RocksProps) => {
-  const { nodes, materials } = useGLTF('/models/rocks/rocks1.glb') as unknown as GLTFResult
+const Rocks = ({ count = 1000 }: StoneCountProps) => {
+  const { nodes, materials } = useGLTF('/models/rocks/rocks1.glb') as unknown as StonesData
   return (
     <Instances castShadow receiveShadow range={count} material={materials.Stone_Dark} geometry={nodes.Rock_3.geometry}>
-      {randomizer.map((props, i) => (
+      {rocksRandomizer.map((props, i) => (
         <Rock1 key={i} {...props} scale={[100, 100, 150]} />
       ))}
     </Instances>
   )
 }
 
+const Gold = ({ count = 1000 }: StoneCountProps) => {
+  const { nodes, materials } = useGLTF('/models/rocks/gold1.glb') as unknown as StonesData
+  return (
+    <>
+      <Instances castShadow receiveShadow range={count} material={materials.Gold} geometry={nodes.Resource_Gold_1_1.geometry}>
+        {goldRandomizer.map((props, i) => (
+          <Gold1 key={i} {...props} scale={[10, 10, 10]} meshRef={nodes.Resource_Gold_1_1} />
+        ))}
+      </Instances>
+      <Instances castShadow receiveShadow range={count} material={materials.Stone} geometry={nodes.Resource_Gold_1_2.geometry}>
+        {goldRandomizer.map((props, i) => (
+          <Gold1 key={i} {...props} scale={[10, 10, 10]} meshRef={nodes.Resource_Gold_1_2} />
+        ))}
+      </Instances>
+    </>
+  )
+}
+
 const Rock1 = ({ ...props }) => {
-  const ref = useRef()
-  return <Instance ref={ref} {...props} />
+  const rock1 = useRef()
+  return <Instance ref={rock1} {...props} />
+}
+
+const Gold1 = ({ ...props }) => {
+  const gold1 = useRef()
+  return <Instance ref={gold1} {...props} />
+}
+
+const Stones = () => {
+  return (
+    <>
+      <Rocks count={1000} />
+      <Gold count={100} />
+    </>
+  )
 }
 
 useGLTF.preload('/models/rocks/rocks1.glb')
+useGLTF.preload('/models/rocks/gold1.glb')
 
-export default Rocks
+export default Stones
