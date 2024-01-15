@@ -28,7 +28,7 @@ const Rocks = ({ count = 1000 }: StoneCountProps) => {
   return (
     <Instances castShadow receiveShadow range={count} material={materials.Stone_Dark} geometry={nodes.Rock_3.geometry}>
       {rocksRandomizer.map((props, i) => (
-        <Rock1 key={i} {...props} scale={[100, 100, 150]} />
+        <Rock1 key={i} {...props} />
       ))}
     </Instances>
   )
@@ -38,12 +38,12 @@ const Gold = ({ count = 1000 }: StoneCountProps) => {
   const { nodes, materials } = useGLTF('/models/rocks/gold1.glb') as unknown as StonesData
   return (
     <>
-      <Instances castShadow receiveShadow range={count} material={materials.Gold} geometry={nodes.Resource_Gold_1_1.geometry}>
+      <Instances range={count} material={materials.Gold} geometry={nodes.Resource_Gold_1_1.geometry}>
         {goldRandomizer.map((props, i) => (
           <Gold1 key={i} {...props} scale={[10, 10, 10]} meshRef={nodes.Resource_Gold_1_1} />
         ))}
       </Instances>
-      <Instances castShadow receiveShadow range={count} material={materials.Stone} geometry={nodes.Resource_Gold_1_2.geometry}>
+      <Instances range={count} material={materials.Stone} geometry={nodes.Resource_Gold_1_2.geometry}>
         {goldRandomizer.map((props, i) => (
           <Gold1 key={i} {...props} scale={[10, 10, 10]} meshRef={nodes.Resource_Gold_1_2} />
         ))}
@@ -55,7 +55,7 @@ const Gold = ({ count = 1000 }: StoneCountProps) => {
 const Crystals = ({ count = 1000 }: StoneCountProps) => {
   const { nodes, materials } = useGLTF('/models/rocks/crystal1.glb') as unknown as StonesData
   return (
-    <Instances castShadow receiveShadow range={count} material={materials['Material.004']} geometry={nodes.crystal_2.geometry}>
+    <Instances range={count} material={materials['Material.004']} geometry={nodes.crystal_2.geometry}>
       {crystalsRandomizer.map((props, i) => (
         <Crystal1 key={i} {...props} scale={[1, 1, 1]} />
       ))}
@@ -82,7 +82,7 @@ const Stones = () => {
   return (
     <>
       <Rocks count={1000} />
-      <Gold count={300} />
+      <Gold count={100} />
       <Crystals count={100} />
     </>
   )
