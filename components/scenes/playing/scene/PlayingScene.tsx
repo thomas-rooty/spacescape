@@ -4,14 +4,16 @@ import { Canvas } from '@react-three/fiber'
 import { Physics } from '@react-three/rapier'
 import { createCinematicSlice } from '@/stores/intro.store'
 import Effects from '@/components/scenes/common/fx/Effects'
-import FloorMesh from '@/components/scenes/playing/scene/floor/FloorMesh'
 import PlayingLights from '@/components/scenes/playing/lights/PlayingLights'
-import SpaceshipOuters from '@/components/scenes/playing/assets/spaceship/ShipshipOuters'
-import ShipHitbox from '@/components/scenes/playing/assets/spaceship/ShipHitbox'
-import RenderAstronauts from '@/components/scenes/common/multiplayer/RenderAstronauts'
 import CharacterController from '@/components/character/CharacterController'
+import RenderAstronauts from '@/components/scenes/common/multiplayer/RenderAstronauts'
 import Floor from '@/components/scenes/common/utils/Floor'
+import FloorMesh from '@/components/scenes/playing/scene/floor/FloorMesh'
 import Stones from '@/components/scenes/playing/assets/rocks/Rocks'
+import Ship from '@/components/scenes/playing/assets/ship/Ship'
+import ShipHitbox from '@/components/scenes/playing/assets/ship/ShipHitbox'
+import Rover from '@/components/scenes/playing/assets/rover/Rover'
+import RevoluteJointVehicle from '@/components/scenes/playing/assets/rover/RevoluteJointVehicle'
 
 const PlayingScene = () => {
   // Base values
@@ -31,10 +33,14 @@ const PlayingScene = () => {
       <Effects />
       {animationDone && <PointerLockControls />}
       <Stars radius={1} depth={250} count={10000} factor={0.5} saturation={1} fade />
-      <Physics gravity={[0, -1.5, 0]}>
+      <Physics debug gravity={[0, -1.5, 0]}>
         <CharacterController position={[0, 0.3, distanceFromCenter]} canMove={true} />
-        <SpaceshipOuters position={[4, 1.07, 26]} scale={0.4} rotation={[0, -2, 0]} />
-        <Floor position={[0, 0, distanceFromCenter]} size={2000} friction={1} />
+        <Floor position={[0, -0.03, distanceFromCenter]} size={2000} friction={1} />
+        <Ship position={[4, 1.07, 26]} scale={0.4} rotation={[0, -2, 0]} />
+        <RevoluteJointVehicle position={[0, 1, 23]} scale={0.2} />
+        {
+          // Make the rover have the same position at RevoluteJointVehicle but outside the physics engine
+        }
       </Physics>
       <ShipHitbox refProp={SHIP_HITBOX} id="SHIP_HITBOX" position={[5.5, 0.3, 26.6]} rotation={[0, -2, 0]} geometryArgs={[2, 0.5, 1.2]} />
       <FloorMesh />
