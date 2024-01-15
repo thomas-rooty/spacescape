@@ -3,7 +3,6 @@ import React, { useEffect, useRef } from 'react'
 import { RigidBody } from '@react-three/rapier'
 import { useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
-import ExitDoor from '@/components/scenes/privatequarters/interactions/ExitDoor'
 
 type GLTFResult = GLTF & {
   nodes: {

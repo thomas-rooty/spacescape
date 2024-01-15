@@ -5,7 +5,7 @@ const PlayingLights = () => {
     <>
       <ambientLight intensity={0.2} />
       <fog attach="fog" args={['black', 0, 12]} />
-      <SpotLight position={[0, 7, 20]} target={[6, 0, 28]} angle={360} intensity={1} penumbra={1} distance={100} bias={-0.001} />
+      <SpotLight position={[-10, 15, -15]} target={[6, 0, 28]} angle={Math.PI/4} intensity={1.2} penumbra={1} distance={0} bias={-0.000001} />
     </>
   )
 }

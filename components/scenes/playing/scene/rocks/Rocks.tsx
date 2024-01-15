@@ -19,25 +19,18 @@ type GLTFResult = GLTF & {
 
 const Rocks = ({ count = 1000 }: RocksProps) => {
   const { nodes, materials } = useGLTF('/models/rocks/rocks1.glb') as unknown as GLTFResult
-  console.log(randomizer)
   return (
-    <Instances range={count} material={materials.Stone_Dark} geometry={nodes.Rock_3.geometry}>
-      <group>
-        {randomizer.map((props, i) => (
-          <Rock1 key={i} {...props} scale={100} />
-        ))}
-      </group>
+    <Instances castShadow receiveShadow range={count} material={materials.Stone_Dark} geometry={nodes.Rock_3.geometry}>
+      {randomizer.map((props, i) => (
+        <Rock1 key={i} {...props} scale={[100, 100, 150]} />
+      ))}
     </Instances>
   )
 }
 
 const Rock1 = ({ ...props }) => {
   const ref = useRef()
-  return (
-    <group {...props}>
-      <Instance ref={ref} />
-    </group>
-  )
+  return <Instance ref={ref} {...props} />
 }
 
 useGLTF.preload('/models/rocks/rocks1.glb')
