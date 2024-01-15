@@ -4,14 +4,14 @@ import { Canvas } from '@react-three/fiber'
 import { Physics } from '@react-three/rapier'
 import { createCinematicSlice } from '@/stores/intro.store'
 import Effects from '@/components/scenes/common/fx/Effects'
-import FloorMesh from '@/components/scenes/playing/scene/planet/floor/FloorMesh'
+import FloorMesh from '@/components/scenes/playing/scene/floor/FloorMesh'
 import PlayingLights from '@/components/scenes/playing/lights/PlayingLights'
 import SpaceshipOuters from '@/components/scenes/playing/assets/spaceship/ShipshipOuters'
 import ShipHitbox from '@/components/scenes/playing/assets/spaceship/ShipHitbox'
 import RenderAstronauts from '@/components/scenes/common/multiplayer/RenderAstronauts'
 import CharacterController from '@/components/character/CharacterController'
 import Floor from '@/components/scenes/common/utils/Floor'
-import Rocks from '@/components/scenes/playing/scene/rocks/Rocks'
+import Rocks from '@/components/scenes/playing/assets/rocks/Rocks'
 
 const PlayingScene = () => {
   // Base values
