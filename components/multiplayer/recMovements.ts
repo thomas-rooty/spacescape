@@ -16,6 +16,7 @@ export const RecMovements = (
   // Threshold for detecting significant movement
   const lastPosition = lastPositionRef.current
   const movementThreshold = 0.001
+  const jumpThreshold = 0.0035
   lastPositionRef.current = { x: camera.position.x, y: camera.position.y, z: camera.position.z }
 
   // Calculate the position difference
@@ -24,36 +25,38 @@ export const RecMovements = (
   // Determine if the character is still moving
   const isStillMoving = positionDiff > movementThreshold
 
-  // Handle jump initiation
-  if (jump && !jumpStartTime) {
-    setJumpStartTime(elapsedTime)
-  }
-
-  // Handle static jump emission
-  if (jumpStartTime) {
-    const timeSinceJump = elapsedTime - jumpStartTime
-    const newPosition = [camera.position.x, camera.position.y, camera.position.z]
-    if (timeSinceJump < 2.2) {
-      console.log('jump animation')
-      socket.emit('move', { newPosition, animation: 'jump', lookingAt: horizontalLookAtPosition })
-    } else {
-      console.log('idle animation')
-      setJumpStartTime(null)
-      socket.emit('move', { newPosition, animation: 'idle', lookingAt: horizontalLookAtPosition })
-    }
-  }
+  // Determine if the character is falling
+  const isFalling = camera.position.y < lastPosition.y - jumpThreshold
+  const isJumping = camera.position.y > lastPosition.y + jumpThreshold
 
   // Handle movement emission
-  if (isKeyPressed && isStillMoving) {
-    console.log('run animation')
-    isDoneMoving.current = false
+  const emitMoveEvent = (animation: string) => {
     const newPosition = [camera.position.x, camera.position.y, camera.position.z]
-    socket.emit('move', { newPosition, animation: 'run', lookingAt: horizontalLookAtPosition })
-  } else if (!isDoneMoving.current) {
-    console.log('idle animation')
-    const newPosition = [camera.position.x, camera.position.y, camera.position.z]
-    socket.emit('move', { newPosition, animation: 'idle', lookingAt: horizontalLookAtPosition })
-    isDoneMoving.current = true
+    socket.emit('move', { newPosition, animation, lookingAt: horizontalLookAtPosition })
+  }
+
+  // Main logic
+  if (!isStillMoving) {
+    if (!isDoneMoving.current) {
+      console.log('idle')
+      emitMoveEvent('idle')
+      isDoneMoving.current = true
+    }
+    return // Not moving
+  }
+  isDoneMoving.current = false
+
+  if (isJumping) {
+    console.log('jumping')
+    emitMoveEvent('jump')
+  } else if (isFalling) {
+    console.log('falling')
+    emitMoveEvent('fall')
+  }
+
+  if (isKeyPressed) {
+    console.log('running')
+    emitMoveEvent('run')
   }
   prevMovementRef.current = isKeyPressed
 }

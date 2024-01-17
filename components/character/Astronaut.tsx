@@ -39,10 +39,10 @@ interface AstronautProps {
 
 type ActionName =
   | 'dance'
-  | 'idle.001_Armature'
   | 'idle02'
   | 'idle'
   | 'jump'
+  | 'fall'
   | 'pistol_idle'
   | 'pistol_walk'
   | 'pistol_walk_back'
@@ -72,7 +72,7 @@ export const Astronaut = ({ headColor = '#f5f5f5', animationName, ...props }: As
     actions[animation]?.reset().fadeIn(0.2).play()
     return () => {
       if (actions[animation]) {
-        actions[animation]?.fadeOut(0.4)
+        actions[animation]?.fadeOut(0.2)
       }
     }
   }, [actions, animation])

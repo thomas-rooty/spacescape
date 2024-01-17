@@ -116,12 +116,12 @@ const CharacterController = ({ position, canMove }: CharacterControllerProps) =>
         enabledRotations={[false, false, false]}
         onCollisionEnter={({ other }: any) => {
           if (other.rigidBody?.isWalkable) {
-            setGrounded(true);
+            setGrounded(true)
           }
         }}
         onCollisionExit={({ other }: any) => {
           if (other.rigidBody?.isWalkable) {
-            setGrounded(false);
+            setGrounded(false)
           }
         }}
       >
