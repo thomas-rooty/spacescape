@@ -1,4 +1,4 @@
-import PrivateQScene from '@/components/scenes/privatequarters/scene/PrivateQScene'
+import PrivateQScene from '@/components/scenes/privatequarters/PrivateQScene'
 import { SocketManager } from '@/utils/SocketManager'
 
 const PrivateQExperience = () => {

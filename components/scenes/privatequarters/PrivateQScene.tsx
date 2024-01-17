@@ -5,7 +5,7 @@ import Effects from '@/components/scenes/common/fx/Effects'
 import CharacterController from '@/components/character/CharacterController'
 import PrivateQLights from '@/components/scenes/privatequarters/lights/PrivateQLights'
 import PrivateQuarters from '@/components/scenes/privatequarters/assets/spaceship/interiors/PrivateQuarters'
-import ExitDoor from '@/components/scenes/privatequarters/interactions/ExitDoor'
+import ExitDoor from '@/components/scenes/privatequarters/assets/spaceship/interiors/interactions/ExitDoor'
 import React, { useRef } from 'react'
 
 const PrivateQScene = () => {

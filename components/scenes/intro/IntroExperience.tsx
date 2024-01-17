@@ -1,9 +1,9 @@
 import styles from '@/styles/Home.module.css'
-import IntroScene from '@/components/scenes/intro/scene/IntroScene'
-import DateTimelapse from '@/components/scenes/intro/scene/datetimelapse/DateTimelapse'
+import IntroScene from '@/components/scenes/intro/IntroScene'
+import DateTimelapse from '@/components/scenes/intro/assets/datetimelapse/DateTimelapse'
 import { createCinematicSlice } from '@/stores/intro.store'
 import { useEffect, useState } from 'react'
-import Sidebar from '@/components/scenes/intro/sidebar/Sidebar'
+import Sidebar from '@/components/dom/sidebar/Sidebar'
 
 const IntroExperience = () => {
   // Store values

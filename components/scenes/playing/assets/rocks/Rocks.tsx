@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import { useRef } from 'react'
 import { Instances, Instance, useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
-import { rocksRandomizer, goldRandomizer, crystalsRandomizer } from '@/components/scenes/common/utils/randomizer'
+import { rocksRandomizer, goldRandomizer, crystalsRandomizer } from '@/components/scenes/common/physics/randomizer'
 
 interface StoneCountProps {
   count?: number
