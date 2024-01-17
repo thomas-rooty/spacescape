@@ -1,5 +1,8 @@
 import * as THREE from 'three'
 
+const MOVEMENT_THRESHOLD = 0.001
+const JUMP_THRESHOLD = 0.0035
+
 export const RecMovements = (
   lastPositionRef: React.MutableRefObject<{ x: number; y: number; z: number }>,
   isDoneMoving: React.MutableRefObject<boolean>,
@@ -7,50 +10,60 @@ export const RecMovements = (
   camera: THREE.Camera,
   socket: any,
   horizontalLookAtPosition: THREE.Vector3,
-  prevMovementRef: React.MutableRefObject<boolean>,
+  prevMovementRef: React.MutableRefObject<boolean>
 ) => {
-  // Threshold for detecting significant movement
+  // Get the last position
   const lastPosition = lastPositionRef.current
-  const movementThreshold = 0.001
-  const jumpThreshold = 0.0035
+
+  // Helper function to calculate the distance
+  const calculateDistance = (position1: THREE.Vector3, position2: { x: any; y: any; z: any }) => {
+    return Math.sqrt((position1.x - position2.x) ** 2 + (position1.y - position2.y) ** 2 + (position1.z - position2.z) ** 2)
+  }
+
+  // Helper function to emit movement event
+  const emitMoveEvent = (animation: string) => {
+    socket.emit('move', {
+      newPosition: [camera.position.x, camera.position.y, camera.position.z],
+      animation,
+      lookingAt: horizontalLookAtPosition,
+    })
+  }
+
+  // Update the last position
   lastPositionRef.current = { x: camera.position.x, y: camera.position.y, z: camera.position.z }
 
   // Calculate the position difference
-  const positionDiff = Math.sqrt((camera.position.x - lastPosition.x) ** 2 + (camera.position.y - lastPosition.y) ** 2 + (camera.position.z - lastPosition.z) ** 2)
+  const positionDiff = calculateDistance(camera.position, lastPosition)
 
-  // Determine if the character is still moving
-  const isStillMoving = positionDiff > movementThreshold
-
-  // Determine if the character is falling
-  const isFalling = camera.position.y < lastPosition.y - jumpThreshold
-  const isJumping = camera.position.y > lastPosition.y + jumpThreshold
+  // Determine movement status
+  const isStillMoving = positionDiff > MOVEMENT_THRESHOLD
+  const isFalling = camera.position.y < lastPosition.y - JUMP_THRESHOLD
+  const isJumping = camera.position.y > lastPosition.y + JUMP_THRESHOLD
   const isInAir = isFalling || isJumping
 
   // Handle movement emission
-  const emitMoveEvent = (animation: string) => {
-    const newPosition = [camera.position.x, camera.position.y, camera.position.z]
-    socket.emit('move', { newPosition, animation, lookingAt: horizontalLookAtPosition })
-  }
-
-  // Main logic
   if (!isStillMoving) {
     if (!isDoneMoving.current) {
       emitMoveEvent('idle')
-      isDoneMoving.current = true
+      isDoneMoving.current = true // Instantly stop
     }
-    return // Not moving
+    return
   }
-  isDoneMoving.current = false
 
+  isDoneMoving.current = false // Instantly start
+
+  // Handle unique movement cases
   if (isJumping) {
     emitMoveEvent('jump')
   } else if (isFalling) {
-    console.log('falling')
     emitMoveEvent('fall')
   }
 
+  // Running
   if (isKeyPressed && !isInAir) {
     emitMoveEvent('run')
   }
+
+  // Update the previous movement
   prevMovementRef.current = isKeyPressed
 }
