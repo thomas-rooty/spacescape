@@ -8,10 +8,6 @@ export const RecMovements = (
   socket: any,
   horizontalLookAtPosition: THREE.Vector3,
   prevMovementRef: React.MutableRefObject<boolean>,
-  jump: boolean,
-  elapsedTime: number,
-  jumpStartTime: number | null,
-  setJumpStartTime: React.Dispatch<React.SetStateAction<number | null>>
 ) => {
   // Threshold for detecting significant movement
   const lastPosition = lastPositionRef.current
@@ -28,6 +24,7 @@ export const RecMovements = (
   // Determine if the character is falling
   const isFalling = camera.position.y < lastPosition.y - jumpThreshold
   const isJumping = camera.position.y > lastPosition.y + jumpThreshold
+  const isInAir = isFalling || isJumping
 
   // Handle movement emission
   const emitMoveEvent = (animation: string) => {
@@ -38,7 +35,6 @@ export const RecMovements = (
   // Main logic
   if (!isStillMoving) {
     if (!isDoneMoving.current) {
-      console.log('idle')
       emitMoveEvent('idle')
       isDoneMoving.current = true
     }
@@ -47,15 +43,13 @@ export const RecMovements = (
   isDoneMoving.current = false
 
   if (isJumping) {
-    console.log('jumping')
     emitMoveEvent('jump')
   } else if (isFalling) {
     console.log('falling')
     emitMoveEvent('fall')
   }
 
-  if (isKeyPressed) {
-    console.log('running')
+  if (isKeyPressed && !isInAir) {
     emitMoveEvent('run')
   }
   prevMovementRef.current = isKeyPressed

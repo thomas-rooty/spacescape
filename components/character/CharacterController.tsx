@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { useMemo, useRef, useState } from 'react'
+import { useMemo, useRef } from 'react'
 import { useControls } from '@/utils/useControls'
 import { useFrame } from '@react-three/fiber'
 import { BallCollider, RigidBody } from '@react-three/rapier'
@@ -41,7 +41,6 @@ const CharacterController = ({ position, canMove }: CharacterControllerProps) =>
   const horizontalLookAtPosition = useMemo(() => new THREE.Vector3(), [])
   const worldDirection = useMemo(() => new THREE.Vector3(), [])
   const raycaster = useMemo(() => new THREE.Raycaster(), [])
-  const [jumpStartTime, setJumpStartTime] = useState<number | null>(null)
 
   // Store values
   const socket = createSocketSlice((state) => state.socket)
@@ -97,7 +96,7 @@ const CharacterController = ({ position, canMove }: CharacterControllerProps) =>
 
     // Stream movements to server
     if (socket !== null) {
-      RecMovements(lastPositionRef, isDoneMoving, isKeyPressed, camera, socket, horizontalLookAtPosition, prevMovementRef, controls.jump, elapsedTime, jumpStartTime, setJumpStartTime)
+      RecMovements(lastPositionRef, isDoneMoving, isKeyPressed, camera, socket, horizontalLookAtPosition, prevMovementRef)
     }
 
     // DEBUG : Display camera position
