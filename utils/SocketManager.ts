@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { createAstronautSlice } from '@/stores/astronauts.store'
 import { createSocketSlice } from '@/stores/socket.store'
 import { createCharacterSlice } from '@/stores/character.store'
+import { decode } from '@msgpack/msgpack'
 
 export const SocketManager = () => {
   const url = process.env.NODE_ENV === 'production' ? 'https://spacescape.eu-4.evennode.com' : 'localhost:3001'
@@ -21,7 +22,8 @@ export const SocketManager = () => {
       console.log('disconnected')
     }
 
-    function onAstronauts(astronauts: any) {
+    function onAstronauts(encodedAstronauts: any) {
+      const astronauts = decode(encodedAstronauts) as any[]
       setAstronauts(astronauts)
     }
 
