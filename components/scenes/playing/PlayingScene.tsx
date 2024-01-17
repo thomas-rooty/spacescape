@@ -3,6 +3,7 @@ import { Stars, PointerLockControls, AdaptiveDpr } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { Physics } from '@react-three/rapier'
 import { createCinematicSlice } from '@/stores/intro.store'
+import { createDebugStore } from '@/stores/debug.store'
 import Effects from '@/components/scenes/common/fx/Effects'
 import PlayingLights from '@/components/scenes/playing/lights/PlayingLights'
 import CharacterController from '@/components/character/CharacterController'
@@ -21,6 +22,7 @@ const PlayingScene = () => {
 
   // Store values
   const animationDone = createCinematicSlice((state) => state.animationDone)
+  const debug = createDebugStore((state) => state.debug)
 
   // Hitbox references
   const SHIP_HITBOX = useRef<any>()
@@ -33,7 +35,7 @@ const PlayingScene = () => {
       <PlayingLights />
       <Effects />
       {animationDone && <PointerLockControls />}
-      <Physics debug gravity={[0, -1.5, 0]}>
+      <Physics debug={debug} gravity={[0, -1.5, 0]}>
         <CharacterController position={[0, 0.3, distanceFromCenter]} canMove={true} />
         <Floor position={[0, -0.03, distanceFromCenter]} size={2000} friction={1} />
         <Ship position={[4, 1.07, 26]} scale={0.4} rotation={[0, -2, 0]} />
