@@ -28,10 +28,10 @@ export const RecMovements = (
   if (isKeyPressed || isStillMoving) {
     isDoneMoving.current = false
     const newPosition = [camera.position.x, camera.position.y, camera.position.z]
-    socket.emit('move', { newPosition, animation: 'CharacterArmature|Run', lookingAt: horizontalLookAtPosition })
+    socket.emit('move', { newPosition, animation: 'run', lookingAt: horizontalLookAtPosition })
   } else if (!isDoneMoving.current) {
     const newPosition = [camera.position.x, camera.position.y, camera.position.z]
-    socket.emit('move', { newPosition, animation: 'CharacterArmature|Idle', lookingAt: horizontalLookAtPosition })
+    socket.emit('move', { newPosition, animation: 'idle', lookingAt: horizontalLookAtPosition })
     isDoneMoving.current = true
   }
 
@@ -45,10 +45,10 @@ export const RecMovements = (
     const timeSinceJump = elapsedTime - jumpStartTime
     const newPosition = [camera.position.x, camera.position.y, camera.position.z]
     if (timeSinceJump < 1.5) {
-      socket.emit('move', { newPosition, animation: 'CharacterArmature|Run', lookingAt: horizontalLookAtPosition })
+      socket.emit('move', { newPosition, animation: 'jump', lookingAt: horizontalLookAtPosition })
     } else {
       setJumpStartTime(null)
-      socket.emit('move', { newPosition, animation: 'CharacterArmature|Idle', lookingAt: horizontalLookAtPosition })
+      socket.emit('move', { newPosition, animation: 'idle', lookingAt: horizontalLookAtPosition })
     }
   }
   prevMovementRef.current = isKeyPressed
