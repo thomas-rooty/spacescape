@@ -72,7 +72,7 @@ export const Astronaut = ({ headColor = '#f5f5f5', animationName, ...props }: As
     actions[animation]?.reset().fadeIn(0.2).play()
     return () => {
       if (actions[animation]) {
-        actions[animation]?.fadeOut(0.8)
+        actions[animation]?.fadeOut(0.4)
       }
     }
   }, [actions, animation])

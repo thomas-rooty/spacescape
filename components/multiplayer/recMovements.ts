@@ -33,20 +33,24 @@ export const RecMovements = (
   if (jumpStartTime) {
     const timeSinceJump = elapsedTime - jumpStartTime
     const newPosition = [camera.position.x, camera.position.y, camera.position.z]
-    if (timeSinceJump < 1.5) {
+    if (timeSinceJump < 2.2) {
+      console.log('jump animation')
       socket.emit('move', { newPosition, animation: 'jump', lookingAt: horizontalLookAtPosition })
     } else {
+      console.log('idle animation')
       setJumpStartTime(null)
       socket.emit('move', { newPosition, animation: 'idle', lookingAt: horizontalLookAtPosition })
     }
   }
 
   // Handle movement emission
-  if (isKeyPressed || isStillMoving) {
+  if (isKeyPressed && isStillMoving) {
+    console.log('run animation')
     isDoneMoving.current = false
     const newPosition = [camera.position.x, camera.position.y, camera.position.z]
     socket.emit('move', { newPosition, animation: 'run', lookingAt: horizontalLookAtPosition })
   } else if (!isDoneMoving.current) {
+    console.log('idle animation')
     const newPosition = [camera.position.x, camera.position.y, camera.position.z]
     socket.emit('move', { newPosition, animation: 'idle', lookingAt: horizontalLookAtPosition })
     isDoneMoving.current = true

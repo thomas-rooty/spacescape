@@ -125,7 +125,7 @@ const CharacterController = ({ position, canMove }: CharacterControllerProps) =>
           }
         }}
       >
-        <BallCollider args={[0.2]} position={[0, 0, 0]} />
+        <BallCollider args={[0.2]} position={[0, 0, 0]} friction={10} />
         <group ref={character}>
           <mesh>
             <boxGeometry args={[0.1, 0.15, 0.1]} />
