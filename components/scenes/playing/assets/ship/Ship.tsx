@@ -43,17 +43,17 @@ const Ship = ({ position, rotation, scale }: SpaceshipOutersProps) => {
   }, [])
   return (
     <RigidBody ref={ship} type="fixed" colliders={'trimesh'} name="ship" position={position} rotation={rotation} scale={scale}>
-      <mesh castShadow receiveShadow geometry={nodes.l_low.geometry} material={materials.turbine} rotation={[Math.PI / 2, 0, 0]} scale={8.766} />
       <mesh castShadow receiveShadow geometry={nodes.e_low.geometry} material={materials.base} rotation={[Math.PI / 2, 0, 0]} scale={8.766} />
-      <mesh castShadow receiveShadow geometry={nodes.f_low.geometry} material={materials.gun} rotation={[Math.PI / 2, 0, 0]} scale={8.766} />
-      <mesh castShadow receiveShadow geometry={nodes.g_low.geometry} material={materials.gun} rotation={[Math.PI / 2, 0, 0]} scale={8.766} />
       <mesh castShadow receiveShadow geometry={nodes.d_low.geometry} material={materials.base} rotation={[Math.PI / 2, 0, 0]} scale={8.766} />
-      <mesh castShadow receiveShadow geometry={nodes.h_low.geometry} material={materials.gun} rotation={[Math.PI / 2, 0, 0]} scale={8.766} />
-      <mesh castShadow receiveShadow geometry={nodes.i_low.geometry} material={materials.gun} rotation={[Math.PI / 2, 0, 0]} scale={8.766} />
-      <mesh castShadow receiveShadow geometry={nodes.j_low.geometry} material={materials.gun} rotation={[Math.PI / 2, 0, 0]} scale={8.766} />
+      <mesh castShadow receiveShadow geometry={nodes.l_low.geometry} material={materials.turbine} rotation={[Math.PI / 2, 0, 0]} scale={8.766} />
       <mesh castShadow receiveShadow geometry={nodes.b_low.geometry} material={materials.turbine} rotation={[Math.PI / 2, 0, 0]} scale={8.766} />
       <mesh castShadow receiveShadow geometry={nodes.a_low.geometry} material={materials.turbine} rotation={[Math.PI / 2, 0, 0]} scale={8.766} />
       <mesh castShadow receiveShadow geometry={nodes.c_low.geometry} material={materials.turbine} rotation={[Math.PI / 2, 0, 0]} scale={8.766} />
+      <mesh castShadow receiveShadow geometry={nodes.h_low.geometry} material={materials.gun} rotation={[Math.PI / 2, 0, 0]} scale={8.766} />
+      <mesh castShadow receiveShadow geometry={nodes.i_low.geometry} material={materials.gun} rotation={[Math.PI / 2, 0, 0]} scale={8.766} />
+      <mesh castShadow receiveShadow geometry={nodes.j_low.geometry} material={materials.gun} rotation={[Math.PI / 2, 0, 0]} scale={8.766} />
+      <mesh castShadow receiveShadow geometry={nodes.f_low.geometry} material={materials.gun} rotation={[Math.PI / 2, 0, 0]} scale={8.766} />
+      <mesh castShadow receiveShadow geometry={nodes.g_low.geometry} material={materials.gun} rotation={[Math.PI / 2, 0, 0]} scale={8.766} />
       <mesh castShadow receiveShadow geometry={nodes.k_low.geometry} material={materials.gun} rotation={[Math.PI / 2, 0, 0]} scale={8.766} />
     </RigidBody>
   )
