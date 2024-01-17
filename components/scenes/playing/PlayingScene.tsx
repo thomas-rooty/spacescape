@@ -37,10 +37,10 @@ const PlayingScene = () => {
         <CharacterController position={[0, 0.3, distanceFromCenter]} canMove={true} />
         <Floor position={[0, -0.03, distanceFromCenter]} size={2000} friction={1} />
         <Ship position={[4, 1.07, 26]} scale={0.4} rotation={[0, -2, 0]} />
+        <Stones />
       </Physics>
       <ShipHitbox refProp={SHIP_HITBOX} id="SHIP_HITBOX" position={[5.5, 0.3, 26.6]} rotation={[0, -2, 0]} geometryArgs={[2, 0.5, 1.2]} />
       <FloorMesh />
-      <Stones />
     </Canvas>
   )
 }

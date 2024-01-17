@@ -1,8 +1,9 @@
 import * as THREE from 'three'
-import { useRef } from 'react'
+import { useRef, useEffect, useMemo } from 'react'
 import { Instances, Instance, useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
 import { rocksRandomizer, goldRandomizer, crystalsRandomizer } from '@/components/scenes/common/physics/randomizer'
+import { InstancedRigidBodies, InstancedRigidBodyProps, RapierRigidBody } from '@react-three/rapier'
 
 interface StoneCountProps {
   count?: number
@@ -24,13 +25,30 @@ type StonesData = GLTF & {
 }
 
 const Rocks = ({ count = 1000 }: StoneCountProps) => {
+  const rigidBodies = useRef<RapierRigidBody[]>(null)
   const { nodes, materials } = useGLTF('/models/rocks/rocks1.glb') as unknown as StonesData
+
+  const instances = useMemo(() => {
+    const instances: InstancedRigidBodyProps[] = []
+
+    rocksRandomizer.forEach((props, i) => {
+      instances.push({
+        key: i,
+        position: [props.position[0], props.position[1], props.position[2]],
+        rotation: [props.rotation[0], props.rotation[1], props.rotation[2]],
+        scale: [props.scale[0], props.scale[1], props.scale[2]],
+      })
+    })
+
+    return instances
+  }, [])
+
   return (
-    <Instances castShadow receiveShadow range={count} material={materials.Stone_Dark} geometry={nodes.Rock_3.geometry}>
-      {rocksRandomizer.map((props, i) => (
-        <Rock1 key={i} {...props} />
-      ))}
-    </Instances>
+    <InstancedRigidBodies ref={rigidBodies} instances={instances} colliders="cuboid" type="fixed" onIntersectionEnter={(e) => console.log(e)}>
+      <instancedMesh castShadow args={[nodes.Rock_3.geometry, undefined, count]} count={count} >
+        <meshStandardMaterial attach="material" {...materials.Stone_Dark} />
+      </instancedMesh>
+    </InstancedRigidBodies>
   )
 }
 
@@ -61,11 +79,6 @@ const Crystals = ({ count = 1000 }: StoneCountProps) => {
       ))}
     </Instances>
   )
-}
-
-const Rock1 = ({ ...props }) => {
-  const rock1 = useRef()
-  return <Instance ref={rock1} {...props} />
 }
 
 const Gold1 = ({ ...props }) => {
