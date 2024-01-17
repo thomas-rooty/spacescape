@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { Stars, PointerLockControls } from '@react-three/drei'
+import { Stars, PointerLockControls, AdaptiveDpr } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { Physics } from '@react-three/rapier'
 import { createCinematicSlice } from '@/stores/intro.store'
@@ -26,7 +26,8 @@ const PlayingScene = () => {
   const SHIP_HITBOX = useRef<any>()
 
   return (
-    <Canvas shadows={true} camera={{ position: [0, 0, distanceFromCenter], fov: 60 }}>
+    <Canvas shadows={true} camera={{ position: [0, 0, distanceFromCenter], fov: 60 }} performance={{ min: 0.5, max: 1 }}>
+      <AdaptiveDpr pixelated />
       <Stars radius={150} depth={25} count={10000} factor={2} saturation={10} fade />
       <RenderAstronauts />
       <PlayingLights />
