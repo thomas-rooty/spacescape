@@ -35,7 +35,7 @@ const PlayingScene = () => {
       <PlayingLights />
       <Effects />
       {animationDone && <PointerLockControls />}
-      <Physics debug={debug} gravity={[0, -1.5, 0]}>
+      <Physics debug={debug} gravity={[0, -1, 0]}>
         <CharacterController position={[0, 0.3, distanceFromCenter]} canMove={true} />
         <Floor position={[0, -0.03, distanceFromCenter]} size={2000} friction={1} />
         <Ship position={[4, 1.07, 26]} scale={0.4} rotation={[0, -2, 0]} />

@@ -69,10 +69,10 @@ export const Astronaut = ({ headColor = '#f5f5f5', animationName, ...props }: As
   // Animate the astronaut
   const [animation, setAnimation] = useState('idle')
   useEffect(() => {
-    actions[animation]?.reset().fadeIn(0.6).play()
+    actions[animation]?.reset().fadeIn(0.2).play()
     return () => {
       if (actions[animation]) {
-        actions[animation]?.fadeOut(0.3)
+        actions[animation]?.fadeOut(0.8)
       }
     }
   }, [actions, animation])

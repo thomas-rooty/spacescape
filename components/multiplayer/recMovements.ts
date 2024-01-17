@@ -24,17 +24,6 @@ export const RecMovements = (
   // Determine if the character is still moving
   const isStillMoving = positionDiff > movementThreshold
 
-  // Handle movement emission
-  if (isKeyPressed || isStillMoving) {
-    isDoneMoving.current = false
-    const newPosition = [camera.position.x, camera.position.y, camera.position.z]
-    socket.emit('move', { newPosition, animation: 'run', lookingAt: horizontalLookAtPosition })
-  } else if (!isDoneMoving.current) {
-    const newPosition = [camera.position.x, camera.position.y, camera.position.z]
-    socket.emit('move', { newPosition, animation: 'idle', lookingAt: horizontalLookAtPosition })
-    isDoneMoving.current = true
-  }
-
   // Handle jump initiation
   if (jump && !jumpStartTime) {
     setJumpStartTime(elapsedTime)
@@ -50,6 +39,17 @@ export const RecMovements = (
       setJumpStartTime(null)
       socket.emit('move', { newPosition, animation: 'idle', lookingAt: horizontalLookAtPosition })
     }
+  }
+
+  // Handle movement emission
+  if (isKeyPressed || isStillMoving) {
+    isDoneMoving.current = false
+    const newPosition = [camera.position.x, camera.position.y, camera.position.z]
+    socket.emit('move', { newPosition, animation: 'run', lookingAt: horizontalLookAtPosition })
+  } else if (!isDoneMoving.current) {
+    const newPosition = [camera.position.x, camera.position.y, camera.position.z]
+    socket.emit('move', { newPosition, animation: 'idle', lookingAt: horizontalLookAtPosition })
+    isDoneMoving.current = true
   }
   prevMovementRef.current = isKeyPressed
 }
