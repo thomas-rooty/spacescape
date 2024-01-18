@@ -1,15 +1,9 @@
 import styles from '@/styles/Hud.module.css'
 import { createCinematicSlice } from '@/stores/intro.store'
-import { useEffect } from 'react'
 
+// Display interact prompt if hoveredObject is defined
 export const InteractPrompt = () => {
-  // Display interact prompt if hoveredObject is defined
   const hoveredObject = createCinematicSlice((state) => state.hoveredObject)
-
-  useEffect(() => {
-    console.log(hoveredObject)
-  }, [hoveredObject])
-
   return (
     <div className={`${styles.interactPrompt} ${!hoveredObject ? styles.hide : ''}`}>
       <p>Press E to interact</p>

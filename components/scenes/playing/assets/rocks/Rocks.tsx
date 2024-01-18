@@ -1,10 +1,11 @@
 import * as THREE from 'three'
-import { useRef, useCallback, useMemo } from 'react'
-import { Instances, Instance, useGLTF } from '@react-three/drei'
+import { useRef, useCallback, useMemo, useState, useEffect } from 'react'
+import { useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
-import { rocksRandomizer, goldRandomizer, crystalsRandomizer } from '@/components/scenes/common/physics/randomizer'
+import { rocksRandomizer, crystalsRandomizer } from '@/components/scenes/common/physics/randomizer'
 import { InstancedRigidBodies, InstancedRigidBodyProps, RapierRigidBody } from '@react-three/rapier'
-import { createCinematicSlice } from '@/stores/intro.store'
+import { createInteractionSlice } from '@/stores/interactions.store'
+import Hitbox from '@/components/scenes/common/hitbox/Hitbox'
 
 interface StoneCountProps {
   count?: number
@@ -13,37 +14,49 @@ interface StoneCountProps {
 type StonesData = GLTF & {
   nodes: {
     Rock_3: THREE.Mesh
-    Resource_Gold_1_1: THREE.Mesh
-    Resource_Gold_1_2: THREE.Mesh
     crystal_2: THREE.Mesh
   }
   materials: {
     Stone_Dark: THREE.MeshStandardMaterial
-    Stone: THREE.MeshStandardMaterial
-    Gold: THREE.MeshStandardMaterial
     ['Material.004']: THREE.MeshStandardMaterial
   }
 }
 
+const RAYCAST_DISTANCE = 0.5
+
 const Rocks = ({ count = 1000 }: StoneCountProps) => {
   const rigidBodies = useRef<RapierRigidBody[]>(null)
   const rocks = useRef<any>(null)
+  const hitbox = useRef<any>(null)
+  const [hitboxData, setHitboxData] = useState<any | null>(null)
+  const interactedWith = createInteractionSlice((state) => state.interactedWith)
   const { nodes, materials } = useGLTF('/models/rocks/rocks1.glb') as unknown as StonesData
 
   // Interactions
-  const onPointerMove = useCallback((e: any) => {
-    e.stopPropagation()
+  const onPointerEnter = useCallback((e: any) => {
+    const distance = e.distance
     // Intersected object
-    const intersected = e.instanceId
-    console.log('hovering rock id : ' + intersected)
+    if (distance < RAYCAST_DISTANCE && rigidBodies.current) {
+      e.stopPropagation()
+      const data = rigidBodies.current[e.instanceId].userData as any
+      const rock = {
+        id: data.id,
+        position: data.position,
+        rotation: data.rotation,
+        scale: data.scale,
+      }
+      setHitboxData(rock)
+    }
   }, [])
 
   const onPointerOut = useCallback((e: any) => {
     e.stopPropagation()
-    // Intersected object
-    const intersected = e.instanceId
-    console.log('hovering out rock id : ' + intersected)
+    setHitboxData(null)
   }, [])
+
+  useEffect(() => {
+    console.log(interactedWith)
+  }, [interactedWith])
 
   const instances = useMemo(() => {
     const instances: InstancedRigidBodyProps[] = []
@@ -54,35 +67,12 @@ const Rocks = ({ count = 1000 }: StoneCountProps) => {
         position: [props.position[0], props.position[1], props.position[2]],
         rotation: [props.rotation[0], props.rotation[1], props.rotation[2]],
         scale: [props.scale[0], props.scale[1], props.scale[2]],
-      })
-    })
-
-    console.log(instances)
-    return instances
-  }, [])
-
-  return (
-    <InstancedRigidBodies ref={rigidBodies} instances={instances} colliders="cuboid" type="fixed">
-      <instancedMesh ref={rocks} castShadow args={[nodes.Rock_3.geometry, undefined, count]} count={count} onPointerMove={onPointerMove} onPointerOut={onPointerOut}>
-        <meshStandardMaterial attach="material" {...materials.Stone_Dark} />
-      </instancedMesh>
-    </InstancedRigidBodies>
-  )
-}
-
-const Gold = ({ count = 1000 }: StoneCountProps) => {
-  const rigidBodiesGold = useRef<RapierRigidBody[]>(null)
-  const { nodes, materials } = useGLTF('/models/rocks/gold1.glb') as unknown as StonesData
-
-  const instancesGold = useMemo(() => {
-    const instances: InstancedRigidBodyProps[] = []
-
-    goldRandomizer.forEach((props, i) => {
-      instances.push({
-        key: i,
-        position: [props.position[0], props.position[1], props.position[2]],
-        rotation: [props.rotation[0], props.rotation[1], props.rotation[2]],
-        scale: [10, 10, 10],
+        userData: {
+          id: i,
+          position: props.position,
+          rotation: props.rotation,
+          scale: props.scale,
+        },
       })
     })
 
@@ -90,14 +80,14 @@ const Gold = ({ count = 1000 }: StoneCountProps) => {
   }, [])
 
   return (
-    <InstancedRigidBodies ref={rigidBodiesGold} instances={instancesGold} colliders="cuboid" type="fixed" onIntersectionEnter={(e) => console.log(e)}>
-      <instancedMesh castShadow args={[nodes.Resource_Gold_1_1.geometry, undefined, count]} count={count}>
-        <meshStandardMaterial attach="material" {...materials.Gold} />
-      </instancedMesh>
-      <instancedMesh castShadow args={[nodes.Resource_Gold_1_2.geometry, undefined, count]} count={count}>
-        <meshStandardMaterial attach="material" {...materials.Stone} />
-      </instancedMesh>
-    </InstancedRigidBodies>
+    <>
+      <InstancedRigidBodies ref={rigidBodies} instances={instances} colliders="cuboid" type="fixed">
+        <instancedMesh ref={rocks} castShadow args={[nodes.Rock_3.geometry, undefined, count]} count={count} onPointerEnter={onPointerEnter} onPointerOut={onPointerOut}>
+          <meshStandardMaterial attach="material" {...materials.Stone_Dark} />
+        </instancedMesh>
+      </InstancedRigidBodies>
+      {hitboxData && <Hitbox refProp={hitbox} id={hitboxData.id} position={hitboxData.position} rotation={hitboxData.rotation} />}
+    </>
   )
 }
 
@@ -137,5 +127,8 @@ const Stones = () => {
     </>
   )
 }
+
+useGLTF.preload('/models/rocks/rocks1.glb')
+useGLTF.preload('/models/rocks/crystal1.glb')
 
 export default Stones
