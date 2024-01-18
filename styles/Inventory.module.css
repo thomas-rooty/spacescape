@@ -1,0 +1,61 @@
+.inventory {
+    position: absolute;
+    bottom: 4rem;
+    right: 5rem;
+    width: 40%;
+    height: 30%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 20px;
+    z-index: 100;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); /* Adjust minmax values as needed */
+    grid-auto-rows: 150px; /* Adjust row height as needed */
+    gap: 10px; /* Adjust the spacing between items */
+    overflow-y: auto; /* Adds scroll for overflow */
+    color: white;
+}
+
+.inventoryItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 90px;
+    height: 90px;
+    border: 1px solid #fff; /* Example border */
+    border-radius: 5px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.itemIcon {
+    width: 60px;
+    height: 60px;
+}
+
+.itemName {
+    font-family: "Montserrat", sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 5px 0;
+    text-transform: capitalize;
+}
+
+.itemQuantity {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: -25px;
+    right: -25px;
+    width: 25px;
+    height: 25px;
+    background-color: rgb(0, 0, 0);
+    border-radius: 50%;
+    border: 1px solid #fff;
+    padding: 5px;
+    font-family: "Montserrat SemiBold", sans-serif;
+    font-size: 1rem;
+}

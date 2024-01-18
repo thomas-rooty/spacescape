@@ -14,6 +14,7 @@ import Audios from '@/components/dom/audios/Audios'
 const Home = () => {
   const adventureStarted = createCinematicSlice((state) => state.adventureStarted)
   const debug = createDebugStore((state) => state.debug)
+  const isProduction = process.env.NODE_ENV === 'production'
   return (
     <>
       <Head>
@@ -38,7 +39,7 @@ const Home = () => {
       <Suspense fallback={<Loader />}>
         <Hud />
         <Dialogs />
-        <Audios />
+        {isProduction && <Audios />}
         <Experience />
       </Suspense>
     </>
