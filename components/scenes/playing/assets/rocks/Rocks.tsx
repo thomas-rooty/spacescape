@@ -5,6 +5,7 @@ import { GLTF } from 'three-stdlib'
 import { rocksRandomizer, crystalsRandomizer } from '@/components/scenes/common/physics/randomizer'
 import { InstancedRigidBodies, InstancedRigidBodyProps, RapierRigidBody } from '@react-three/rapier'
 import { createInteractionSlice } from '@/stores/interactions.store'
+import { createInventorySlice } from '@/stores/inventory.store'
 import Hitbox from '@/components/scenes/common/hitbox/Hitbox'
 
 interface StoneCountProps {
@@ -30,6 +31,8 @@ const Rocks = ({ count = 1000 }: StoneCountProps) => {
   const hitbox = useRef<any>(null)
   const [hitboxData, setHitboxData] = useState<any | null>(null)
   const interactedWith = createInteractionSlice((state) => state.interactedWith)
+  const inventory = createInventorySlice((state) => state.inventory)
+  const addItem = createInventorySlice((state) => state.addItem)
   const { nodes, materials } = useGLTF('/models/rocks/rocks1.glb') as unknown as StonesData
 
   // Interactions
@@ -61,9 +64,15 @@ const Rocks = ({ count = 1000 }: StoneCountProps) => {
       if (rock) {
         const force = new THREE.Vector3(0, 0, -1000)
         rock.applyImpulse(force, true)
+        addItem('stone', 3, 'resources', 'https://cdn.iconscout.com/icon/free/png-256/free-stone-11-449918.png')
       }
     }
   }, [interactedWith])
+
+  // console log inventory changes
+  useEffect(() => {
+    console.log(inventory)
+  }, [inventory])
 
   const instances = useMemo(() => {
     const instances: InstancedRigidBodyProps[] = []
