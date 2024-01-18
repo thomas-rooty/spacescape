@@ -2,6 +2,7 @@ import { useControls } from '@/utils/useControls'
 import { useFrame } from '@react-three/fiber'
 import { createCinematicSlice } from '@/stores/intro.store'
 import { createInteractionSlice } from '@/stores/interactions.store'
+import { createDebugStore } from '@/stores/debug.store'
 import * as THREE from 'three'
 
 interface ShipButtonProps {
@@ -33,13 +34,14 @@ const useInteraction = (refProp: React.MutableRefObject<any>, id: string, intera
 }
 
 const Hitbox = ({ refProp, id, position, rotation }: ShipButtonProps) => {
+  const debug = createDebugStore((state) => state.debug)
   const { interact } = useControls()
   useInteraction(refProp, id, interact)
 
   return (
     <mesh ref={refProp} userData={{ id }} position={position} rotation={rotation}>
       <boxGeometry args={[0.2, 0.2, 0.2]} />
-      <meshLambertMaterial visible={true} color="red" side={THREE.DoubleSide} />
+      <meshLambertMaterial visible={debug} color="red" side={THREE.DoubleSide} />
     </mesh>
   )
 }
