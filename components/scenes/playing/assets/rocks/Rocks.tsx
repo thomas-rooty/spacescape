@@ -31,7 +31,6 @@ const Rocks = ({ count = 1000 }: StoneCountProps) => {
   const hitbox = useRef<any>(null)
   const [hitboxData, setHitboxData] = useState<any | null>(null)
   const interactedWith = createInteractionSlice((state) => state.interactedWith)
-  const inventory = createInventorySlice((state) => state.inventory)
   const addItem = createInventorySlice((state) => state.addItem)
   const { nodes, materials } = useGLTF('/models/rocks/rocks1.glb') as unknown as StonesData
 
@@ -68,11 +67,6 @@ const Rocks = ({ count = 1000 }: StoneCountProps) => {
       }
     }
   }, [interactedWith])
-
-  // console log inventory changes
-  useEffect(() => {
-    console.log(inventory)
-  }, [inventory])
 
   const instances = useMemo(() => {
     const instances: InstancedRigidBodyProps[] = []
