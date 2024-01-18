@@ -15,7 +15,7 @@ interface ShipButtonProps {
 const useInteraction = (refProp: React.MutableRefObject<any>, id: string, interact: boolean) => {
   const addObjectAsHoverable = createCinematicSlice((state) => state.addObjectAsHoverable)
   const hoveredObject = createCinematicSlice((state) => state.hoveredObject)
-  const setCollectedRock = createInteractionSlice((state) => state.setCollectedRock)
+  const setCollectedCrystal = createInteractionSlice((state) => state.setCollectedCrystal)
 
   // Ship button interactions
   useFrame(() => {
@@ -25,15 +25,15 @@ const useInteraction = (refProp: React.MutableRefObject<any>, id: string, intera
 
     if (hoveredObject === id && interact) {
       refProp.current.material.color.set('orange')
-      setCollectedRock(id)
+      setCollectedCrystal(id)
     } else {
       refProp.current.material.color.set('#FFD580')
-      setCollectedRock(null)
+      setCollectedCrystal(null)
     }
   })
 }
 
-const Hitbox = ({ refProp, id, position, rotation }: ShipButtonProps) => {
+const CrystalHitbox = ({ refProp, id, position, rotation }: ShipButtonProps) => {
   const debug = createDebugStore((state) => state.debug)
   const { interact } = useControls()
   useInteraction(refProp, id, interact)
@@ -46,4 +46,4 @@ const Hitbox = ({ refProp, id, position, rotation }: ShipButtonProps) => {
   )
 }
 
-export default Hitbox
+export default CrystalHitbox

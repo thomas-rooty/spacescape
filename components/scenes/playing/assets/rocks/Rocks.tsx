@@ -6,7 +6,8 @@ import { rocksRandomizer, crystalsRandomizer } from '@/components/scenes/common/
 import { InstancedRigidBodies, InstancedRigidBodyProps, RapierRigidBody } from '@react-three/rapier'
 import { createInteractionSlice } from '@/stores/interactions.store'
 import { createInventorySlice } from '@/stores/inventory.store'
-import Hitbox from '@/components/scenes/common/hitbox/Hitbox'
+import RockHitbox from '@/components/scenes/playing/assets/rocks/RockHitbox'
+import CrystalHitbox from '@/components/scenes/playing/assets/rocks/CrystalHitbox'
 
 interface StoneCountProps {
   count?: number
@@ -59,13 +60,8 @@ const Rocks = ({ count = 1000 }: StoneCountProps) => {
   useEffect(() => {
     // Apply force to the rock
     if (collectedRock && rigidBodies.current) {
-      const rock = rigidBodies.current?.find((rock: any) => rock.userData.id === collectedRock)
-      if (rock) {
-        const force = new THREE.Vector3(0, 0, -1000)
-        rock.applyImpulse(force, true)
-        addItem('stone', 3, 'resources', 'https://cdn.iconscout.com/icon/free/png-256/free-stone-11-449918.png')
-        setHitboxData(null)
-      }
+      addItem('stone', 3, 'resources', 'https://cdn.iconscout.com/icon/free/png-256/free-stone-11-449918.png')
+      setHitboxData(null)
     }
   }, [collectedRock])
 
@@ -97,14 +93,49 @@ const Rocks = ({ count = 1000 }: StoneCountProps) => {
           <meshStandardMaterial attach="material" {...materials.Stone_Dark} />
         </instancedMesh>
       </InstancedRigidBodies>
-      {hitboxData && <Hitbox refProp={hitbox} id={hitboxData.id} position={hitboxData.position} rotation={hitboxData.rotation} />}
+      {hitboxData && <RockHitbox refProp={hitbox} id={hitboxData.id} position={hitboxData.position} rotation={hitboxData.rotation} />}
     </>
   )
 }
 
 const Crystals = ({ count = 1000 }: StoneCountProps) => {
   const rigidBodiesCrystals = useRef<RapierRigidBody[]>(null)
+  const crystals = useRef<any>(null)
+  const hitbox = useRef<any>(null)
+  const [hitboxData, setHitboxData] = useState<any | null>(null)
+  const collectedCrystal = createInteractionSlice((state) => state.collectedCrystal)
+  const addItem = createInventorySlice((state) => state.addItem)
   const { nodes, materials } = useGLTF('/models/rocks/crystal1.glb') as unknown as StonesData
+
+  // Interactions
+  const onPointerEnter = useCallback((e: any) => {
+    const distance = e.distance
+    // Intersected object
+    if (distance < RAYCAST_DISTANCE && rigidBodiesCrystals.current) {
+      e.stopPropagation()
+      const data = rigidBodiesCrystals.current[e.instanceId].userData as any
+      const crystal = {
+        id: data.id,
+        position: data.position,
+        rotation: data.rotation,
+        scale: data.scale,
+      }
+      setHitboxData(crystal)
+    }
+  }, [])
+
+  const onPointerOut = useCallback((e: any) => {
+    e.stopPropagation()
+    setHitboxData(null)
+  }, [])
+
+  useEffect(() => {
+    // Apply force to the rock
+    if (collectedCrystal && rigidBodiesCrystals.current) {
+      addItem('crystal', 1, 'resources', 'https://cdn-icons-png.flaticon.com/512/10606/10606237.png')
+      setHitboxData(null)
+    }
+  }, [collectedCrystal])
 
   const instancesCrystals = useMemo(() => {
     const instances: InstancedRigidBodyProps[] = []
@@ -115,6 +146,12 @@ const Crystals = ({ count = 1000 }: StoneCountProps) => {
         position: [props.position[0], props.position[1], props.position[2]],
         rotation: [props.rotation[0], props.rotation[1], props.rotation[2]],
         scale: [1, 1, 1],
+        userData: {
+          id: i,
+          position: props.position,
+          rotation: props.rotation,
+          scale: [1, 1, 1],
+        },
       })
     })
 
@@ -122,11 +159,14 @@ const Crystals = ({ count = 1000 }: StoneCountProps) => {
   }, [])
 
   return (
-    <InstancedRigidBodies ref={rigidBodiesCrystals} instances={instancesCrystals} colliders="cuboid" type="fixed" onIntersectionEnter={(e) => console.log(e)}>
-      <instancedMesh castShadow args={[nodes.crystal_2.geometry, undefined, count]} count={count}>
+    <>
+    <InstancedRigidBodies ref={rigidBodiesCrystals} instances={instancesCrystals} colliders="cuboid" type="dynamic">
+      <instancedMesh ref={crystals} castShadow args={[nodes.crystal_2.geometry, undefined, count]} count={count} onPointerEnter={onPointerEnter} onPointerOut={onPointerOut}>
         <meshStandardMaterial attach="material" {...materials['Material.004']} />
       </instancedMesh>
     </InstancedRigidBodies>
+      {hitboxData && <CrystalHitbox refProp={hitbox} id={hitboxData.id} position={hitboxData.position} rotation={hitboxData.rotation} />}
+    </>
   )
 }
 

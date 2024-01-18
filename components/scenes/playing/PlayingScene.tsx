@@ -22,7 +22,7 @@ const PlayingScene = () => {
   const animationDone = createCinematicSlice((state) => state.animationDone)
   const debug = createDebugStore((state) => state.debug)
 
-  // Hitbox references
+  // RockHitbox references
   const SHIP_HITBOX = useRef<any>()
 
   return (
