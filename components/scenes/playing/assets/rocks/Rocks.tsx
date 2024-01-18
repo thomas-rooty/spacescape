@@ -1,9 +1,10 @@
 import * as THREE from 'three'
-import { useRef, useEffect, useMemo } from 'react'
+import { useRef, useCallback, useMemo } from 'react'
 import { Instances, Instance, useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
 import { rocksRandomizer, goldRandomizer, crystalsRandomizer } from '@/components/scenes/common/physics/randomizer'
 import { InstancedRigidBodies, InstancedRigidBodyProps, RapierRigidBody } from '@react-three/rapier'
+import { createCinematicSlice } from '@/stores/intro.store'
 
 interface StoneCountProps {
   count?: number
@@ -26,7 +27,23 @@ type StonesData = GLTF & {
 
 const Rocks = ({ count = 1000 }: StoneCountProps) => {
   const rigidBodies = useRef<RapierRigidBody[]>(null)
+  const rocks = useRef<any>(null)
   const { nodes, materials } = useGLTF('/models/rocks/rocks1.glb') as unknown as StonesData
+
+  // Interactions
+  const onPointerMove = useCallback((e: any) => {
+    e.stopPropagation()
+    // Intersected object
+    const intersected = e.instanceId
+    console.log('hovering rock id : ' + intersected)
+  }, [])
+
+  const onPointerOut = useCallback((e: any) => {
+    e.stopPropagation()
+    // Intersected object
+    const intersected = e.instanceId
+    console.log('hovering out rock id : ' + intersected)
+  }, [])
 
   const instances = useMemo(() => {
     const instances: InstancedRigidBodyProps[] = []
@@ -40,12 +57,13 @@ const Rocks = ({ count = 1000 }: StoneCountProps) => {
       })
     })
 
+    console.log(instances)
     return instances
   }, [])
 
   return (
-    <InstancedRigidBodies ref={rigidBodies} instances={instances} colliders="cuboid" type="fixed" onIntersectionEnter={(e) => console.log(e)}>
-      <instancedMesh castShadow args={[nodes.Rock_3.geometry, undefined, count]} count={count}>
+    <InstancedRigidBodies ref={rigidBodies} instances={instances} colliders="cuboid" type="fixed">
+      <instancedMesh ref={rocks} castShadow args={[nodes.Rock_3.geometry, undefined, count]} count={count} onPointerMove={onPointerMove} onPointerOut={onPointerOut}>
         <meshStandardMaterial attach="material" {...materials.Stone_Dark} />
       </instancedMesh>
     </InstancedRigidBodies>
