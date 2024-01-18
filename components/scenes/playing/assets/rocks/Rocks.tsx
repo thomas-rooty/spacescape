@@ -55,7 +55,6 @@ const Rocks = ({ count = 1000 }: StoneCountProps) => {
   }, [])
 
   useEffect(() => {
-    console.log(interactedWith)
     // Apply force to the rock
     if (interactedWith && rigidBodies.current) {
       const rock = rigidBodies.current?.find((rock: any) => rock.userData.id === interactedWith)
