@@ -29,7 +29,7 @@ const goldRandomizer = Array.from({ length: 1000 }, () => ({
   rotation: randomRotation(),
 }))
 
-const crystalsRandomizer = Array.from({ length: 1000 }, () => ({
+const crystalsRandomizer = Array.from({ length: 100 }, () => ({
   position: randomVector(crystalsRandom),
   rotation: randomCrystalRotation(),
 }))

@@ -41,7 +41,7 @@ const Hitbox = ({ refProp, id, position, rotation }: ShipButtonProps) => {
   return (
     <mesh ref={refProp} userData={{ id }} position={position} rotation={rotation}>
       <boxGeometry args={[0.2, 0.2, 0.2]} />
-      <meshLambertMaterial visible={debug} color="red" side={THREE.DoubleSide} />
+      <meshLambertMaterial visible={true} color="red" side={THREE.DoubleSide} />
     </mesh>
   )
 }

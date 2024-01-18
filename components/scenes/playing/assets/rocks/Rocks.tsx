@@ -129,6 +129,5 @@ const Stones = () => {
 }
 
 useGLTF.preload('/models/rocks/rocks1.glb')
-useGLTF.preload('/models/rocks/crystal1.glb')
 
 export default Stones
