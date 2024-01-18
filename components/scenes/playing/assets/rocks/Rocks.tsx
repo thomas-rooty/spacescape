@@ -56,6 +56,14 @@ const Rocks = ({ count = 1000 }: StoneCountProps) => {
 
   useEffect(() => {
     console.log(interactedWith)
+    // Apply force to the rock
+    if (interactedWith && rigidBodies.current) {
+      const rock = rigidBodies.current?.find((rock: any) => rock.userData.id === interactedWith)
+      if (rock) {
+        const force = new THREE.Vector3(0, 0, -1000)
+        rock.applyImpulse(force, true)
+      }
+    }
   }, [interactedWith])
 
   const instances = useMemo(() => {
@@ -81,7 +89,7 @@ const Rocks = ({ count = 1000 }: StoneCountProps) => {
 
   return (
     <>
-      <InstancedRigidBodies ref={rigidBodies} instances={instances} colliders="cuboid" type="fixed">
+      <InstancedRigidBodies ref={rigidBodies} instances={instances} colliders="cuboid" type="dynamic">
         <instancedMesh ref={rocks} castShadow args={[nodes.Rock_3.geometry, undefined, count]} count={count} onPointerEnter={onPointerEnter} onPointerOut={onPointerOut}>
           <meshStandardMaterial attach="material" {...materials.Stone_Dark} />
         </instancedMesh>
