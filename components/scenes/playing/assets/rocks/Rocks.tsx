@@ -64,6 +64,7 @@ const Rocks = ({ count = 1000 }: StoneCountProps) => {
         const force = new THREE.Vector3(0, 0, -1000)
         rock.applyImpulse(force, true)
         addItem('stone', 3, 'resources', 'https://cdn.iconscout.com/icon/free/png-256/free-stone-11-449918.png')
+        setHitboxData(null)
       }
     }
   }, [interactedWith])
