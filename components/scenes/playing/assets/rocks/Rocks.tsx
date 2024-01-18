@@ -30,7 +30,7 @@ const Rocks = ({ count = 1000 }: StoneCountProps) => {
   const rocks = useRef<any>(null)
   const hitbox = useRef<any>(null)
   const [hitboxData, setHitboxData] = useState<any | null>(null)
-  const interactedWith = createInteractionSlice((state) => state.interactedWith)
+  const collectedRock = createInteractionSlice((state) => state.collectedRock)
   const addItem = createInventorySlice((state) => state.addItem)
   const { nodes, materials } = useGLTF('/models/rocks/rocks1.glb') as unknown as StonesData
 
@@ -58,8 +58,8 @@ const Rocks = ({ count = 1000 }: StoneCountProps) => {
 
   useEffect(() => {
     // Apply force to the rock
-    if (interactedWith && rigidBodies.current) {
-      const rock = rigidBodies.current?.find((rock: any) => rock.userData.id === interactedWith)
+    if (collectedRock && rigidBodies.current) {
+      const rock = rigidBodies.current?.find((rock: any) => rock.userData.id === collectedRock)
       if (rock) {
         const force = new THREE.Vector3(0, 0, -1000)
         rock.applyImpulse(force, true)
@@ -67,7 +67,7 @@ const Rocks = ({ count = 1000 }: StoneCountProps) => {
         setHitboxData(null)
       }
     }
-  }, [interactedWith])
+  }, [collectedRock])
 
   const instances = useMemo(() => {
     const instances: InstancedRigidBodyProps[] = []

@@ -15,7 +15,7 @@ interface ShipButtonProps {
 const useInteraction = (refProp: React.MutableRefObject<any>, id: string, interact: boolean) => {
   const addObjectAsHoverable = createCinematicSlice((state) => state.addObjectAsHoverable)
   const hoveredObject = createCinematicSlice((state) => state.hoveredObject)
-  const setInteractedWith = createInteractionSlice((state) => state.setInteractedWith)
+  const setCollectedRock = createInteractionSlice((state) => state.setCollectedRock)
 
   // Ship button interactions
   useFrame(() => {
@@ -25,10 +25,10 @@ const useInteraction = (refProp: React.MutableRefObject<any>, id: string, intera
 
     if (hoveredObject === id && interact) {
       refProp.current.material.color.set('orange')
-      setInteractedWith(id)
+      setCollectedRock(id)
     } else {
       refProp.current.material.color.set('#FFD580')
-      setInteractedWith(null)
+      setCollectedRock(null)
     }
   })
 }
