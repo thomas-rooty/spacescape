@@ -11,7 +11,7 @@ interface IDebugStore {
 }
 
 export const createDebugStore = create<IDebugStore>((set) => ({
-  debug: false,
+  debug: true,
   position: {
     x: 0,
     y: 0,

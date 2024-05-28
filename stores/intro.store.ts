@@ -21,8 +21,8 @@ interface ICinematicStore {
   setEndCryo: (endCryo: boolean) => void
   adventureStarted: boolean
   setAdventureStarted: (beginAdventure: boolean) => void
-  onNewPlanet: boolean
-  setOnNewPlanet: (onNewPlanet: boolean) => void
+  onProxima: boolean
+  setOnProxima: (onProxima: boolean) => void
 }
 
 export const createCinematicSlice = create<ICinematicStore>((set) => ({
@@ -70,7 +70,7 @@ export const createCinematicSlice = create<ICinematicStore>((set) => ({
   // Handles the beginning adventure function, which is used to trigger the end of the cinematic and the beginning of the game
   adventureStarted: false,
   setAdventureStarted: (beginAdventure: boolean) => set({ adventureStarted: beginAdventure }),
-  // Handles the on new planet state, which is used to trigger the end of the first apocalypse planet intro
-  onNewPlanet: false,
-  setOnNewPlanet: (onNewPlanet: boolean) => set({ onNewPlanet }),
+  // Handles the on Proxima state, which is used to trigger the end of the first apocalypse planet intro and the beginning of the Proxima planet intro
+  onProxima: false,
+  setOnProxima: (onProxima: boolean) => set({ onProxima }),
 }))

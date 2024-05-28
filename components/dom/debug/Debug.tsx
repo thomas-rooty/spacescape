@@ -22,6 +22,7 @@ export const Debug = ({ debug }: DebugProps) => {
   const setAnimationDone = createCinematicSlice((state) => state.setAnimationDone)
   const setStartedGame = createCinematicSlice((state) => state.setStartedGame)
   const setEndCryo = createCinematicSlice((state) => state.setEndCryo)
+  const setOnProxima = createCinematicSlice((state) => state.setOnProxima)
 
   // Force Intro scene
   const handleIntro = () => {
@@ -43,6 +44,17 @@ export const Debug = ({ debug }: DebugProps) => {
   const handlePrivateQ = () => {
     console.log('Private Q')
     setInPrivateQuarters(true)
+  }
+
+  // Force Proxima scene
+  const handleProxima = () => {
+    console.log('Proxima')
+    setAnimationDone(true)
+    setStartedGame(true)
+    setEndCryo(true)
+    setAdventureStarted(false)
+    setCheckInitiated(true)
+    setOnProxima(true)
   }
 
   return (
@@ -71,6 +83,10 @@ export const Debug = ({ debug }: DebugProps) => {
             <div className={styles.debug__item}>
               <h4>Private Q:</h4>
               <button onClick={() => handlePrivateQ()}>Run</button>
+            </div>
+            <div className={styles.debug__item}>
+              <h4>Proxima:</h4>
+              <button onClick={handleProxima}>Run</button>
             </div>
           </div>
         </Html>
