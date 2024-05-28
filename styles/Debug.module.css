@@ -4,6 +4,7 @@
     top: 0;
     left: 0;
     z-index: 1000;
+    height: fit-content;
     color: white;
     padding: 0.5rem;
     border-radius: 0.5rem;
@@ -30,15 +31,23 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 0.25rem;
+    vertical-align: center;
+    padding-top: 0.33rem;
+    padding-bottom: 0.33rem;
     pointer-events: all;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.debug__item:last-of-type {
+    border-bottom: none;
 }
 
 .debug__item > h4 {
     margin: 0;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
+    line-height: 1.2rem;
     font-weight: 400;
     text-transform: uppercase;
 }
@@ -46,6 +55,27 @@
 .debug__item > span {
     padding-right: 0.5rem;
     padding-left: 0.5rem;
+}
+
+.debug__item > button {
+    padding: 0.15rem 1rem;
+    font-size: 0.6rem;
+    font-weight: 400;
+    line-height: 1rem;
+    text-transform: uppercase;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 0.25rem;
+    color: white;
+    cursor: pointer;
+    pointer-events: all;
+    transition: background 0.2s, border 0.2s, color 0.2s;
+}
+
+.debug__item > button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 1);
+    color: black;
 }
 
 .separator {

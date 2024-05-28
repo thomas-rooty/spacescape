@@ -29,7 +29,7 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {debug && (
-        <div style={{ position: 'absolute', top: '1rem', left: '1rem', zIndex: 1000, width: '500px' }}>
+        <div style={{ position: 'absolute', top: '1rem', left: '1rem', zIndex: 1000, width: '500px', height: '500px' }}>
           <Canvas color={'#fff'} camera={{ position: [0, 0, 0], fov: 75 }}>
             <Debug debug={true} />
           </Canvas>

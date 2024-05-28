@@ -2,6 +2,7 @@ import styles from '@/styles/Debug.module.css'
 import { createDebugStore } from '@/stores/debug.store'
 import { createSocketSlice } from '@/stores/socket.store'
 import { createCinematicSlice } from '@/stores/intro.store'
+import { createInteractionSlice } from '@/stores/interactions.store'
 import { Html } from '@react-three/drei'
 
 // This component is heavy, it should be used only in development and in case of need solely !
@@ -15,6 +16,7 @@ export const Debug = ({ debug }: DebugProps) => {
   const socket = createSocketSlice((state) => state.socket)
 
   // Trigger state forceful update
+  const setInPrivateQuarters = createInteractionSlice((state) => state.setInPrivateQuarters)
   const setAdventureStarted = createCinematicSlice((state) => state.setAdventureStarted)
   const setCheckInitiated = createCinematicSlice((state) => state.setCheckInitiated)
   const setAnimationDone = createCinematicSlice((state) => state.setAnimationDone)
@@ -35,6 +37,12 @@ export const Debug = ({ debug }: DebugProps) => {
     setEndCryo(true)
     setAdventureStarted(true)
     setCheckInitiated(true)
+  }
+
+  // Force Private Q scene
+  const handlePrivateQ = () => {
+    console.log('Private Q')
+    setInPrivateQuarters(true)
   }
 
   return (
@@ -59,6 +67,10 @@ export const Debug = ({ debug }: DebugProps) => {
             <div className={styles.debug__item}>
               <h4>Planet X:</h4>
               <button onClick={handlePlanetX}>Run</button>
+            </div>
+            <div className={styles.debug__item}>
+              <h4>Private Q:</h4>
+              <button onClick={() => handlePrivateQ()}>Run</button>
             </div>
           </div>
         </Html>
